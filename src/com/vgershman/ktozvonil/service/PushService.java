@@ -14,6 +14,9 @@ import com.vgershman.ktozvonil.activity.ResultActivity;
 import com.vgershman.ktozvonil.connection.Request;
 import com.vgershman.ktozvonil.connection.RequestCallback;
 import com.vgershman.ktozvonil.dao.PhoneUserInfo;
+import com.vgershman.ktozvonil.database.PhonesManager;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,9 +27,13 @@ import com.vgershman.ktozvonil.dao.PhoneUserInfo;
  */
 public class PushService extends Service {
 
+    PhonesManager phonesManager;
+    Boolean unlimited=true;
 
 
     public int onStartCommand(Intent intent, int flags, int startId) {
+        phonesManager = new PhonesManager(this);
+        unlimited = getSharedPreferences("ktozvonil",MODE_PRIVATE).getBoolean("unlimited_connection",true);
         requestTask();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -36,11 +43,17 @@ public class PushService extends Service {
     }
 
     void requestTask() {
-        Request.getInfoByNumber("79265291243",new RequestCallback() {
+
+
+        List<String>phones =  phonesManager.readPhoneNumbers();
+        for (String phone :phones){
+
+        Request.getInfoByNumber(phone,new RequestCallback() {
             @Override
             public void onInfoFound(PhoneUserInfo response) {
                 stopSelf();
                 sendNotification(response);
+                phonesManager.deletePhone(response.getPhone());
             }
 
 
@@ -48,8 +61,15 @@ public class PushService extends Service {
             @Override
             public void onNotFound() {
                 requestTask();
+                int gap;
+                if (unlimited){
+                    gap=10000;
+                } else {
+                    gap=60*60*1000;
+                }
+
                 try {
-                    wait(10000);
+                    wait(gap);
                 } catch (InterruptedException e) {
                     Log.e("KtoZvonilService",e.getMessage());
                 }
@@ -60,14 +80,15 @@ public class PushService extends Service {
                 requestTask();
             }
         });
+      }
     }
 
     private void sendNotification(PhoneUserInfo response) {
         NotificationCompat.Builder mBuilder;
         mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!");
+                .setContentTitle("Вы искали "+response.getPhone())
+                .setContentText(response.getName() + '\n' + response.getEmail());
         Intent found = new Intent(this, ResultActivity.class);
         found.putExtra("found",true);
         found.putExtra("phone", response.getPhone());

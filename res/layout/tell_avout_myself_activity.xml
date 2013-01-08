@@ -3,6 +3,105 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="fill_parent"
+              android:background="#FFFFFF"
+              android:gravity="center_horizontal">
+
+
+    <ImageView android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:src="@drawable/logo"
+               android:layout_marginTop="20dp"/>
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="100dp"
+              android:gravity="center"
+              android:textColor="#133CAC"
+              android:textStyle="italic"
+              android:textSize="20sp"
+              android:text="Поделитесь информацией о себе."
+            />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Телефон"
+                  android:layout_marginTop="40dp"/>
+        <EditText android:layout_marginTop="5dp"
+                  android:id="@+id/phoneEdit"
+                  android:layout_height="wrap_content"
+                  android:layout_width="300dp"
+                  android:inputType="phone"
+                  android:hint="7(***)*******"
+                  android:phoneNumber="true"
+                  android:textStyle="italic"
+                  android:textColor="#133CAC"
+                  android:textColorHint="#133CAC"
+                  android:singleLine="true"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="ФИО"
+                  android:layout_marginTop="10dp"
+                />
+        <EditText android:layout_marginTop="5dp"
+              android:id="@+id/nameEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="300dp"
+              android:inputType="textPersonName"
+              android:hint="Петров Петр Петрович"
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:singleLine="true"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Email"
+                  android:layout_marginTop="10dp"
+                />
+    <EditText android:id="@+id/emailEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="300dp"
+              android:inputType="textEmailAddress"
+              android:hint="example@example.com"
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:singleLine="true"
+              android:layout_marginTop="5dp"
+            />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Допольнительно"
+                  android:layout_marginTop="10dp"
+                />
+    <EditText android:id="@+id/optEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="300dp"
+              android:inputType="text"
+              android:hint="Например, профиль в соц.сетях или профессия"
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:lines="3"
+              android:layout_marginTop="5dp"/>
+
+
+        <Button android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:id="@+id/aboutMyself"
+                android:text="Отправить"
+                android:textColor="#133CAC"
+                android:textStyle="italic"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"/>
+
 
 </LinearLayout>

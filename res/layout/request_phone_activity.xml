@@ -3,62 +3,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="fill_parent"
+              android:background="#FFFFFF"
+              >
 
-    <TextView android:layout_width="fill_parent"
-              android:layout_height="60dp"
-              android:background="@drawable/header_back"
-              android:text="Заказ эвакуатора"
-              android:textColor="#FFFF"
-              android:gravity="center_vertical|left"
-              android:paddingLeft="10dp"
-              android:textSize="25sp"
-              android:shadowDx="-1"
-              android:shadowDy="1"
-              android:shadowRadius="1"
-              android:shadowColor="#000"
-              />
-    <LinearLayout android:layout_height="0dp"
-                  android:layout_width="fill_parent"
-                  android:layout_weight="3"
+    <ImageView android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:src="@drawable/logo"
+               android:layout_marginTop="20dp"/>
+
+    <TextView android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:gravity="center"
+              android:text="Введите интересующий номер телефона:"
+              android:layout_marginTop="100dp"
+              android:textColor="#133CAC"
+              android:textStyle="italic"/>
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:clickable="true"
-                  android:id="@+id/fromButton"
-                  android:background="@drawable/first_button_lay"
-
-                  android:gravity="center_vertical">
-           <ImageView android:layout_width="50dp"
-                      android:layout_height="wrap_content"
-                      android:adjustViewBounds="true"
-                      android:scaleType="fitCenter"
-                      android:src="@drawable/from_icon"/>
-           <LinearLayout android:layout_height="fill_parent"
-                         android:layout_width="0dp"
-                         android:layout_weight="1"
-                         android:orientation="vertical">
-               <TextView android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:textSize="20sp"
-                         android:text="Откуда"/>
-               <TextView android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:textSize="15sp"
-                         android:text="test"
-                         android:textColor="#EBB332"
-
-                         android:id="@+id/textFrom"/>
-           </LinearLayout>
+                  android:gravity="center">
+        <TextView android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:text="+"
+                  android:textSize="30sp"
+                  android:layout_gravity="center_vertical"
+                  android:padding="10dp"
+                  android:layout_marginTop="6dp"
+                  android:textColor="#133CAC"/>
+        <EditText android:id="@+id/phoneInput"
+                  android:inputType="phone"
+                  android:layout_height="wrap_content"
+                  android:layout_width="200dp"
+                  android:layout_marginTop="10dp"
+                  android:textColorHint="#133CAC"
+                  android:singleLine="true"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:hint="7 ( *** ) *******"/>
+        <Button   android:id="@+id/btnSend"
+                  android:layout_height="wrap_content"
+                  android:layout_width="100dp"
+                  android:text="Найти"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:layout_marginTop="10dp"
+                  />
     </LinearLayout>
 
-    <Button android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:id="@+id/to"
-            android:text="Куда"/>
-    <Button android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:id="@+id/when"
-            android:text="Когда"/>
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="Примеры: 74952313219, 79213441134"
+              android:gravity="center"
+              android:textColor="#133CAC"
+              android:textStyle="italic"
+              android:layout_marginTop="10dp"/>
+
+
 
 </LinearLayout>

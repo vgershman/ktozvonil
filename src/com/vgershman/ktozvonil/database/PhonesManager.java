@@ -1,5 +1,14 @@
 package com.vgershman.ktozvonil.database;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.ExpandableListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vgershman
@@ -8,4 +17,44 @@ package com.vgershman.ktozvonil.database;
  * To change this template use File | Settings | File Templates.
  */
 public class PhonesManager {
+
+    private SQLiteDatabase db;
+    private DBHelper dbHelper;
+
+    private static final String DBNAME = "KtoZvonil";
+    private static final String TABLENAME = "phoneNumbers";
+
+    public PhonesManager(Context mContext){
+
+            List<String> fields = new ArrayList<String>();
+            fields.add("phone text");
+            dbHelper = new DBHelper(mContext, DBNAME, TABLENAME, fields);
+    }
+
+    public List<String> readPhoneNumbers(){
+        List<String> phoneNumbers = null;
+        db = dbHelper.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("select * from " + TABLENAME , null);
+        phoneNumbers = new ArrayList<String>();
+        while (cursor.moveToNext()) {
+            phoneNumbers.add(cursor.getString(0));
+        }
+        db.close();
+        return phoneNumbers;
+    }
+
+    public void deletePhone(String phone){
+        dbHelper.getWritableDatabase();
+        db.rawQuery("delete * from " + TABLENAME + "where phone ==" + phone,null);
+        db.close();
+    }
+
+    public void addPhone(String phone){
+        dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("phone", phone);
+        db.insert(TABLENAME, null, values);
+        db.close();
+    }
 }

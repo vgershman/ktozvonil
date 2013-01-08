@@ -1,5 +1,9 @@
 package com.vgershman.ktozvonil.activity;
 
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import com.vgershman.ktozvonil.R;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vgershman
@@ -7,5 +11,10 @@ package com.vgershman.ktozvonil.activity;
  * Time: 1:34
  * To change this template use File | Settings | File Templates.
  */
-public class SettingsActivity {
+public class SettingsActivity extends PreferenceActivity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
+    }
 }
