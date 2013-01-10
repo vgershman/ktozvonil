@@ -21,13 +21,13 @@ import java.net.URI;
  * Time: 0:15
  * To change this template use File | Settings | File Templates.
  */
-public class RequestTask extends AsyncTask{
+public class RequestGetTask extends AsyncTask{
     boolean fail=false;
     PhoneUserInfo result=null;
     String url;
     RequestCallback requestCallback;
 
-    public RequestTask(String url, RequestCallback requestCallback) {
+    public RequestGetTask(String url, RequestCallback requestCallback) {
         this.url=url;
         this.requestCallback=requestCallback;
     }
