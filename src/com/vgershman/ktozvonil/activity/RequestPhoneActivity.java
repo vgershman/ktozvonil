@@ -1,16 +1,18 @@
 package com.vgershman.ktozvonil.activity;
 
 
-
-
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.vgershman.ktozvonil.R;
+import com.vgershman.ktozvonil.app.*;
 import com.vgershman.ktozvonil.connection.Request;
 import com.vgershman.ktozvonil.connection.RequestGetCallback;
 import com.vgershman.ktozvonil.dao.PhoneUserInfo;
@@ -38,6 +40,45 @@ public class RequestPhoneActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_phone_activity);
         initView();
+        showAddInfoDialog();
+    }
+
+    private void showAddInfoDialog() {
+        final SharedPreferences sharedPreferences = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE);
+        boolean addedInfo = sharedPreferences.getBoolean("addedInfo",false);
+        if(!addedInfo){
+             int startCounter = sharedPreferences.getInt("startCounter",0);
+             if(startCounter==2){
+                 startCounter = 0;
+                 sharedPreferences.edit().putInt("startCounter",startCounter).commit();
+                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                 builder.setMessage("Пожалуйста, добавьте информацию о себе");
+                 builder.setNegativeButton("Никогда",new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                         sharedPreferences.edit().putBoolean("addedInfo",true);
+                     }
+                 });
+                 builder.setNeutralButton("Позже", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                         dialogInterface.dismiss();
+                     }
+                 });
+                 builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialogInterface, int i) {
+                         Intent intent = new Intent(RequestPhoneActivity.this, TellAboutMyselfActivity.class);
+                         startActivity(intent);
+                     }
+                 });
+                 builder.create().show();
+
+             }else{
+                 sharedPreferences.edit().putInt("startCounter",startCounter+1).commit();
+             }
+
+        }
     }
 
     private void initView() {
@@ -68,7 +109,7 @@ public class RequestPhoneActivity extends Activity {
             @Override
             public void onInfoFound(PhoneUserInfo response) {
                 Intent found = new Intent(RequestPhoneActivity.this,ResultActivity.class);
-                found.putExtra("found",true);
+                found.putExtra("actionType",1);
                 found.putExtra("phone", response.getPhone());
                 found.putExtra("name", response.getName());
                 found.putExtra("email", response.getEmail());
@@ -80,7 +121,7 @@ public class RequestPhoneActivity extends Activity {
             @Override
             public void onNotFound() {
                 Intent notFound = new Intent(RequestPhoneActivity.this, ResultActivity.class);
-                notFound.putExtra("found",false);
+                notFound.putExtra("actionType", 0);
                 notFound.putExtra("phone",phone);
                 startActivity(notFound);
             }

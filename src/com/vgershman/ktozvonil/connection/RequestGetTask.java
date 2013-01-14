@@ -10,7 +10,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 
@@ -25,11 +24,11 @@ public class RequestGetTask extends AsyncTask{
     boolean fail=false;
     PhoneUserInfo result=null;
     String url;
-    RequestCallback requestCallback;
+    RequestGetCallback requestGetCallback;
 
-    public RequestGetTask(String url, RequestCallback requestCallback) {
+    public RequestGetTask(String url, RequestGetCallback requestGetCallback) {
         this.url=url;
-        this.requestCallback=requestCallback;
+        this.requestGetCallback = requestGetCallback;
     }
 
     @Override
@@ -70,12 +69,12 @@ public class RequestGetTask extends AsyncTask{
     protected void onPostExecute(Object o) {
         if(!fail){
             if(result!=null){
-                requestCallback.onInfoFound(result);
+                requestGetCallback.onInfoFound(result);
             }else{
-                requestCallback.onNotFound();
+                requestGetCallback.onNotFound();
             }
         }else {
-            requestCallback.onFailure();
+            requestGetCallback.onFailure();
         }
     }
 }

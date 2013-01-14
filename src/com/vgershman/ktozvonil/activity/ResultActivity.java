@@ -3,13 +3,17 @@ package com.vgershman.ktozvonil.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.vgershman.ktozvonil.database.PhonesManager;
 import com.vgershman.ktozvonil.service.PushService;
 import com.vgershman.ktozvonil.R;
+import com.vgershman.ktozvonil.app.*;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,12 +30,15 @@ public class ResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
-        boolean found = getIntent().getBooleanExtra("found", false);
+
+        int actionType = getIntent().getIntExtra("actionType", 0);
         phoneRequest = getIntent().getStringExtra("phone");
-        if(found){
-            showFound();
-        }else{
-            showNotFound();
+
+        switch (actionType){
+            case 0:showNotFound();break;
+            case 1:showFound();break;
+            case 2:showSuccessFullyAdded();break;
+
         }
 
         Button anotherRequest = (Button)findViewById(R.id.another);
@@ -43,16 +50,26 @@ public class ResultActivity extends Activity {
             }
         });
 
+        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getBoolean("addedInfo",false);
+
         Button tellAboutMyself = (Button)findViewById(R.id.aboutMyself);
-        tellAboutMyself.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ResultActivity.this,TellAboutMyselfActivity.class);
-                startActivity(intent);
-            }
-        });
+        if(!addedInfo){
+            tellAboutMyself.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ResultActivity.this,TellAboutMyselfActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            tellAboutMyself.setVisibility(View.GONE);
+        }
 
+    }
 
+    private void showSuccessFullyAdded() {
+        TextView resultText = (TextView)findViewById(R.id.resultText);
+        resultText.setText("Информация о Вас успешно добавлена. Спасибо!");
     }
 
     private void showNotFound() {
@@ -75,11 +92,11 @@ public class ResultActivity extends Activity {
         TextView reqionResult = (TextView)resultLayout.findViewById(R.id.resultReqion);
         Bundle data = getIntent().getExtras();
 
-            String phone = data.getString("phone");
+         final   String phone = data.getString("phone");
             if(phone!=null){
                 phoneResult.setText("Телефон: "+ phone);
             }
-            String name = data.getString("name");
+         final   String name = data.getString("name");
             if(name!=null){
                 nameResult.setText("ФИО: "+ name);
             }
@@ -95,6 +112,23 @@ public class ResultActivity extends Activity {
             if(operator!=null){
                 operatorResult.setText("Оператор: "+ operator);
             }
+        Button addContact = (Button)findViewById(R.id.addContact);
+        addContact.setVisibility(View.VISIBLE);
+        addContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+
+
+                intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, "+"+phone);
+
+              startActivity(intent);
+
+            }
+        });
 
 
     }

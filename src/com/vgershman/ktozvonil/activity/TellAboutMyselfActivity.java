@@ -3,14 +3,20 @@ package com.vgershman.ktozvonil.activity;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import com.vgershman.ktozvonil.R;
+import com.vgershman.ktozvonil.app.AppInfo;
+import com.vgershman.ktozvonil.connection.Request;
+import com.vgershman.ktozvonil.connection.RequestPostCallback;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -44,7 +50,29 @@ public class TellAboutMyselfActivity extends Activity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                return; //TODO send request
+                if(checkFields()){
+                    String phone =  phoneEdit.getText().toString();
+                    String email = emailEdit.getText().toString();
+                    String description = optEdit.getText().toString();
+                    String image = "";
+                    String name = nameEdit.getText().toString();
+
+                    Request.postInfo(phone,name,description,image,email,new RequestPostCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                            getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).edit().putBoolean("addedInfo",true).commit();
+
+                            Intent intent = new Intent(TellAboutMyselfActivity.this, ResultActivity.class);
+                            intent.putExtra("actionType",2);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(TellAboutMyselfActivity.this,"Ошибка сервера",2000).show();
+                        }
+                    });}
             }
         });
 
@@ -58,10 +86,10 @@ public class TellAboutMyselfActivity extends Activity {
     }
 
     private boolean checkFields(){
-
-        if(phoneEdit.getText().toString().equals("")){return false;}
-        if(phoneEdit.getText().toString().charAt(0)!='7'){return false;}
-        if(phoneEdit.getText().toString().length()!=11){return false;}
+        Toast toast = Toast.makeText(this,"Неверно введен телефон",2000);
+        if(phoneEdit.getText().toString().equals("")){toast.show();return false;}
+        if(phoneEdit.getText().toString().charAt(0)!='7'){toast.show();return false;}
+        if(phoneEdit.getText().toString().length()!=11){toast.show();return false;}
 
         return true;
     }

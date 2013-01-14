@@ -2,16 +2,26 @@ package com.vgershman.ktozvonil.connection;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ExpandableListView;
 import com.vgershman.ktozvonil.dao.PhoneUserInfo;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,14 +31,17 @@ import java.net.URI;
  * To change this template use File | Settings | File Templates.
  */
 public class RequestPostTask extends AsyncTask{
+
+    List<NameValuePair> params;
     boolean fail=false;
     PhoneUserInfo result=null;
     String url;
-    RequestGetCallback requestGetCallback;
+    RequestPostCallback requestPostCallback;
 
-    public RequestPostTask(String url, RequestGetCallback requestGetCallback) {
+    public RequestPostTask(String url, List<NameValuePair> params,RequestPostCallback requestPostCallback) {
         this.url=url;
-        this.requestGetCallback = requestGetCallback;
+        this.requestPostCallback = requestPostCallback;
+        this.params=params;
     }
 
     @Override
@@ -36,8 +49,13 @@ public class RequestPostTask extends AsyncTask{
 
         try {
             HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet();
+            HttpPost request = new HttpPost();
             request.setURI(new URI(url));
+
+
+            request.setEntity(new UrlEncodedFormEntity(params));
+
+
             HttpResponse response = client.execute(request);
             BufferedReader in = new BufferedReader
                     (new InputStreamReader(response.getEntity().getContent()));
@@ -69,12 +87,12 @@ public class RequestPostTask extends AsyncTask{
     protected void onPostExecute(Object o) {
         if(!fail){
             if(result!=null){
-                requestGetCallback.onInfoFound(result);
+                //requestGetCallback.onInfoFound(result);
             }else{
-                requestGetCallback.onNotFound();
+                //requestGetCallback.onNotFound();
             }
         }else {
-            requestGetCallback.onFailure();
+            //requestGetCallback.onFailure();
         }
     }
 }

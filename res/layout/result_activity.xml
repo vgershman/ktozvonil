@@ -70,6 +70,14 @@
     >
     <Button android:layout_height="wrap_content"
             android:layout_width="fill_parent"
+            android:id="@+id/addContact"
+            android:text="Добавить в контакты"
+            android:textColor="#133CAC"
+            android:textStyle="italic"
+            android:visibility="gone"
+            />
+    <Button android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
             android:id="@+id/another"
             android:text="Другой номер"
             android:textColor="#133CAC"

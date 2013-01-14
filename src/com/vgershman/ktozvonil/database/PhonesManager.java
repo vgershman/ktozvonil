@@ -34,11 +34,15 @@ public class PhonesManager {
     public List<String> readPhoneNumbers(){
         List<String> phoneNumbers = null;
         db = dbHelper.getReadableDatabase();
+        String []columns = {"phone"};
         Cursor cursor;
-        cursor = db.rawQuery("select * from " + TABLENAME , null);
+        cursor = db.query(TABLENAME,columns,null,null,null,null,"phone");
+        //cursor = db.rawQuery("select * from " + TABLENAME , null);
         phoneNumbers = new ArrayList<String>();
         while (cursor.moveToNext()) {
-            phoneNumbers.add(cursor.getString(0));
+            if(cursor.getString(0)!=null){
+                phoneNumbers.add(cursor.getString(0));
+            }
         }
         db.close();
         return phoneNumbers;
@@ -51,10 +55,13 @@ public class PhonesManager {
     }
 
     public void addPhone(String phone){
-        dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("phone", phone);
-        db.insert(TABLENAME, null, values);
-        db.close();
+        List<String> numbers = readPhoneNumbers();
+        if(!numbers.contains(phone)){
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("phone", phone);
+            db.insert(TABLENAME, null, values);
+            db.close();
+        }
     }
 }

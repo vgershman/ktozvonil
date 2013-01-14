@@ -8,4 +8,7 @@ package com.vgershman.ktozvonil.connection;
  * To change this template use File | Settings | File Templates.
  */
 public interface RequestPostCallback {
+
+    void onSuccess();
+    void onFailure();
 }
