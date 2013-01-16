@@ -1,94 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="#FFFFFF">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#FFFFFF">
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
 
+        <ImageView android:layout_width="fill_parent"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/logo"
+                   android:layout_marginTop="20dp"/>
 
-    <ImageView android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:src="@drawable/logo"
-               android:layout_marginTop="20dp"/>
-
-    <TextView android:id="@+id/resultText"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="100dp"
-              android:gravity="center"
-              android:textColor="#133CAC"
-              android:textStyle="italic"
-              android:textSize="20sp"
-              />
-
-    <LinearLayout android:id="@+id/resultLayout"
+        <TextView android:id="@+id/resultText"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:visibility="gone"
-                  android:orientation="vertical"
-                  android:layout_marginTop="40dp"
-                  android:gravity="center">
-        <TextView android:id="@+id/resultPhone"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+                  android:layout_marginTop="100dp"
+                  android:gravity="center"
                   android:textColor="#133CAC"
                   android:textStyle="italic"
-                />
-        <TextView android:id="@+id/resultName"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                />
-        <TextView android:id="@+id/resultEmail"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                />
-        <TextView android:id="@+id/resultOperator"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                />
-        <TextView android:id="@+id/resultReqion"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
+                  android:textSize="20sp"
                 />
 
+        <LinearLayout android:id="@+id/resultLayout"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:visibility="gone"
+                      android:orientation="vertical"
+                      android:layout_marginTop="40dp"
+                      android:gravity="center">
+            <TextView android:id="@+id/resultPhone"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="#133CAC"
+                      android:textStyle="italic"
+                    />
+        </LinearLayout>
+        <Button android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:id="@+id/showMore"
+                android:text="Подробнее"
+                android:textColor="#133CAC"
+                android:textStyle="italic"
+                />
+        <LinearLayout android:id="@+id/addResultLayout"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:visibility="gone"
+                      android:orientation="vertical"
+                      android:layout_marginTop="40dp"
+                      android:gravity="center">
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:orientation="vertical"
+                      android:layout_gravity="center"
+                      android:layout_marginTop="40dp">
+            <Button android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/addContact"
+                    android:text="Добавить в контакты"
+                    android:textColor="#133CAC"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    />
+            <Button android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/another"
+                    android:text="Другой номер"
+                    android:textColor="#133CAC"
+                    android:textStyle="italic"/>
+
+            <Button android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/aboutMyself"
+                    android:text="Поделится информацией о себе"
+                    android:textColor="#133CAC"
+                    android:textStyle="italic"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout android:layout_height="wrap_content"
-                  android:layout_width="wrap_content"
-                  android:orientation="vertical"
-                  android:layout_gravity="center"
-                  android:layout_marginTop="40dp"
-    >
-    <Button android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/addContact"
-            android:text="Добавить в контакты"
-            android:textColor="#133CAC"
-            android:textStyle="italic"
-            android:visibility="gone"
-            />
-    <Button android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/another"
-            android:text="Другой номер"
-            android:textColor="#133CAC"
-            android:textStyle="italic"/>
-
-    <Button android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:id="@+id/aboutMyself"
-            android:text="Поделится информацией о себе"
-            android:textColor="#133CAC"
-            android:textStyle="italic"/>
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

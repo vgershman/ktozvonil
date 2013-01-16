@@ -2,15 +2,19 @@ package com.vgershman.ktozvonil.connection;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import com.vgershman.ktozvonil.dto.PhoneUserInfo;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,8 +58,17 @@ public class RequestGetTask extends AsyncTask{
                 result = PhoneUserInfo.createFromJSONObject(jsonObject.getJSONObject("data"));
             }
 
-        } catch (Exception ex){
+        } catch (IOException ex){
             Log.e("KtoZvonil", ex.getMessage());
+            fail=true;
+            return null;
+
+        } catch (JSONException ex){
+            Log.e("KtoZvonil", ex.getMessage());
+            fail=true;
+            return null;
+        } catch (URISyntaxException e) {
+            Log.e("KtoZvonil", e.getMessage());
             fail=true;
             return null;
         }

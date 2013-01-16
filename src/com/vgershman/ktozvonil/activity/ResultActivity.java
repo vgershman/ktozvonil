@@ -14,6 +14,10 @@ import com.vgershman.ktozvonil.service.PushService;
 import com.vgershman.ktozvonil.R;
 import com.vgershman.ktozvonil.app.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +29,7 @@ import com.vgershman.ktozvonil.app.*;
 public class ResultActivity extends Activity {
 
     String phoneRequest;
+    LinearLayout additionalLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +39,20 @@ public class ResultActivity extends Activity {
         int actionType = getIntent().getIntExtra("actionType", 0);
         phoneRequest = getIntent().getStringExtra("phone");
 
-        switch (actionType){
-            case 0:showNotFound();break;
-            case 1:showFound();break;
-            case 2:showSuccessFullyAdded();break;
+        switch (actionType) {
+            case 0:
+                showNotFound();
+                break;
+            case 1:
+                showFound();
+                break;
+            case 2:
+                showSuccessFullyAdded();
+                break;
 
         }
 
-        Button anotherRequest = (Button)findViewById(R.id.another);
+        Button anotherRequest = (Button) findViewById(R.id.another);
         anotherRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,69 +61,77 @@ public class ResultActivity extends Activity {
             }
         });
 
-        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getBoolean("addedInfo",false);
+        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
 
-        Button tellAboutMyself = (Button)findViewById(R.id.aboutMyself);
-        if(!addedInfo){
+        Button tellAboutMyself = (Button) findViewById(R.id.aboutMyself);
+        if (!addedInfo) {
             tellAboutMyself.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ResultActivity.this,TellAboutMyselfActivity.class);
+                    Intent intent = new Intent(ResultActivity.this, TellAboutMyselfActivity.class);
                     startActivity(intent);
                 }
             });
         } else {
             tellAboutMyself.setVisibility(View.GONE);
         }
+        Button showMore = (Button) findViewById(R.id.showMore);
+        showMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (additionalLayout.getVisibility() == View.GONE) {
+                    additionalLayout.setVisibility(View.VISIBLE);
+                } else {
+                    additionalLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
 
     }
 
     private void showSuccessFullyAdded() {
-        TextView resultText = (TextView)findViewById(R.id.resultText);
+        TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Информация о Вас успешно добавлена. Спасибо!");
     }
 
     private void showNotFound() {
-        TextView resultText = (TextView)findViewById(R.id.resultText);
-        resultText.setText("Информация пока не найдена."+ '\n' +" Как только найдем - обязательно сообщим Вам об этом.");
+        TextView resultText = (TextView) findViewById(R.id.resultText);
+        resultText.setText("Информация пока не найдена." + '\n' + " Как только найдем - обязательно сообщим Вам об этом.");
         new PhonesManager(this).addPhone(phoneRequest);
         Intent intent = new Intent(ResultActivity.this, PushService.class);
         startService(intent);
     }
 
     private void showFound() {
-        TextView resultText = (TextView)findViewById(R.id.resultText);
+        TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Информация успешно найдена.");
-        LinearLayout resultLayout = (LinearLayout)findViewById(R.id.resultLayout);
+        LinearLayout resultLayout = (LinearLayout) findViewById(R.id.resultLayout);
         resultLayout.setVisibility(View.VISIBLE);
-        TextView phoneResult = (TextView)resultLayout.findViewById(R.id.resultPhone);
-        TextView nameResult = (TextView)resultLayout.findViewById(R.id.resultName);
-        TextView emailResult = (TextView)resultLayout.findViewById(R.id.resultEmail);
-        TextView operatorResult = (TextView)resultLayout.findViewById(R.id.resultOperator);
-        TextView reqionResult = (TextView)resultLayout.findViewById(R.id.resultReqion);
-        Bundle data = getIntent().getExtras();
 
-         final   String phone = data.getString("phone");
-            if(phone!=null){
-                phoneResult.setText("Телефон: "+ phone);
-            }
-         final   String name = data.getString("name");
-            if(name!=null){
-                nameResult.setText("ФИО: "+ name);
-            }
-            String email = data.getString("email");
-            if(email!=null){
-                emailResult.setText("Email: "+ email);
-            }
-            String reqion = data.getString("reqion");
-            if(reqion!=null){
-                reqionResult.setText("Регион: "+ reqion);
-            }
-            String operator = data.getString("operator");
-            if(operator!=null){
-                operatorResult.setText("Оператор: "+ operator);
-            }
-        Button addContact = (Button)findViewById(R.id.addContact);
+        additionalLayout = (LinearLayout) findViewById(R.id.addResultLayout);
+        TextView phoneResult = (TextView) resultLayout.findViewById(R.id.resultPhone);
+        Bundle data = getIntent().getExtras();
+        final String phone = data.getString("phone");
+        final String name = data.getString("name");
+        phoneResult.setText(phone);
+
+        List<String> main = new ArrayList<String>();
+        main.add("name");
+        data.keySet().removeAll(main);
+
+        for (String key : main) {
+            TextView textView = new TextView(this);
+            textView.setText(data.getString(key));
+            resultLayout.addView(textView);
+        }
+        for (String key : data.keySet()) {
+            TextView textView = new TextView(this);
+            textView.setText(data.getString(key));
+            additionalLayout.addView(textView);
+        }
+
+        Button addContact = (Button) findViewById(R.id.addContact);
         addContact.setVisibility(View.VISIBLE);
         addContact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,16 +139,22 @@ public class ResultActivity extends Activity {
 
                 Intent intent = new Intent(Intent.ACTION_INSERT);
                 intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
-
-
                 intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
-                intent.putExtra(ContactsContract.Intents.Insert.PHONE, "+"+phone);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
 
-              startActivity(intent);
+                startActivity(intent);
 
             }
         });
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (additionalLayout.getVisibility() == View.VISIBLE) {
+            additionalLayout.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
 
     }
 }

@@ -1,5 +1,7 @@
 package com.vgershman.ktozvonil.connection;
 
+import com.vgershman.ktozvonil.dto.PhoneUserInfo;
+
 /**
  * Created with IntelliJ IDEA.
  * User: vgershman

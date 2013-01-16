@@ -2,6 +2,7 @@ package com.vgershman.ktozvonil.connection;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import com.vgershman.ktozvonil.dto.PhoneUserInfo;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

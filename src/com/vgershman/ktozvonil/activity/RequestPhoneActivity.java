@@ -15,6 +15,10 @@ import com.vgershman.ktozvonil.R;
 import com.vgershman.ktozvonil.app.*;
 import com.vgershman.ktozvonil.connection.Request;
 import com.vgershman.ktozvonil.connection.RequestGetCallback;
+import com.vgershman.ktozvonil.dto.PhoneUserInfo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -110,10 +114,23 @@ public class RequestPhoneActivity extends Activity {
                 Intent found = new Intent(RequestPhoneActivity.this,ResultActivity.class);
                 found.putExtra("actionType",1);
                 found.putExtra("phone", response.getPhone());
-                found.putExtra("name", response.getName());
-                found.putExtra("email", response.getEmail());
-                found.putExtra("operator", response.getOperator());
-                found.putExtra("reqion", response.getRegion());
+                Map<String,Object> info = response.getInfo();
+                for(String key:info.keySet()){
+                    Object value = info.get(key);
+                    if(value instanceof List<?>){
+                        List<String> strings =(List<String>)value;
+                        StringBuilder builder=new StringBuilder();
+                        for(String s:strings){
+                            builder.append(s);
+                            builder.append(" ,");
+                        }
+                        builder.deleteCharAt(builder.length()-1);
+                        found.putExtra(key, builder.toString());
+                    }else{
+                        found.putExtra(key,String.valueOf(value));
+                    }
+                }
+
                 startActivity(found);
             }
 
