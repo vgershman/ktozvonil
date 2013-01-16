@@ -1,24 +1,11 @@
 package com.vgershman.ktozvonil.service;
 
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
-import com.vgershman.ktozvonil.R;
-import com.vgershman.ktozvonil.activity.ResultActivity;
-import com.vgershman.ktozvonil.connection.Request;
-import com.vgershman.ktozvonil.connection.RequestGetCallback;
-import com.vgershman.ktozvonil.dao.PhoneUserInfo;
-import com.vgershman.ktozvonil.database.PhonesManager;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

@@ -15,7 +15,6 @@ import com.vgershman.ktozvonil.R;
 import com.vgershman.ktozvonil.app.*;
 import com.vgershman.ktozvonil.connection.Request;
 import com.vgershman.ktozvonil.connection.RequestGetCallback;
-import com.vgershman.ktozvonil.dao.PhoneUserInfo;
 
 /**
  * Created with IntelliJ IDEA.

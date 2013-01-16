@@ -13,7 +13,6 @@ import com.vgershman.ktozvonil.activity.ResultActivity;
 import com.vgershman.ktozvonil.app.AppInfo;
 import com.vgershman.ktozvonil.connection.Request;
 import com.vgershman.ktozvonil.connection.RequestGetCallback;
-import com.vgershman.ktozvonil.dao.PhoneUserInfo;
 import com.vgershman.ktozvonil.database.PhonesManager;
 
 import java.util.List;
