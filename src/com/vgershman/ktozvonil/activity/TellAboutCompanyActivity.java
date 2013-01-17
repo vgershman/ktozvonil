@@ -23,7 +23,6 @@ import com.vgershman.ktozvonil.util.ReverseGeoCodingListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,19 +31,21 @@ import java.util.StringTokenizer;
  * Time: 19:02
  * To change this template use File | Settings | File Templates.
  */
-public class TellAboutMyselfActivity extends Activity {
+public class TellAboutCompanyActivity extends Activity {
 
     EditText phoneEdit;
     EditText emailEdit;
     EditText nameEdit;
     EditText optEdit;
+    EditText wtEdit;
+    EditText urlEdit;
     String locationText;
     String point;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tell_avout_myself_activity);
+        setContentView(R.layout.tell_about_company_activity);
         initView();
         LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -96,9 +97,11 @@ public class TellAboutMyselfActivity extends Activity {
                     data.put("image","");
                     data.put("email",emailEdit.getText().toString());
 
-                    adds.put("type","personal");
+                    adds.put("type","corporate");
                     adds.put("location",locationText);
                     adds.put("point",point);
+                    adds.put("url", urlEdit.getText().toString());
+                    adds.put("worktime",wtEdit.getText().toString());
 
 
                     Request.postInfo(data, adds, new RequestPostCallback() {
@@ -107,14 +110,14 @@ public class TellAboutMyselfActivity extends Activity {
 
                             getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).edit().putBoolean("addedInfo", true).commit();
 
-                            Intent intent = new Intent(TellAboutMyselfActivity.this, ResultActivity.class);
+                            Intent intent = new Intent(TellAboutCompanyActivity.this, ResultActivity.class);
                             intent.putExtra("actionType", 2);
                             startActivity(intent);
                         }
 
                         @Override
                         public void onFailure() {
-                            Toast.makeText(TellAboutMyselfActivity.this, "Ошибка сервера", 2000).show();
+                            Toast.makeText(TellAboutCompanyActivity.this, "Ошибка сервера", 2000).show();
                         }
                     });}
             }
@@ -127,10 +130,12 @@ public class TellAboutMyselfActivity extends Activity {
         optEdit = (EditText)findViewById(R.id.optEdit);
         phoneEdit=(EditText)findViewById(R.id.phoneEdit);
         emailEdit = (EditText)findViewById(R.id.emailEdit);
+        urlEdit = (EditText)findViewById(R.id.urlEdit);
+        wtEdit = (EditText)findViewById(R.id.wtEdit);
     }
 
     private boolean checkFields(){
-        Toast toast = Toast.makeText(this,"Неверно введен телефон и/или имя",2000);
+        Toast toast = Toast.makeText(this,"Неверно введен телефон и/или название",2000);
         if(phoneEdit.getText().toString().equals("")){toast.show();return false;}
         if(phoneEdit.getText().toString().charAt(0)!='7'){toast.show();return false;}
         if(phoneEdit.getText().toString().length()!=11){toast.show();return false;}

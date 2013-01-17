@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+<LinearLayout
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#FFFFFF"
+              android:gravity="center_horizontal">
+
+    <ImageView android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:src="@drawable/logo"
+               android:layout_marginTop="20dp"/>
+    <LinearLayout
+            android:focusable="true" android:focusableInTouchMode="true"
+            android:layout_width="0px" android:layout_height="0px"
+            />
+
+    <LinearLayout android:layout_height="0dp"
+                  android:layout_width="fill_parent"
+                  android:layout_weight="1"
+                  android:orientation="vertical"
+                  android:gravity="center">
+
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:textSize="20sp"
+                  android:layout_marginTop="20dp"
+                  android:text="Поделитесь информацией о компании."/>
+
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Телефон"
+                  android:layout_marginTop="40dp"
+                  android:gravity="center"/>
+
+        <EditText android:layout_marginTop="5dp"
+                  android:id="@+id/phoneEdit"
+                  android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:inputType="phone"
+                  android:hint="7(***)*******"
+                  android:phoneNumber="true"
+                  android:textStyle="italic"
+                  android:textColor="#133CAC"
+                  android:textColorHint="#133CAC"
+                  android:singleLine="true"
+
+                  />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Название"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center"
+                />
+        <EditText android:layout_marginTop="5dp"
+              android:id="@+id/nameEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:inputType="textPersonName"
+              android:hint=""
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:singleLine="true"
+
+              />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Email"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center"
+                />
+    <EditText android:id="@+id/emailEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:inputType="textEmailAddress"
+              android:hint="example@example.com"
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:singleLine="true"
+              android:layout_marginTop="5dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+
+
+            />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Описание"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center"
+                />
+    <EditText android:id="@+id/optEdit"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp"
+              android:inputType="text"
+              android:hint="Продажа оргтехники или клининговая компания"
+              android:textStyle="italic"
+              android:textColor="#133CAC"
+              android:textColorHint="#133CAC"
+              android:lines="3"
+              android:layout_marginTop="5dp"
+
+              />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="Часы работы"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center"
+                />
+        <EditText android:id="@+id/wtEdit"
+                  android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:inputType="number"
+                  android:hint="9:00 - 22:00"
+                  android:textStyle="italic"
+                  android:textColor="#133CAC"
+                  android:textColorHint="#133CAC"
+                  android:lines="1"
+                  android:layout_marginTop="5dp"
+
+                />
+        <TextView android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textColor="#133CAC"
+                  android:textStyle="italic"
+                  android:text="www.example.ru"
+                  android:layout_marginTop="10dp"
+                  android:gravity="center"
+                />
+        <EditText android:id="@+id/urlEdit"
+                  android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginRight="10dp"
+                  android:inputType="textUri"
+                  android:hint="9:00 - 22:00"
+                  android:textStyle="italic"
+                  android:textColor="#133CAC"
+                  android:textColorHint="#133CAC"
+                  android:lines="1"
+                  android:layout_marginTop="5dp"
+
+                />
+
+
+        <Button android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/aboutMyself"
+                android:text="Отправить"
+                android:textColor="#133CAC"
+                android:textStyle="italic"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+
+                />
+        </LinearLayout>
+
+</LinearLayout>
+    </ScrollView>

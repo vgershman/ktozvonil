@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,41 +25,15 @@ public class Request {
         new RequestGetTask(HOST + number, requestGetCallback).execute();
 
     }
-    public static void postInfo(String phone,String name, String description, String image, String email, RequestPostCallback requestPostCallback){
-       /* JSONObject params = new JSONObject();
-        JSONObject data = new JSONObject();
-        try {
+    public static void postInfo(Map<String,String> data, Map<String, String> additional, RequestPostCallback requestPostCallback){
 
-            data.put("phone",phone);
-            data.put("name",name);
-            data.put("description",description);
-            data.put("image",image);
-            data.put("email",email);
-            JSONObject additional = new JSONObject();
-            additional.put("type","test");
-            params.put("data",data);
-            params.put("additional",additional);
-
-        }catch (JSONException ex){
-            Log.e("KtoZvonil",ex.getMessage());
-            requestPostCallback.onFailure();
-        }
-*/
         List<NameValuePair> params= new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("data[phone]",phone));
-        params.add(new BasicNameValuePair("data[name]",name));
-        params.add(new BasicNameValuePair("data[description]",description));
-        params.add(new BasicNameValuePair("data[email]",email));
-        params.add(new BasicNameValuePair("data[image]",image));
-        params.add(new BasicNameValuePair("additional[type]","test"));
-
-        //additional.put("location",location);
-        //additional.put("point",point);
-        //additional.put("url",url);
-        //additional.put("worktime",worktime);
-        //additional.put("from",from);
-        //additional.put("operator",operator);
-        //additional.put("region",region);
+        for(String dataField:data.keySet()){
+            params.add(new BasicNameValuePair("data["+dataField+"]",data.get(dataField)));
+        }
+        for(String addField:additional.keySet()){
+            params.add(new BasicNameValuePair("additional["+addField+"]",additional.get(addField)));
+        }
 
 
         new RequestPostTask(HOST + "add",params, requestPostCallback).execute();

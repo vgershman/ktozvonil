@@ -28,18 +28,25 @@ public class TypeActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.slide_out_right,android.R.anim.slide_in_left);
+                overridePendingTransition(android.R.anim.slide_in_left,0);
             }
         });
         Button company = (Button)findViewById(R.id.company);
         company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
+                Intent intent = new Intent(TypeActivity.this, TellAboutCompanyActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.slide_out_right,android.R.anim.slide_in_left);
+                overridePendingTransition(android.R.anim.slide_in_left,0);
             }
         });
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();    //To change body of overridden methods use File | Settings | File Templates.
+        overridePendingTransition(0,android.R.anim.slide_out_right);
     }
 }
