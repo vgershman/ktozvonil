@@ -38,7 +38,7 @@ public class ResultActivity extends Activity {
 
         int actionType = getIntent().getIntExtra("actionType", 0);
         phoneRequest = getIntent().getStringExtra("phone");
-
+        showMore = (Button) findViewById(R.id.showMore);
         switch (actionType) {
             case 0:
                 showNotFound();
@@ -74,7 +74,7 @@ public class ResultActivity extends Activity {
         } else {
             tellAboutMyself.setVisibility(View.GONE);
         }
-         showMore = (Button) findViewById(R.id.showMore);
+
         showMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +103,7 @@ public class ResultActivity extends Activity {
     }
 
     private void showFound() {
+        showMore.setVisibility(View.VISIBLE);
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Информация успешно найдена.");
         LinearLayout resultLayout = (LinearLayout) findViewById(R.id.resultLayout);
@@ -113,6 +114,7 @@ public class ResultActivity extends Activity {
         Bundle data = getIntent().getExtras();
         final String phone = data.getString("phone");
         final String name = data.getString("name");
+        final String email = data.getString("email");
         phoneResult.setText(phone);
 
         List<String> main = new ArrayList<String>();
@@ -140,7 +142,9 @@ public class ResultActivity extends Activity {
                 intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
                 intent.putExtra(ContactsContract.Intents.Insert.NAME, name);
                 intent.putExtra(ContactsContract.Intents.Insert.PHONE, phone);
-
+                if(email!=null){
+                    intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
+                }
                 startActivity(intent);
 
             }

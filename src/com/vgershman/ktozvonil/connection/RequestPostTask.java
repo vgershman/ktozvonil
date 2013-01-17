@@ -26,8 +26,7 @@ import java.util.List;
 public class RequestPostTask extends AsyncTask{
 
     List<NameValuePair> params;
-    boolean fail=false;
-    PhoneUserInfo result=null;
+    boolean fail;
     String url;
     RequestPostCallback requestPostCallback;
 
@@ -62,8 +61,9 @@ public class RequestPostTask extends AsyncTask{
             String page = sb.toString();
             JSONObject jsonObject= new JSONObject(page);
 
-            if(!jsonObject.has("msg")){
-                result = PhoneUserInfo.createFromJSONObject(jsonObject.getJSONObject("data"));
+            if(jsonObject.has("msg")){
+                fail=false;
+                return null;
             }
 
         } catch (Exception ex){
@@ -79,13 +79,7 @@ public class RequestPostTask extends AsyncTask{
     @Override
     protected void onPostExecute(Object o) {
         if(!fail){
-            if(result!=null){
-                //requestGetCallback.onInfoFound(result);
-            }else{
-                //requestGetCallback.onNotFound();
-            }
-        }else {
-            //requestGetCallback.onFailure();
-        }
+            requestPostCallback.onSuccess();
+        }else {requestPostCallback.onFailure();}
     }
 }
