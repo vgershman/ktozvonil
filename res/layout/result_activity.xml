@@ -37,28 +37,27 @@
                       android:textStyle="italic"
                     />
         </LinearLayout>
-        <Button android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:id="@+id/showMore"
-                android:text="Подробнее"
-                android:textColor="#133CAC"
-                android:textStyle="italic"
-                />
+
         <LinearLayout android:id="@+id/addResultLayout"
                       android:layout_width="fill_parent"
                       android:layout_height="wrap_content"
                       android:visibility="gone"
                       android:orientation="vertical"
                       android:layout_marginTop="40dp"
-                      android:gravity="center">
-
-        </LinearLayout>
-
+                      android:gravity="center"
+                     />
         <LinearLayout android:layout_height="wrap_content"
                       android:layout_width="wrap_content"
                       android:orientation="vertical"
                       android:layout_gravity="center"
                       android:layout_marginTop="40dp">
+            <Button android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:id="@+id/showMore"
+                    android:text="Подробнее"
+                    android:textColor="#133CAC"
+                    android:textStyle="italic"
+                    />
             <Button android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:id="@+id/addContact"

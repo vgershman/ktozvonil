@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#FFFF"
+              android:gravity="center_horizontal">
+
+    <ImageView android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:src="@drawable/logo"
+               android:layout_marginTop="20dp"/>
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:layout_height="0dp"
+                  android:layout_weight="1"
+                  android:gravity="center"
+                  android:orientation="vertical">
+
+    <TextView android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:textColor="#133CAC"
+              android:textStyle="italic"
+              android:text="Вы..."
+              android:gravity="center"
+              android:textSize="30sp"
+              android:layout_marginBottom="20dp"/>
+
+    <Button android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Частное лицо"
+            android:textColor="#133CAC"
+            android:textStyle="italic"
+            android:id="@+id/personal"/>
+
+    <Button android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Компания"
+            android:textColor="#133CAC"
+            android:textStyle="italic"
+            android:id="@+id/company"/>
+    </LinearLayout>
+</LinearLayout>

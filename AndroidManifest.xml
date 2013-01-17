@@ -19,5 +19,6 @@
         <activity android:name=".activity.ResultActivity"/>
         <activity android:name=".activity.TellAboutMyselfActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
+        <activity android:name=".activity.TypeActivity"/>
     </application>
 </manifest>

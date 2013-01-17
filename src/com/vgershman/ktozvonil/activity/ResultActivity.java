@@ -16,7 +16,6 @@ import com.vgershman.ktozvonil.app.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -30,6 +29,7 @@ public class ResultActivity extends Activity {
 
     String phoneRequest;
     LinearLayout additionalLayout;
+    Button showMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,6 @@ public class ResultActivity extends Activity {
             case 2:
                 showSuccessFullyAdded();
                 break;
-
         }
 
         Button anotherRequest = (Button) findViewById(R.id.another);
@@ -68,26 +67,26 @@ public class ResultActivity extends Activity {
             tellAboutMyself.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ResultActivity.this, TellAboutMyselfActivity.class);
+                    Intent intent = new Intent(ResultActivity.this, TypeActivity.class);
                     startActivity(intent);
                 }
             });
         } else {
             tellAboutMyself.setVisibility(View.GONE);
         }
-        Button showMore = (Button) findViewById(R.id.showMore);
+         showMore = (Button) findViewById(R.id.showMore);
         showMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (additionalLayout.getVisibility() == View.GONE) {
                     additionalLayout.setVisibility(View.VISIBLE);
+                    showMore.setText("Скрыть");
                 } else {
                     additionalLayout.setVisibility(View.GONE);
+                    showMore.setText("Подробнее");
                 }
             }
         });
-
-
     }
 
     private void showSuccessFullyAdded() {
@@ -121,12 +120,12 @@ public class ResultActivity extends Activity {
         data.keySet().removeAll(main);
 
         for (String key : main) {
-            TextView textView = new TextView(this);
+            TextView textView = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
             textView.setText(data.getString(key));
             resultLayout.addView(textView);
         }
         for (String key : data.keySet()) {
-            TextView textView = new TextView(this);
+            TextView textView = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
             textView.setText(data.getString(key));
             additionalLayout.addView(textView);
         }
@@ -152,6 +151,7 @@ public class ResultActivity extends Activity {
     public void onBackPressed() {
         if (additionalLayout.getVisibility() == View.VISIBLE) {
             additionalLayout.setVisibility(View.GONE);
+            showMore.setText("Подробнее");
         } else {
             super.onBackPressed();
         }
