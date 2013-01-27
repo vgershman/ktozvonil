@@ -17,6 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <receiver android:name=".service.OnBootReceiver"
+                  android:exported="true"/>
+        <receiver android:name=".service.RequestService"
+                android:exported="true"/>
         <service android:name=".service.PushService"/>
         <activity android:name=".activity.ResultActivity"/>
         <activity android:name=".activity.TellAboutMyselfActivity"/>

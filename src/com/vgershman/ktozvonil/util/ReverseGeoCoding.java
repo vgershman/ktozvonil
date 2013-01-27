@@ -3,8 +3,8 @@ package com.vgershman.ktozvonil.util;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
-import com.google.android.maps.GeoPoint;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,15 +21,15 @@ public class ReverseGeoCoding extends AsyncTask {
 
     private enum RESULT{SUCCESS,FAILURE}
 
-    public ReverseGeoCoding(Context context,GeoPoint geoPoint,ReverseGeoCodingListener listener) {
+    public ReverseGeoCoding(Context context,Location location,ReverseGeoCodingListener listener) {
         this.listener=listener;
-        this.geoPoint = geoPoint;
+        this.geoPoint = location;
         this.mContext=context;
     }
 
     private ReverseGeoCodingListener listener;
     private Context mContext;
-    private GeoPoint geoPoint;
+    private Location geoPoint;
     private String textResult;
 
     @Override
@@ -40,7 +40,7 @@ public class ReverseGeoCoding extends AsyncTask {
         List<Address> addresses = null;
         try {
             // Call the synchronous getFromLocation() method by passing in the lat/long values.
-            addresses = geocoder.getFromLocation(geoPoint.getLatitudeE6()/1E6,geoPoint.getLongitudeE6()/1E6, 1);
+            addresses = geocoder.getFromLocation(geoPoint.getLatitude(),geoPoint.getLongitude(), 1);
         } catch (IOException e) {
             e.printStackTrace();
             // Update UI field with the exception.

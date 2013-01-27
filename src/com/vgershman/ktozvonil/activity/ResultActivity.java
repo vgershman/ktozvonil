@@ -36,6 +36,7 @@ public class ResultActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result_activity);
 
+        additionalLayout = (LinearLayout) findViewById(R.id.addResultLayout);
         int actionType = getIntent().getIntExtra("actionType", 0);
         phoneRequest = getIntent().getStringExtra("phone");
         showMore = (Button) findViewById(R.id.showMore);
@@ -97,7 +98,8 @@ public class ResultActivity extends Activity {
     private void showNotFound() {
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Информация пока не найдена." + '\n' + " Как только найдем - обязательно сообщим Вам об этом.");
-        new PhonesManager(this).addPhone(phoneRequest);
+        PhonesManager phonesManager = new PhonesManager(this);
+                phonesManager.addPhone(phoneRequest);
         Intent intent = new Intent(ResultActivity.this, PushService.class);
         startService(intent);
     }
@@ -109,7 +111,7 @@ public class ResultActivity extends Activity {
         LinearLayout resultLayout = (LinearLayout) findViewById(R.id.resultLayout);
         resultLayout.setVisibility(View.VISIBLE);
 
-        additionalLayout = (LinearLayout) findViewById(R.id.addResultLayout);
+
         TextView phoneResult = (TextView) resultLayout.findViewById(R.id.resultPhone);
         Bundle data = getIntent().getExtras();
         final String phone = data.getString("phone");

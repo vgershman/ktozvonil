@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.android.maps.GeoPoint;
 import com.vgershman.ktozvonil.R;
 import com.vgershman.ktozvonil.app.AppInfo;
 import com.vgershman.ktozvonil.connection.Request;
@@ -57,8 +56,8 @@ public class TellAboutCompanyActivity extends Activity {
             point=location.toString();
         }
         if(location!=null){
-            point= location.toString();
-           new ReverseGeoCoding(this,new GeoPoint((int)(location.getLatitude()*1E6), (int)(location.getLatitude()*1e6)), new ReverseGeoCodingListener() {
+
+           new ReverseGeoCoding(this, location, new ReverseGeoCodingListener() {
                @Override
                public void OnSuccess(String s) {
                    locationText=s;

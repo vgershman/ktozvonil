@@ -44,13 +44,15 @@ public class PhonesManager {
                 phoneNumbers.add(cursor.getString(0));
             }
         }
+        cursor.close();
         db.close();
         return phoneNumbers;
     }
 
     public void deletePhone(String phone){
-        dbHelper.getWritableDatabase();
-        db.rawQuery("delete * from " + TABLENAME + "where phone ==" + phone,null);
+        db = dbHelper.getWritableDatabase();
+        db.delete(TABLENAME,"phone = " +phone,null );
+        //db.rawQuery("delete * from " + TABLENAME + "where phone ==" + phone,null);
         db.close();
     }
 
