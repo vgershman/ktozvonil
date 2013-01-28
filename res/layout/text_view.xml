@@ -2,6 +2,6 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_height="wrap_content"
                         android:layout_width="fill_parent"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:textStyle="italic"
                         android:textColor="#133CAC"/>

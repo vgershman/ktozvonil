@@ -42,6 +42,17 @@ public class TypeActivity extends Activity {
                 finish();
             }
         });
+        Button rascal = (Button)findViewById(R.id.rascal);
+        rascal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left,0);
+                finish();
+            }
+        });
+
 
 
     }

@@ -217,12 +217,7 @@ public class RequestPhoneActivity extends Activity {
 
     private boolean checkPhoneInput() {
         String phone = phoneInput.getText().toString();
-        if (phone.equals("")) {
-            return false;
-        }
-        if (phone.charAt(0) != '7') {
-            return false;
-        }
+
         if (phone.length() < 5) {
             return false;
         }

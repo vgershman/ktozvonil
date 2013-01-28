@@ -97,7 +97,7 @@ public class ResultActivity extends Activity {
 
     private void showNotFound() {
         TextView resultText = (TextView) findViewById(R.id.resultText);
-        resultText.setText("Информация пока не найдена." + '\n' + " Как только найдем - обязательно сообщим Вам об этом.");
+        resultText.setText("Помогите другим! \n Вы будете первым кто добавит информацию о контакте." );
         PhonesManager phonesManager = new PhonesManager(this);
                 phonesManager.addPhone(phoneRequest);
         Intent intent = new Intent(ResultActivity.this, PushService.class);

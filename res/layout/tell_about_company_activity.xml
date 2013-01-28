@@ -8,26 +8,30 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:background="#FFFFFF"
-              android:gravity="center_horizontal">
+              android:gravity="left"
+              android:paddingLeft="15dp">
 
-    <ImageView android:layout_width="fill_parent"
+    <ImageView android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:src="@drawable/logo"
-               android:layout_marginTop="20dp"/>
+               android:layout_marginTop="20dp"
+               android:layout_marginLeft="5dp"/>
     <LinearLayout
-            android:focusable="true" android:focusableInTouchMode="true"
-            android:layout_width="0px" android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0px"
+            android:layout_height="0px"
             />
 
     <LinearLayout android:layout_height="0dp"
                   android:layout_width="fill_parent"
                   android:layout_weight="1"
                   android:orientation="vertical"
-                  android:gravity="center">
+                  android:gravity="left">
 
         <TextView android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:gravity="center"
+                  android:gravity="left"
                   android:textColor="#133CAC"
                   android:textStyle="italic"
                   android:textSize="20sp"
@@ -40,13 +44,12 @@
                   android:textStyle="italic"
                   android:text="Телефон"
                   android:layout_marginTop="40dp"
-                  android:gravity="center"/>
+                  android:gravity="left"/>
 
         <EditText android:layout_marginTop="5dp"
                   android:id="@+id/phoneEdit"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"
-                  android:layout_marginLeft="10dp"
                   android:layout_marginRight="10dp"
                   android:inputType="phone"
                   android:hint="7(***)*******"
@@ -63,14 +66,13 @@
                   android:textStyle="italic"
                   android:text="Название"
                   android:layout_marginTop="10dp"
-                  android:gravity="center"
+                  android:gravity="left"
                 />
         <EditText android:layout_marginTop="5dp"
               android:id="@+id/nameEdit"
               android:layout_height="wrap_content"
               android:layout_width="fill_parent"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp"
+              android:layout_marginRight="15dp"
               android:inputType="textPersonName"
               android:hint=""
               android:textStyle="italic"
@@ -85,7 +87,7 @@
                   android:textStyle="italic"
                   android:text="Email"
                   android:layout_marginTop="10dp"
-                  android:gravity="center"
+                  android:gravity="left"
                 />
     <EditText android:id="@+id/emailEdit"
               android:layout_height="wrap_content"
@@ -97,8 +99,7 @@
               android:textColorHint="#133CAC"
               android:singleLine="true"
               android:layout_marginTop="5dp"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp"
+              android:layout_marginRight="15dp"
 
 
             />
@@ -108,13 +109,12 @@
                   android:textStyle="italic"
                   android:text="Описание"
                   android:layout_marginTop="10dp"
-                  android:gravity="center"
+                  android:gravity="left"
                 />
     <EditText android:id="@+id/optEdit"
               android:layout_height="wrap_content"
               android:layout_width="fill_parent"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp"
+              android:layout_marginRight="15dp"
               android:inputType="text"
               android:hint="Продажа оргтехники или клининговая компания"
               android:textStyle="italic"
@@ -130,13 +130,12 @@
                   android:textStyle="italic"
                   android:text="Часы работы"
                   android:layout_marginTop="10dp"
-                  android:gravity="center"
+                  android:gravity="left"
                 />
         <EditText android:id="@+id/wtEdit"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginRight="10dp"
+                  android:layout_marginRight="15dp"
                   android:inputType="number"
                   android:hint="9:00 - 22:00"
                   android:textStyle="italic"
@@ -150,24 +149,23 @@
                   android:layout_height="wrap_content"
                   android:textColor="#133CAC"
                   android:textStyle="italic"
-                  android:text="www.example.ru"
+                  android:text="Адрес в интернете:"
                   android:layout_marginTop="10dp"
-                  android:gravity="center"
+                  android:gravity="left"
                 />
         <EditText android:id="@+id/urlEdit"
                   android:layout_height="wrap_content"
                   android:layout_width="fill_parent"
-                  android:layout_marginLeft="10dp"
-                  android:layout_marginRight="10dp"
+                  android:layout_marginLeft="5dp"
+                  android:layout_marginRight="15dp"
                   android:inputType="textUri"
-                  android:hint="9:00 - 22:00"
+                  android:hint="www.example.ru"
                   android:textStyle="italic"
                   android:textColor="#133CAC"
                   android:textColorHint="#133CAC"
                   android:lines="1"
                   android:layout_marginTop="5dp"
-
-                />
+        />
 
 
         <Button android:layout_height="wrap_content"
@@ -179,9 +177,7 @@
                 android:textColor="#133CAC"
                 android:textStyle="italic"
                 android:layout_marginTop="40dp"
-                android:layout_gravity="center"
-
-                />
+                android:layout_gravity="center"/>
         </LinearLayout>
 
 </LinearLayout>

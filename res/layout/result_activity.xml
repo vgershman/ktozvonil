@@ -47,14 +47,14 @@
                       android:layout_height="wrap_content"
                       android:visibility="gone"
                       android:orientation="vertical"
-                      android:layout_marginTop="40dp"
+                      android:layout_marginTop="10dp"
                       android:gravity="left"
                      />
         <LinearLayout android:layout_height="wrap_content"
-                      android:layout_width="wrap_content"
+                      android:layout_width="fill_parent"
                       android:orientation="vertical"
                       android:layout_gravity="left"
-                      android:layout_marginTop="40dp">
+                      android:layout_marginTop="20dp">
             <Button android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:id="@+id/showMore"
@@ -74,7 +74,7 @@
             <Button android:layout_height="wrap_content"
                     android:layout_width="fill_parent"
                     android:id="@+id/another"
-                    android:text="Другой номер"
+                    android:text="Вернуться к поиску"
                     android:textColor="#133CAC"
                     android:textStyle="italic"/>
 
