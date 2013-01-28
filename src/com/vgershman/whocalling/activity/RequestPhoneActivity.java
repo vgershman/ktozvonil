@@ -10,10 +10,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import com.vgershman.whocalling.R;
 import com.vgershman.whocalling.app.*;
@@ -51,125 +48,150 @@ public class RequestPhoneActivity extends Activity {
     }
 
     private void showAddInfoDialog() {
-        final SharedPreferences sharedPreferences = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE);
-        boolean addedInfo = sharedPreferences.getBoolean("addedInfo",false);
-        if(!addedInfo){
-             int startCounter = sharedPreferences.getInt("startCounter",0);
-             if(startCounter==2){
-                 startCounter = 0;
-                 sharedPreferences.edit().putInt("startCounter",startCounter).commit();
-                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                 builder.setMessage("Пожалуйста, добавьте информацию о себе");
-                 builder.setNegativeButton("Никогда",new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                         sharedPreferences.edit().putBoolean("addedInfo",true);
-                     }
-                 });
-                 builder.setNeutralButton("Позже", new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                         dialogInterface.dismiss();
-                     }
-                 });
-                 builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
-                     @Override
-                     public void onClick(DialogInterface dialogInterface, int i) {
-                         Intent intent = new Intent(RequestPhoneActivity.this, TellAboutMyselfActivity.class);
-                         startActivity(intent);
-                     }
-                 });
-                 builder.create().show();
+        final SharedPreferences sharedPreferences = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE);
+        boolean addedInfo = sharedPreferences.getBoolean("addedInfo", false);
+        if (!addedInfo) {
+            int startCounter = sharedPreferences.getInt("startCounter", 0);
+            if (startCounter == 2) {
+                startCounter = 0;
+                sharedPreferences.edit().putInt("startCounter", startCounter).commit();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Пожалуйста, добавьте информацию о себе");
+                builder.setNegativeButton("Никогда", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sharedPreferences.edit().putBoolean("addedInfo", true);
+                    }
+                });
+                builder.setNeutralButton("Позже", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(RequestPhoneActivity.this, TellAboutMyselfActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.create().show();
 
-             }else{
-                 sharedPreferences.edit().putInt("startCounter",startCounter+1).commit();
-             }
+            } else {
+                sharedPreferences.edit().putInt("startCounter", startCounter + 1).commit();
+            }
 
         }
     }
 
     private void initView() {
-        phoneInput = (EditText)findViewById(R.id.phoneInput);
-        sendButton = (Button)findViewById(R.id.btnSend);
+        phoneInput = (EditText) findViewById(R.id.phoneInput);
+        sendButton = (Button) findViewById(R.id.btnSend);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(checkPhoneInput()){sendRequest();} else{
+                if (checkPhoneInput()) {
+                    sendRequest();
+                } else {
                     showWrongPhone();
                 }
             }
 
-            
-        });
 
-        Button fromCallLog = (Button)findViewById(R.id.fromCallLog);
+        });
+        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
+
+        if(!addedInfo){
+            Button tellAboutMyself = (Button)findViewById(R.id.aboutMyself);
+            tellAboutMyself.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(RequestPhoneActivity.this,TypeActivity.class));
+                }
+            });
+        }
+
+        Button fromCallLog = (Button) findViewById(R.id.fromCallLog);
         fromCallLog.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View v) {
+                String[] strFields = {android.provider.CallLog.Calls._ID,
+                        android.provider.CallLog.Calls.NUMBER,
+                        android.provider.CallLog.Calls.CACHED_NAME,};
+                String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
+                final Cursor cursorCall = getContentResolver().query(
+                        android.provider.CallLog.Calls.CONTENT_URI, strFields,
+                        null, null, strOrder);
 
-                    public void onClick(View v) {
-                        String[] strFields = {android.provider.CallLog.Calls._ID,
-                                android.provider.CallLog.Calls.NUMBER,
-                                android.provider.CallLog.Calls.CACHED_NAME,};
-                        String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
-                        final Cursor cursorCall = getContentResolver().query(
-                                android.provider.CallLog.Calls.CONTENT_URI, strFields,
-                                null, null, strOrder);
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        RequestPhoneActivity.this);
 
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(
-                                RequestPhoneActivity.this);
-
-                        android.content.DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogInterface,
-                                                int item) {
-                                cursorCall.moveToPosition(item);
-                                Toast.makeText(
-                                        RequestPhoneActivity.this,
-                                        cursorCall.getString(cursorCall
-                                                .getColumnIndex(android.provider.CallLog.Calls.NUMBER)),
-                                        Toast.LENGTH_LONG).show();
-                                cursorCall.close();
-                                return;
-                            }
-                        };
-                        builder.setCursor(cursorCall, listener,
-                                android.provider.CallLog.Calls.CACHED_NAME);
-                        builder.create().show();
+                builder.setInverseBackgroundForced(false);
+                final CustomCursorAdapter customCursorAdapter = new CustomCursorAdapter(RequestPhoneActivity.this, cursorCall);
+                builder.setAdapter(customCursorAdapter,new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String phone = ((Cursor)customCursorAdapter.getItem(i)).getString(1);
+                        phoneInput.setText(phone);
                     }
                 });
 
+
+                builder.create().show();
+            }
+        });
+
+    }
+
+    class CustomCursorAdapter extends CursorAdapter{
+
+        CustomCursorAdapter(Context context, Cursor c) {
+            super(context, c);
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+            final View view = LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false);
+            return view;
+        }
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+             TextView textItem = (TextView)view.findViewById(R.id.itemText);
+             textItem.setText(cursor.getString(1));
+
+        }
     }
 
 
-
     private void showWrongPhone() {
-        Toast.makeText(this,"Неверно введен номер!",2000).show();
+        Toast.makeText(this, "Неверно введен номер!", 2000).show();
     }
 
     private void sendRequest() {
         sendButton.setEnabled(false);
         final String phone = phoneInput.getText().toString();
-        Request.getInfoByNumber(phone,new RequestGetCallback() {
+        Request.getInfoByNumber(phone, new RequestGetCallback() {
             @Override
             public void onInfoFound(PhoneUserInfo response) {
-                Intent found = new Intent(RequestPhoneActivity.this,ResultActivity.class);
-                found.putExtra("actionType",1);
+                Intent found = new Intent(RequestPhoneActivity.this, ResultActivity.class);
+                found.putExtra("actionType", 1);
                 found.putExtra("phone", response.getPhone());
-                Map<String,Object> info = response.getInfo();
-                for(String key:info.keySet()){
+                Map<String, Object> info = response.getInfo();
+                for (String key : info.keySet()) {
                     Object value = info.get(key);
-                    if(value instanceof List<?>){
-                        List<String> strings =(List<String>)value;
-                        StringBuilder builder=new StringBuilder();
-                        for(String s:strings){
+                    if (value instanceof List<?>) {
+                        List<String> strings = (List<String>) value;
+                        StringBuilder builder = new StringBuilder();
+                        for (String s : strings) {
                             builder.append(s);
                             builder.append(" ,");
                         }
-                        builder.deleteCharAt(builder.length()-1);
+                        builder.deleteCharAt(builder.length() - 1);
                         found.putExtra(key, builder.toString());
-                    }else{
-                        found.putExtra(key,String.valueOf(value));
+                    } else {
+                        found.putExtra(key, String.valueOf(value));
                     }
                 }
 
@@ -180,13 +202,13 @@ public class RequestPhoneActivity extends Activity {
             public void onNotFound() {
                 Intent notFound = new Intent(RequestPhoneActivity.this, ResultActivity.class);
                 notFound.putExtra("actionType", 0);
-                notFound.putExtra("phone",phone);
+                notFound.putExtra("phone", phone);
                 startActivity(notFound);
             }
 
             @Override
             public void onFailure() {
-                Toast.makeText(RequestPhoneActivity.this,"Ошибка сервера", 2000);
+                Toast.makeText(RequestPhoneActivity.this, "Ошибка сервера", 2000);
             }
         });
 
@@ -195,9 +217,15 @@ public class RequestPhoneActivity extends Activity {
 
     private boolean checkPhoneInput() {
         String phone = phoneInput.getText().toString();
-        if(phone.equals("")){return false;}
-        if(phone.charAt(0)!='7'){return false;}
-        if(phone.length()<5){return false;}
+        if (phone.equals("")) {
+            return false;
+        }
+        if (phone.charAt(0) != '7') {
+            return false;
+        }
+        if (phone.length() < 5) {
+            return false;
+        }
         return true;
     }
 

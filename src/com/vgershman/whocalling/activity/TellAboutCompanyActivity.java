@@ -111,6 +111,7 @@ public class TellAboutCompanyActivity extends Activity {
 
                             Intent intent = new Intent(TellAboutCompanyActivity.this, ResultActivity.class);
                             intent.putExtra("actionType", 2);
+                            intent.putExtra("phone", phoneEdit.getText());
                             startActivity(intent);
                         }
 

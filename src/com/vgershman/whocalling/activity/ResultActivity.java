@@ -92,7 +92,7 @@ public class ResultActivity extends Activity {
 
     private void showSuccessFullyAdded() {
         TextView resultText = (TextView) findViewById(R.id.resultText);
-        resultText.setText("Информация о Вас успешно добавлена. Спасибо!");
+        resultText.setText("Спасибо! Вы успешно добавили информацию по телефону");
     }
 
     private void showNotFound() {

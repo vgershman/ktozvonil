@@ -29,6 +29,7 @@ public class TypeActivity extends Activity {
                 Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left,0);
+                finish();
             }
         });
         Button company = (Button)findViewById(R.id.company);
@@ -38,6 +39,7 @@ public class TypeActivity extends Activity {
                 Intent intent = new Intent(TypeActivity.this, TellAboutCompanyActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left,0);
+                finish();
             }
         });
 

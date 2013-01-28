@@ -107,6 +107,7 @@ public class TellAboutMyselfActivity extends Activity {
 
                             Intent intent = new Intent(TellAboutMyselfActivity.this, ResultActivity.class);
                             intent.putExtra("actionType", 2);
+                            intent.putExtra("phone", phoneEdit.getText());
                             startActivity(intent);
                         }
 
