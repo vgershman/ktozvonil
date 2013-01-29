@@ -23,8 +23,7 @@
                 android:exported="true"/>
         <service android:name=".service.PushService"/>
         <activity android:name=".activity.ResultActivity"/>
-        <activity android:name=".activity.TellAboutMyselfActivity"/>
-        <activity android:name=".activity.TellAboutCompanyActivity"/>
+        <activity android:name=".activity.TellAboutActivity"/>
         <activity android:name=".activity.SettingsActivity"/>
         <activity android:name=".activity.TypeActivity"/>
     </application>

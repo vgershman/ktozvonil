@@ -72,7 +72,8 @@ public class RequestPhoneActivity extends Activity {
                 builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(RequestPhoneActivity.this, TellAboutMyselfActivity.class);
+                        Intent intent = new Intent(RequestPhoneActivity.this, TypeActivity.class);
+                        intent.putExtra("self",true);
                         startActivity(intent);
                     }
                 });
@@ -105,10 +106,13 @@ public class RequestPhoneActivity extends Activity {
 
         if(!addedInfo){
             Button tellAboutMyself = (Button)findViewById(R.id.aboutMyself);
+            tellAboutMyself.setVisibility(View.VISIBLE);
             tellAboutMyself.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(RequestPhoneActivity.this,TypeActivity.class));
+                    Intent intent = new Intent(RequestPhoneActivity.this, TypeActivity.class);
+                    intent.putExtra("self",true);
+                    startActivity(intent);
                 }
             });
         }

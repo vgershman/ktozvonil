@@ -9,6 +9,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -40,13 +41,13 @@ public class RequestPostTask extends AsyncTask{
     protected Object doInBackground(Object... objects) {
 
         try {
+
             HttpClient client = new DefaultHttpClient();
+
             HttpPost request = new HttpPost();
+
             request.setURI(new URI(url));
-
-
-            request.setEntity(new UrlEncodedFormEntity(params));
-
+            request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 
             HttpResponse response = client.execute(request);
             BufferedReader in = new BufferedReader

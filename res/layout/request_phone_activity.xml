@@ -84,6 +84,7 @@
                 android:id="@+id/aboutMyself"
                 android:text="Добавить информацию о себе"
                 android:textColor="#133CAC"
+                android:visibility="gone"
                 android:textStyle="italic"/>
     </LinearLayout>
 

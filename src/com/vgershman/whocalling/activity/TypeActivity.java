@@ -22,11 +22,16 @@ public class TypeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.type_activity);
+
+
+
         Button personal = (Button)findViewById(R.id.personal);
         personal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
+                Intent intent = new Intent(TypeActivity.this, TellAboutActivity.class);
+                intent.putExtra("type","personal");
+                intent.putExtra("self",getIntent().getBooleanExtra("self",true));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left,0);
                 finish();
@@ -36,7 +41,9 @@ public class TypeActivity extends Activity {
         company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TypeActivity.this, TellAboutCompanyActivity.class);
+                Intent intent = new Intent(TypeActivity.this, TellAboutActivity.class);
+                intent.putExtra("type","company");
+                intent.putExtra("self",getIntent().getBooleanExtra("self",true));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left,0);
                 finish();
@@ -46,14 +53,20 @@ public class TypeActivity extends Activity {
         rascal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TypeActivity.this, TellAboutMyselfActivity.class);
+                Intent intent = new Intent(TypeActivity.this, TellAboutActivity.class);
+                intent.putExtra("type","rascal");
+                intent.putExtra("self",getIntent().getBooleanExtra("self",true));
+                intent.putExtra("phone",getIntent().getStringExtra("phone"));
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left,0);
                 finish();
             }
         });
 
-
+        boolean self = getIntent().getBooleanExtra("self",false);
+        if(self){
+            rascal.setVisibility(View.GONE);
+        }
 
     }
 

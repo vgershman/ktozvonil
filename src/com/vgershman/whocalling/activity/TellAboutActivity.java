@@ -11,6 +11,7 @@ import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.vgershman.whocalling.R;
 import com.vgershman.whocalling.app.AppInfo;
@@ -43,20 +44,24 @@ public class TellAboutActivity extends Activity {
     Button send;
     boolean self;
     String type="";
+    LinearLayout addit;
+    Button showMore;
+    boolean showMoreVar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tell_about_company_activity);
+        setContentView(R.layout.tell_about);
         self = getIntent().getBooleanExtra("self",true);
         type = getIntent().getStringExtra("type");
 
         initView();
         getCurrentLocation();
-        String number=getMyPhoneNumber();
+        String number = getIntent().getStringExtra("phone");
         if(number!=null){
             phoneEdit.setText(number);
         }
+
         String myEmail = getMyEmail();
         if(myEmail!=null){
             emailEdit.setText(myEmail);
@@ -133,6 +138,22 @@ public class TellAboutActivity extends Activity {
     }
 
     private void initView() {
+        addit = (LinearLayout)findViewById(R.id.addFields);
+        showMore = (Button)findViewById(R.id.showMore);
+        showMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!showMoreVar){
+                    addit.setVisibility(View.VISIBLE);
+                    showMoreVar=true;
+                    showMore.setText("Скрыть");
+                }else{
+                    addit.setVisibility(View.GONE);
+                    showMoreVar=false;
+                    showMore.setText("Подробнее");
+                }
+            }
+        });
         send = (Button)findViewById(R.id.aboutMyself);
         nameEdit = (EditText)findViewById(R.id.nameEdit);
         optEdit = (EditText)findViewById(R.id.optEdit);
@@ -140,15 +161,11 @@ public class TellAboutActivity extends Activity {
         emailEdit = (EditText)findViewById(R.id.emailEdit);
         urlEdit = (EditText)findViewById(R.id.urlEdit);
         wtEdit = (EditText)findViewById(R.id.wtEdit);
-
-
     }
 
     private boolean checkFields(){
         Toast toast = Toast.makeText(this,"Неверно введен телефон и/или название",2000);
-        if(phoneEdit.getText().toString().equals("")){toast.show();return false;}
-        if(phoneEdit.getText().toString().charAt(0)!='7'){toast.show();return false;}
-        if(phoneEdit.getText().toString().length()!=11){toast.show();return false;}
+        if(phoneEdit.getText().toString().length()<5){toast.show();return false;}
         if(nameEdit.getText().toString().equals("")){toast.show();return false;}
         return true;
     }
@@ -169,7 +186,6 @@ public class TellAboutActivity extends Activity {
             if(ac.type.equals("com.google")) {
                 googleAccounts.add(ac.name);
             }
-
 
         }
         if(googleAccounts.size()==0){

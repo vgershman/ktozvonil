@@ -30,6 +30,7 @@ public class ResultActivity extends Activity {
     String phoneRequest;
     LinearLayout additionalLayout;
     Button showMore;
+    Button tellAboutMyself;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,22 @@ public class ResultActivity extends Activity {
         int actionType = getIntent().getIntExtra("actionType", 0);
         phoneRequest = getIntent().getStringExtra("phone");
         showMore = (Button) findViewById(R.id.showMore);
+
+        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
+
+        tellAboutMyself = (Button) findViewById(R.id.aboutMyself);
+        if (!addedInfo) {
+            tellAboutMyself.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ResultActivity.this, TypeActivity.class);
+                    intent.putExtra("self",true);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            tellAboutMyself.setVisibility(View.GONE);
+        }
         switch (actionType) {
             case 0:
                 showNotFound();
@@ -60,21 +77,6 @@ public class ResultActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
-
-        Button tellAboutMyself = (Button) findViewById(R.id.aboutMyself);
-        if (!addedInfo) {
-            tellAboutMyself.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(ResultActivity.this, TypeActivity.class);
-                    startActivity(intent);
-                }
-            });
-        } else {
-            tellAboutMyself.setVisibility(View.GONE);
-        }
 
         showMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +100,18 @@ public class ResultActivity extends Activity {
     private void showNotFound() {
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Помогите другим! \n Вы будете первым кто добавит информацию о контакте." );
+        tellAboutMyself.setVisibility(View.VISIBLE);
+        tellAboutMyself.setText("Добавить комментарии");
+        tellAboutMyself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResultActivity.this, TypeActivity.class);
+                intent.putExtra("self",false);
+                intent.putExtra("phone",phoneRequest);
+                startActivity(intent);
+            }
+        });
+
         PhonesManager phonesManager = new PhonesManager(this);
                 phonesManager.addPhone(phoneRequest);
         Intent intent = new Intent(ResultActivity.this, PushService.class);
