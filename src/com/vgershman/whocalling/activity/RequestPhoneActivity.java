@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.view.*;
@@ -123,11 +125,11 @@ public class RequestPhoneActivity extends Activity {
             public void onClick(View v) {
                 String[] strFields = {android.provider.CallLog.Calls._ID,
                         android.provider.CallLog.Calls.NUMBER,
-                        android.provider.CallLog.Calls.CACHED_NAME,};
+                        android.provider.CallLog.Calls.CACHED_NAME, CallLog.Calls.TYPE};
                 String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
                 final Cursor cursorCall = getContentResolver().query(
                         android.provider.CallLog.Calls.CONTENT_URI, strFields,
-                        null, null, strOrder);
+                        CallLog.Calls.CACHED_NAME+" is null", null, strOrder);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         RequestPhoneActivity.this);
@@ -151,9 +153,18 @@ public class RequestPhoneActivity extends Activity {
 
     class CustomCursorAdapter extends CursorAdapter{
 
+        Bitmap incoming;
+        Bitmap outgoing;
+        Bitmap missed;
+
+
         CustomCursorAdapter(Context context, Cursor c) {
             super(context, c);
+            missed = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_missed);
+            outgoing = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_outgoing);
+            incoming = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_incoming);
         }
+
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
@@ -164,6 +175,13 @@ public class RequestPhoneActivity extends Activity {
         public void bindView(View view, Context context, Cursor cursor) {
              TextView textItem = (TextView)view.findViewById(R.id.itemText);
              textItem.setText(cursor.getString(1));
+             ImageView type = (ImageView)view.findViewById(R.id.type);
+             switch (cursor.getInt(3)){
+                 case CallLog.Calls.INCOMING_TYPE:type.setImageBitmap(incoming); break;
+                 case CallLog.Calls.OUTGOING_TYPE:type.setImageBitmap(outgoing);break;
+                 case CallLog.Calls.MISSED_TYPE:type.setImageBitmap(missed);break;
+
+             }
 
         }
     }
@@ -212,7 +230,8 @@ public class RequestPhoneActivity extends Activity {
 
             @Override
             public void onFailure() {
-                Toast.makeText(RequestPhoneActivity.this, "Ошибка сервера", 2000);
+                Toast.makeText(RequestPhoneActivity.this, "Ошибка сервера", 2000).show();
+                sendButton.setEnabled(true);
             }
         });
 
@@ -234,4 +253,7 @@ public class RequestPhoneActivity extends Activity {
         mi.setIntent(new Intent(this, SettingsActivity.class));
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
 }

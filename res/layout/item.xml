@@ -7,8 +7,14 @@
               android:padding="10dp"
               >
     <TextView android:layout_height="fill_parent"
-              android:layout_width="fill_parent"
+              android:layout_width="0dp"
+              android:layout_weight="1"
               android:id="@+id/itemText"
               android:textColor="#000"
-              android:textStyle="normal"/>
+              android:textStyle="normal"
+              android:textSize="18sp"
+              android:gravity="center_vertical"/>
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/type"/>
 </LinearLayout>

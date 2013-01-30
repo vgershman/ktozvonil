@@ -96,6 +96,7 @@ public class TellAboutActivity extends Activity {
                             intent.putExtra("actionType", 2);
                             intent.putExtra("phone", phoneEdit.getText());
                             startActivity(intent);
+                            finish();
                         }
 
                         @Override
@@ -114,12 +115,9 @@ public class TellAboutActivity extends Activity {
 
         if(location==null){
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-        }else{
-            point=location.toString();
         }
         if(location!=null){
-
+            point = "Lat:" + location.getLatitude() + ", Lon:"+ location.getLongitude();
             new ReverseGeoCoding(this, location, new ReverseGeoCodingListener() {
                 @Override
                 public void OnSuccess(String s) {
@@ -133,6 +131,7 @@ public class TellAboutActivity extends Activity {
                 }
             });
         }else{
+            point = "";
             locationText="";
         }
     }

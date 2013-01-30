@@ -74,6 +74,7 @@ public class ResultActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResultActivity.this, RequestPhoneActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
         });
@@ -109,6 +110,7 @@ public class ResultActivity extends Activity {
                 intent.putExtra("self",false);
                 intent.putExtra("phone",phoneRequest);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -137,13 +139,15 @@ public class ResultActivity extends Activity {
         List<String> main = new ArrayList<String>();
         main.add("name");
         main.add("type");
-        data.keySet().removeAll(main);
+
 
         for (String key : main) {
             TextView textView = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
             textView.setText(data.getString(key));
             resultLayout.addView(textView);
         }
+
+        data.keySet().removeAll(main);
         for (String key : data.keySet()) {
             TextView textView = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
             textView.setText(data.getString(key));
