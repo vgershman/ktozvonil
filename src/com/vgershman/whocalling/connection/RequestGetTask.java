@@ -3,6 +3,7 @@ package com.vgershman.whocalling.connection;
 import android.os.AsyncTask;
 import android.util.Log;
 import com.vgershman.whocalling.app.AppInfo;
+import com.vgershman.whocalling.dto.NotFoundInfo;
 import com.vgershman.whocalling.dto.PhoneUserInfo;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -29,6 +30,7 @@ public class RequestGetTask extends AsyncTask{
     PhoneUserInfo result=null;
     String url;
     RequestGetCallback requestGetCallback;
+    NotFoundInfo notFoundInfo = null;
 
     public RequestGetTask(String url, RequestGetCallback requestGetCallback) {
         this.url=url;
@@ -57,6 +59,8 @@ public class RequestGetTask extends AsyncTask{
 
             if(!jsonObject.has("msg")){
                 result = PhoneUserInfo.createFromJSONObject(jsonObject.getJSONObject("data"));
+            } else {
+                notFoundInfo = NotFoundInfo.createFromJson(jsonObject.getJSONObject("data"));
             }
 
         } catch (IOException ex){
@@ -84,7 +88,7 @@ public class RequestGetTask extends AsyncTask{
             if(result!=null){
                 requestGetCallback.onInfoFound(result);
             }else{
-                requestGetCallback.onNotFound();
+                requestGetCallback.onNotFound(notFoundInfo);
             }
         }else {
             requestGetCallback.onFailure();

@@ -100,7 +100,23 @@ public class ResultActivity extends Activity {
 
     private void showNotFound() {
         TextView resultText = (TextView) findViewById(R.id.resultText);
-        resultText.setText("Помогите другим! \n Вы будете первым кто добавит информацию о контакте." );
+        resultText.setText("Вы искали " + getIntent().getStringExtra("phone"));
+        LinearLayout resultLayout = (LinearLayout)findViewById(R.id.resultLayout);
+        resultLayout.setVisibility(View.VISIBLE);
+
+        TextView textView = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
+        textView.setText("Оператор:" + getIntent().getStringExtra("operator"));
+        TextView textView1 = (TextView)getLayoutInflater().inflate(R.layout.text_view,null,false);
+        textView1.setText("Регион:" + getIntent().getStringExtra("region"));
+        TextView textView2 = (TextView)getLayoutInflater().inflate(R.layout.text_view2,null,false);
+        textView2.setText("Помогите другим! \n" +
+                "Ты первый кто добавит информацию о владельце "+getIntent().getStringExtra("phone") );
+
+        resultLayout.addView(textView);
+        resultLayout.addView(textView1);
+        resultLayout.addView(textView2);
+
+
         tellAboutMyself.setVisibility(View.VISIBLE);
         tellAboutMyself.setText("Добавить комментарии");
         tellAboutMyself.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +143,7 @@ public class ResultActivity extends Activity {
         resultText.setVisibility(View.GONE);
         LinearLayout resultLayout = (LinearLayout) findViewById(R.id.resultLayout);
         resultLayout.setVisibility(View.VISIBLE);
+
 
 
         TextView phoneResult = (TextView) resultLayout.findViewById(R.id.resultPhone);

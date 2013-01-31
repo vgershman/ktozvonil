@@ -14,6 +14,7 @@ import com.vgershman.whocalling.app.AppInfo;
 import com.vgershman.whocalling.connection.Request;
 import com.vgershman.whocalling.connection.RequestGetCallback;
 import com.vgershman.whocalling.database.PhonesManager;
+import com.vgershman.whocalling.dto.NotFoundInfo;
 import com.vgershman.whocalling.dto.PhoneUserInfo;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class RequestService extends BroadcastReceiver {
                 }
 
                 @Override
-                public void onNotFound() {
+                public void onNotFound(NotFoundInfo response) {
                     Log.i(AppInfo.SERVICE_NAME,"NotFound");
                 }
 

@@ -1,5 +1,6 @@
 package com.vgershman.whocalling.connection;
 
+import com.vgershman.whocalling.dto.NotFoundInfo;
 import com.vgershman.whocalling.dto.PhoneUserInfo;
 
 /**
@@ -12,7 +13,7 @@ import com.vgershman.whocalling.dto.PhoneUserInfo;
 public interface RequestGetCallback {
 
     void onInfoFound(PhoneUserInfo response);
-    void onNotFound();
+    void onNotFound(NotFoundInfo response);
     void onFailure();
 
 

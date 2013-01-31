@@ -18,6 +18,7 @@ import com.vgershman.whocalling.R;
 import com.vgershman.whocalling.app.*;
 import com.vgershman.whocalling.connection.Request;
 import com.vgershman.whocalling.connection.RequestGetCallback;
+import com.vgershman.whocalling.dto.NotFoundInfo;
 import com.vgershman.whocalling.dto.PhoneUserInfo;
 
 import java.util.List;
@@ -221,9 +222,11 @@ public class RequestPhoneActivity extends Activity {
             }
 
             @Override
-            public void onNotFound() {
+            public void onNotFound(NotFoundInfo response) {
                 Intent notFound = new Intent(RequestPhoneActivity.this, ResultActivity.class);
                 notFound.putExtra("actionType", 0);
+                notFound.putExtra("operator",response.getOperator());
+                notFound.putExtra("region",response.getRegion());
                 notFound.putExtra("phone", phone);
                 startActivity(notFound);
             }
