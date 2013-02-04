@@ -54,7 +54,6 @@ public class PhoneUserInfo {
                             ((List<String>) toPut).add(array.getString(j));
                         }
 
-
                     } else {
 
                         toPut = data.getString(name);

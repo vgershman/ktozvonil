@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Кто звонит?</string>
+    <string name="input_phone_number">Введите номер телефона:</string>
+    <string name="phone_hint">7(***)*******"</string>
+    <string name="btn_send_request">Найти</string>
+    <string name="phone_request_example">Примеры: 74952313219, 79213441134</string>
+    <string name="search_from_log">Поиск из журнала вызова</string>
+    <string name="btn_about_myself">Добавить информацию о себе</string>
+    <string name="btn_more">Подробнее</string>
+    <string name="btn_add2contacts">Добавить в контакты</string>
+    <string name="back_to_search">Вернуться к поиску</string>
+
 </resources>

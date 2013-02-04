@@ -16,7 +16,7 @@
     <TextView android:layout_height="wrap_content"
               android:layout_width="fill_parent"
               android:gravity="left"
-              android:text="Введите номер телефона:"
+              android:text="@string/input_phone_number"
               android:layout_marginTop="80dp"
               android:textColor="#133CAC"
               android:textStyle="normal"
@@ -45,12 +45,12 @@
                   android:singleLine="true"
                   android:textColor="#133CAC"
                   android:textStyle="italic"
-                  android:hint="7(***)*******"/>
+                  android:hint="@string/phone_hint"/>
 
         <Button   android:id="@+id/btnSend"
                   android:layout_height="wrap_content"
                   android:layout_width="80dp"
-                  android:text="Найти"
+                  android:text="@string/btn_send_request"
                   android:textColor="#133CAC"
                   android:textStyle="italic"
                   android:layout_marginTop="10dp"
@@ -59,7 +59,7 @@
 
     <TextView android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:text="Примеры: 74952313219, 79213441134"
+              android:text="@string/phone_request_example"
               android:gravity="left"
               android:textColor="#133CAC"
               android:textStyle="italic"
@@ -76,13 +76,13 @@
         <Button android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:id="@+id/fromCallLog"
-                android:text="Поиск из журнала вызова"
+                android:text="@string/search_from_log"
                 android:textColor="#133CAC"
                 android:textStyle="italic"/>
         <Button android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:id="@+id/aboutMyself"
-                android:text="Добавить информацию о себе"
+                android:text="@string/btn_about_myself"
                 android:textColor="#133CAC"
                 android:visibility="gone"
                 android:textStyle="italic"/>
