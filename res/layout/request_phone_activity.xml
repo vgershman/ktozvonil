@@ -4,90 +4,100 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="#FFFFFF"
-              >
-
-    <ImageView android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/logo"
-               android:layout_marginTop="20dp"
-               android:layout_marginLeft="20dp"/>
-
-    <TextView android:layout_height="wrap_content"
-              android:layout_width="fill_parent"
-              android:gravity="left"
-              android:text="@string/input_phone_number"
-              android:layout_marginTop="80dp"
-              android:textColor="#133CAC"
-              android:textStyle="normal"
-              android:paddingLeft="20dp"/>
-    <LinearLayout android:layout_width="fill_parent"
+              android:background="#FFFFFF">
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#fafafa"
+                 android:paddingLeft="8dp"
+                 android:paddingRight="8dp">
+        <ImageView android:scaleType="fitCenter"
+                   android:layout_width="wrap_content"
+                   android:layout_height="33dp"
+                   android:adjustViewBounds="true"
+                   android:src="@drawable/actionbar_logo"
+                   android:layout_gravity="center_vertical|left"/>
+        <ImageButton android:layout_width="33dp"
+                     android:layout_height="33dp"
+                     android:background="#0000"
+                     android:scaleType="fitCenter"
+                     android:adjustViewBounds="true"
+                     android:src="@drawable/actionbar_button_settings"
+                     android:layout_gravity="center_vertical|right"
+                     android:id="@+id/settingsButton"/>
+    </FrameLayout>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="48dp"
+                 android:background="#e3e5e8">
+        <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:gravity="center"
-                  android:paddingLeft="10dp"
-                  android:paddingRight="20dp">
-        <TextView android:layout_height="wrap_content"
-                  android:layout_width="wrap_content"
-                  android:text="+"
-                  android:textSize="30sp"
-                  android:layout_gravity="center_vertical"
-                  android:padding="10dp"
-                  android:layout_marginTop="6dp"
-                  android:textColor="#133CAC"/>
-        <EditText android:id="@+id/phoneInput"
-                  android:inputType="phone"
-                  android:layout_height="wrap_content"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:layout_marginTop="10dp"
-                  android:textColorHint="#133CAC"
-                  android:singleLine="true"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                  android:hint="@string/phone_hint"/>
-
-        <Button   android:id="@+id/btnSend"
-                  android:layout_height="wrap_content"
-                  android:layout_width="80dp"
-                  android:text="@string/btn_send_request"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                  android:layout_marginTop="10dp"
-                  />
-    </LinearLayout>
-
-    <TextView android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/phone_request_example"
-              android:gravity="left"
-              android:textColor="#133CAC"
-              android:textStyle="italic"
-              android:layout_marginTop="10dp"
-              android:paddingLeft="20dp"/>
-
-    <LinearLayout android:layout_width="fill_parent"
+                  android:text="Последние звонки"
+                  android:textColor="#697384"
+                  android:textSize="20sp"
+                  android:layout_gravity="center"
+                  android:layout_marginTop="5dp"/>
+    </FrameLayout>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_weight="1"
+                 android:background="#e3e5e8">
+        <ListView android:id="@+id/lastCalls"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:padding="8dp"
+                  android:divider="@drawable/call_list_divider"
+                  android:dividerHeight="2px"
+                  android:focusable="false"
+                  android:background="#0000"
+                  android:cacheColorHint="#0000"
+                  android:fadingEdge="none"/>
+    </FrameLayout>
+    <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
-                  android:paddingLeft="20dp"
-                  android:paddingRight="20dp"
-                  android:paddingTop="10dp"
-                  android:paddingBottom="10dp">
-        <Button android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:id="@+id/fromCallLog"
-                android:text="@string/search_from_log"
-                android:textColor="#133CAC"
-                android:textStyle="italic"/>
-        <Button android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:id="@+id/aboutMyself"
-                android:text="@string/btn_about_myself"
-                android:textColor="#133CAC"
-                android:visibility="gone"
-                android:textStyle="italic"/>
+                  android:background="#e3e5e8"
+                  android:padding="8dp">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Введите номер телефона"
+                  android:textColor="#697384"
+                  android:textSize="20sp"
+                  android:layout_gravity="center"
+                  android:layout_marginTop="5dp"/>
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:background="@drawable/background_white">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="10dp"
+                          android:orientation="vertical">
+                <EditText android:id="@+id/phoneInput"
+                          android:inputType="phone"
+                          android:layout_height="48dp"
+                          android:layout_width="match_parent"
+                          android:paddingTop="8dp"
+                          android:paddingBottom="8dp"
+                          android:paddingLeft="8dp"
+                          android:textColorHint="#d4dae4"
+                          android:singleLine="true"
+                          android:textColor="#133CAC"
+                          android:textSize="16sp"
+                          android:hint="@string/phone_hint"
+                          android:background="@drawable/number_input_background"/>
+                <Button android:id="@+id/btnSend"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/find_number_button"
+                        android:text="Получить информацию"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:shadowColor="#8000"
+                        android:shadowRadius="1"
+                        android:shadowDy="1"
+                        android:shadowDx="1"/>
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
-
-
-
 </LinearLayout>

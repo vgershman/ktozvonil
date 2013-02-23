@@ -9,7 +9,9 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <application android:icon="@drawable/logo_small" android:label="@string/app_name">
+    <application android:icon="@drawable/logo_small"
+                 android:label="@string/app_name"
+                 android:theme="@style/Theme.NoBackground">
         <activity android:name=".activity.RequestPhoneActivity"
                   android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
@@ -20,7 +22,7 @@
         <receiver android:name=".service.OnBootReceiver"
                   android:exported="true"/>
         <receiver android:name=".service.RequestService"
-                android:exported="true"/>
+                  android:exported="true"/>
         <service android:name=".service.PushService"/>
         <activity android:name=".activity.ResultActivity"/>
         <activity android:name=".activity.TellAboutActivity"/>

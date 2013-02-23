@@ -15,12 +15,15 @@ import android.provider.CallLog;
 import android.view.*;
 import android.widget.*;
 import com.vgershman.whocalling.R;
+import com.vgershman.whocalling.adapter.LastCallsAdapter;
 import com.vgershman.whocalling.app.*;
 import com.vgershman.whocalling.connection.Request;
 import com.vgershman.whocalling.connection.RequestGetCallback;
+import com.vgershman.whocalling.dao.Call;
 import com.vgershman.whocalling.dto.NotFoundInfo;
 import com.vgershman.whocalling.dto.PhoneUserInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +38,9 @@ public class RequestPhoneActivity extends Activity {
 
     EditText phoneInput;
     Button sendButton;
+    ListView lastCalls;
+    ImageButton settingsButton;
+    LastCallsAdapter callsAdapter = new LastCallsAdapter(this);
 
     @Override
     protected void onResume() {
@@ -76,7 +82,7 @@ public class RequestPhoneActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(RequestPhoneActivity.this, TypeActivity.class);
-                        intent.putExtra("self",true);
+                        intent.putExtra("self", true);
                         startActivity(intent);
                     }
                 });
@@ -105,88 +111,52 @@ public class RequestPhoneActivity extends Activity {
 
 
         });
+
         boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
 
-        if(!addedInfo){
-            Button tellAboutMyself = (Button)findViewById(R.id.aboutMyself);
-            tellAboutMyself.setVisibility(View.VISIBLE);
-            tellAboutMyself.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(RequestPhoneActivity.this, TypeActivity.class);
-                    intent.putExtra("self",true);
-                    startActivity(intent);
-                }
-            });
-        }
+        lastCalls = (ListView) findViewById(R.id.lastCalls);
+        lastCalls.setAdapter(callsAdapter);
+        List<Call> calls = getCallHistory();
+        callsAdapter.setCalls(calls);
+        callsAdapter.notifyDataSetChanged();
 
-        Button fromCallLog = (Button) findViewById(R.id.fromCallLog);
-        fromCallLog.setOnClickListener(new View.OnClickListener() {
+        settingsButton = (ImageButton) findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String[] strFields = {android.provider.CallLog.Calls._ID,
-                        android.provider.CallLog.Calls.NUMBER,
-                        android.provider.CallLog.Calls.CACHED_NAME, CallLog.Calls.TYPE};
-                String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
-                final Cursor cursorCall = getContentResolver().query(
-                        android.provider.CallLog.Calls.CONTENT_URI, strFields,
-                        CallLog.Calls.CACHED_NAME+" is null", null, strOrder);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        RequestPhoneActivity.this);
-
-                builder.setInverseBackgroundForced(false);
-                final CustomCursorAdapter customCursorAdapter = new CustomCursorAdapter(RequestPhoneActivity.this, cursorCall);
-                builder.setAdapter(customCursorAdapter,new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String phone = ((Cursor)customCursorAdapter.getItem(i)).getString(1);
-                        phoneInput.setText(phone);
-                    }
-                });
-
-
-                builder.create().show();
+            public void onClick(View view) {
+                Intent intent = new Intent(RequestPhoneActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
-
     }
 
-    class CustomCursorAdapter extends CursorAdapter{
+    private List<Call> getCallHistory() {
+        String[] strFields = {android.provider.CallLog.Calls._ID,
+                android.provider.CallLog.Calls.NUMBER,
+                android.provider.CallLog.Calls.CACHED_NAME, CallLog.Calls.TYPE,
+                CallLog.Calls.DATE};
+        String strOrder = android.provider.CallLog.Calls.DATE + " DESC";
+        final Cursor cursorCall = getContentResolver().query(
+                android.provider.CallLog.Calls.CONTENT_URI, strFields,
+                null, null, strOrder);
 
-        Bitmap incoming;
-        Bitmap outgoing;
-        Bitmap missed;
+        List<Call> callList = new ArrayList<Call>();
+        while (cursorCall.moveToNext()) {
+            Call call = new Call();
+            call.setNumber(cursorCall.getString(1));
+            if (cursorCall.getInt(3) == CallLog.Calls.OUTGOING_TYPE) {
+                call.setOut(true);
+            } else {
+                call.setOut(false);
+            }
+            call.setName(cursorCall.getString(2));
+            call.setTime(cursorCall.getLong(4));
 
-
-        CustomCursorAdapter(Context context, Cursor c) {
-            super(context, c);
-            missed = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_missed);
-            outgoing = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_outgoing);
-            incoming = BitmapFactory.decodeResource(getResources(),android.R.drawable.sym_call_incoming);
+            callList.add(call);
         }
-
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-            final View view = LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false);
-            return view;
-        }
-        @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-             TextView textItem = (TextView)view.findViewById(R.id.itemText);
-             textItem.setText(cursor.getString(1));
-             ImageView type = (ImageView)view.findViewById(R.id.type);
-             switch (cursor.getInt(3)){
-                 case CallLog.Calls.INCOMING_TYPE:type.setImageBitmap(incoming); break;
-                 case CallLog.Calls.OUTGOING_TYPE:type.setImageBitmap(outgoing);break;
-                 case CallLog.Calls.MISSED_TYPE:type.setImageBitmap(missed);break;
-
-             }
-
-        }
+        cursorCall.close();
+        return callList;
     }
-
 
     private void showWrongPhone() {
         Toast.makeText(this, "Неверно введен номер!", 2000).show();
@@ -225,8 +195,8 @@ public class RequestPhoneActivity extends Activity {
             public void onNotFound(NotFoundInfo response) {
                 Intent notFound = new Intent(RequestPhoneActivity.this, ResultActivity.class);
                 notFound.putExtra("actionType", 0);
-                notFound.putExtra("operator",response.getOperator());
-                notFound.putExtra("region",response.getRegion());
+                notFound.putExtra("operator", response.getOperator());
+                notFound.putExtra("region", response.getRegion());
                 notFound.putExtra("phone", phone);
                 startActivity(notFound);
             }
@@ -256,7 +226,6 @@ public class RequestPhoneActivity extends Activity {
         mi.setIntent(new Intent(this, SettingsActivity.class));
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
 }

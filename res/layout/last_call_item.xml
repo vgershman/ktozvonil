@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:background="@drawable/background_white_cropped"
+             android:paddingLeft="20dp"
+             android:paddingTop="8dp"
+             android:paddingBottom="8dp"
+             android:id="@+id/itemBackground">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+        <LinearLayout android:layout_height="wrap_content"
+                      android:layout_width="match_parent"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="25dp"
+                       android:layout_height="22dp"
+                       android:scaleType="fitEnd"
+                       android:adjustViewBounds="true"
+                       android:src="@drawable/ic_call_in"
+                       android:layout_gravity="right|center_vertical"
+                       android:id="@+id/itemIcCallState"/>
+            <TextView android:layout_height="wrap_content"
+                      android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="+79522298334"
+                      android:textColor="#333"
+                      android:textSize="20sp"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="5dp"
+                      android:layout_marginTop="1dp"
+                      android:id="@+id/itemNumber"/>
+        </LinearLayout>
+        <LinearLayout android:layout_height="wrap_content"
+                      android:layout_width="match_parent"
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="25dp"
+                       android:layout_height="14dp"
+                       android:scaleType="fitEnd"
+                       android:adjustViewBounds="true"
+                       android:layout_marginTop="3dp"
+                       android:src="@drawable/ic_person"
+                       android:gravity="right|center_vertical"
+                       android:id="@+id/itemIcPerson"/>
+            <TextView android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:text="Любимая"
+                      android:textColor="#b7babf"
+                      android:textSize="14sp"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="5dp"
+                      android:singleLine="true"
+                      android:id="@+id/itemName"/>
+            <ImageView android:layout_width="4dp"
+                       android:layout_height="wrap_content"
+                       android:adjustViewBounds="true"
+                       android:scaleType="fitCenter"
+                       android:src="@drawable/text_divider"
+                       android:layout_gravity="center_vertical"
+                       android:layout_marginLeft="4dp"
+                       android:layout_marginTop="2dp"
+                       android:id="@+id/itemIcDivider"/>
+            <TextView android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:text="сегодня в 11:34"
+                      android:textColor="#b7babf"
+                      android:textSize="14sp"
+                      android:layout_gravity="center_vertical"
+                      android:layout_marginLeft="5dp"
+                      android:singleLine="true"
+                      android:id="@+id/itemTime"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

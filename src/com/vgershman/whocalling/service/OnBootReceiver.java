@@ -22,7 +22,7 @@ public class OnBootReceiver extends BroadcastReceiver {
         if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
 
              TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-             tm.listen(new CallStateListener(context), PhoneStateListener.LISTEN_CALL_STATE);
+//             tm.listen(new CallStateListener(context), PhoneStateListener.LISTEN_CALL_STATE);
 
             Intent serviceLauncher = new Intent(context, PushService.class);
             context.startService(serviceLauncher);
