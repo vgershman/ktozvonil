@@ -7,18 +7,18 @@
               android:background="#FFFFFF">
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="48dp"
-                 android:background="#fafafa"
-                 android:paddingLeft="8dp"
-                 android:paddingRight="8dp">
+                 android:background="#fafafa">
         <ImageView android:scaleType="fitCenter"
                    android:layout_width="wrap_content"
-                   android:layout_height="33dp"
+                   android:layout_height="match_parent"
+                   android:padding="8dp"
                    android:adjustViewBounds="true"
                    android:src="@drawable/actionbar_logo"
                    android:layout_gravity="center_vertical|left"/>
-        <ImageButton android:layout_width="33dp"
-                     android:layout_height="33dp"
-                     android:background="#0000"
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:padding="8dp"
+                     android:background="@drawable/actionbar_button_state"
                      android:scaleType="fitCenter"
                      android:adjustViewBounds="true"
                      android:src="@drawable/actionbar_button_settings"
@@ -35,6 +35,10 @@
                   android:textSize="20sp"
                   android:layout_gravity="center"
                   android:layout_marginTop="5dp"/>
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="4px"
+                     android:layout_gravity="top"
+                     android:background="@drawable/shadow"/>
     </FrameLayout>
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="0dp"
@@ -88,7 +92,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:background="@drawable/find_number_button"
+                        android:background="@drawable/find_number_button_state"
                         android:text="Получить информацию"
                         android:textSize="16sp"
                         android:textStyle="bold"

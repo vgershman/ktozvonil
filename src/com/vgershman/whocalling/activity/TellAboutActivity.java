@@ -51,62 +51,62 @@ public class TellAboutActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tell_about);
-        self = getIntent().getBooleanExtra("self",true);
-        type = getIntent().getStringExtra("type");
-
-        initView();
-        getCurrentLocation();
-        String number = getIntent().getStringExtra("phone");
-        if(number!=null){
-            phoneEdit.setText(number);
-        }
-
-        String myEmail = getMyEmail();
-        if(myEmail!=null){
-            emailEdit.setText(myEmail);
-        }
-
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(checkFields()){
-                    Map<String,String> data = new HashMap<String, String>();
-                    Map<String,String> adds = new HashMap<String, String>();
-
-                    data.put("phone",phoneEdit.getText().toString());
-                    data.put("name",nameEdit.getText().toString());
-                    data.put("description", optEdit.getText().toString());
-                    data.put("image","");
-                    data.put("email",emailEdit.getText().toString());
-
-                    adds.put("type",type);
-                    adds.put("location",locationText);
-                    adds.put("point",point);
-                    adds.put("url", urlEdit.getText().toString());
-                    adds.put("worktime",wtEdit.getText().toString());
-
-                    Request.postInfo(data, adds, new RequestPostCallback() {
-                        @Override
-                        public void onSuccess() {
-                            if(self){
-                                getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).edit().putBoolean("addedInfo", true).commit();
-                            }
-                            Intent intent = new Intent(TellAboutActivity.this, ResultActivity.class);
-                            intent.putExtra("actionType", 2);
-                            intent.putExtra("phone", phoneEdit.getText());
-                            startActivity(intent);
-                            finish();
-                        }
-
-                        @Override
-                        public void onFailure() {
-                            Toast.makeText(TellAboutActivity.this, "Ошибка сервера", 2000).show();
-                        }
-                    });}
-            }
-        });
-
+        setContentView(R.layout.tell_avout_myself_activity);
+//        self = getIntent().getBooleanExtra("self",true);
+//        type = getIntent().getStringExtra("type");
+//
+//        initView();
+//        getCurrentLocation();
+//        String number = getIntent().getStringExtra("phone");
+//        if(number!=null){
+//            phoneEdit.setText(number);
+//        }
+//
+//        String myEmail = getMyEmail();
+//        if(myEmail!=null){
+//            emailEdit.setText(myEmail);
+//        }
+//
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(checkFields()){
+//                    Map<String,String> data = new HashMap<String, String>();
+//                    Map<String,String> adds = new HashMap<String, String>();
+//
+//                    data.put("phone",phoneEdit.getText().toString());
+//                    data.put("name",nameEdit.getText().toString());
+//                    data.put("description", optEdit.getText().toString());
+//                    data.put("image","");
+//                    data.put("email",emailEdit.getText().toString());
+//
+//                    adds.put("type",type);
+//                    adds.put("location",locationText);
+//                    adds.put("point",point);
+//                    adds.put("url", urlEdit.getText().toString());
+//                    adds.put("worktime",wtEdit.getText().toString());
+//
+//                    Request.postInfo(data, adds, new RequestPostCallback() {
+//                        @Override
+//                        public void onSuccess() {
+//                            if(self){
+//                                getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).edit().putBoolean("addedInfo", true).commit();
+//                            }
+//                            Intent intent = new Intent(TellAboutActivity.this, ResultActivity.class);
+//                            intent.putExtra("actionType", 2);
+//                            intent.putExtra("phone", phoneEdit.getText());
+//                            startActivity(intent);
+//                            finish();
+//                        }
+//
+//                        @Override
+//                        public void onFailure() {
+//                            Toast.makeText(TellAboutActivity.this, "Ошибка сервера", 2000).show();
+//                        }
+//                    });}
+//            }
+//        });
+//
     }
 
     private void getCurrentLocation() {

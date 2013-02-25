@@ -105,7 +105,9 @@ public class RequestPhoneActivity extends Activity {
                 if (checkPhoneInput()) {
                     sendRequest();
                 } else {
-                    showWrongPhone();
+//                    showWrongPhone();
+                    Intent intent = new Intent(RequestPhoneActivity.this, NoResultActivity.class);
+                    startActivity(intent);
                 }
             }
 

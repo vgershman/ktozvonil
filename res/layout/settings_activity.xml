@@ -23,7 +23,7 @@
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
-                    <TextView android:text="Информация о себе"
+                    <TextView android:text="Настройки"
                               android:textColor="#333"
                               android:textSize="18sp"
                               android:layout_width="wrap_content"
@@ -55,53 +55,7 @@
                                   android:layout_height="match_parent"
                                   android:orientation="vertical">
 
-                        <!-- ================= ACCOUNT ===================== -->
-                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                     android:layout_width="fill_parent"
-                                     android:layout_height="wrap_content"
-                                     android:background="@drawable/item_state"
-                                     android:clickable="true"
-                                     android:paddingLeft="16dp"
-                                     android:paddingRight="10dp"
-                                     android:paddingTop="8dp"
-                                     android:paddingBottom="12dp">
-                            <LinearLayout android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:orientation="vertical">
-                                <TextView android:layout_height="wrap_content"
-                                          android:layout_width="match_parent"
-                                          android:text="Тип аккаунта"
-                                          android:textColor="#333"
-                                          android:textSize="16sp"
-                                          android:layout_gravity="center_vertical"
-                                          android:layout_marginLeft="5dp"
-                                          android:layout_marginTop="1dp"
-                                          android:id="@+id/itemAccountName"/>
-                                <LinearLayout android:layout_height="wrap_content"
-                                              android:layout_width="match_parent"
-                                              android:orientation="horizontal">
-                                    <TextView android:layout_height="wrap_content"
-                                              android:layout_width="0dp"
-                                              android:layout_weight="1"
-                                              android:text="Юридическое лицо"
-                                              android:textColor="#b7babf"
-                                              android:textSize="14sp"
-                                              android:layout_gravity="center_vertical"
-                                              android:id="@+id/itemAccountSelection"/>
-                                    <ImageView android:layout_width="10dp"
-                                               android:layout_height="wrap_content"
-                                               android:adjustViewBounds="true"
-                                               android:scaleType="fitCenter"
-                                               android:src="@drawable/arrow_choise"
-                                               android:layout_gravity="right|bottom"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </FrameLayout>
-
-                        <View android:layout_width="match_parent"
-                              android:layout_height="8px"/>
-
-                        <!-- ================= FIO ===================== -->
+                        <!-- ================= LANGUAGE ===================== -->
                         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                      android:layout_width="fill_parent"
                                      android:layout_height="wrap_content"
@@ -116,25 +70,24 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Фамилия Имя Отчество"
+                                          android:text="Язык приложения"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
                                           android:layout_marginLeft="5dp"
                                           android:layout_marginTop="1dp"
-                                          android:id="@+id/itemFIOName"/>
+                                          android:id="@+id/itemLanguageName"/>
                                 <LinearLayout android:layout_height="wrap_content"
                                               android:layout_width="match_parent"
                                               android:orientation="horizontal">
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Русский Иван Иванович"
+                                              android:text="Русский"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
-                                              android:id="@+id/itemFIOSelection"
-                                              android:paddingRight="8dp"/>
+                                              android:id="@+id/itemLanguageSelection"/>
                                     <ImageView android:layout_width="10dp"
                                                android:layout_height="wrap_content"
                                                android:adjustViewBounds="true"
@@ -149,7 +102,7 @@
                               android:layout_height="2px"
                               android:background="@drawable/call_list_divider"/>
 
-                        <!-- ================= PHONE ===================== -->
+                        <!-- ================= FILTER ===================== -->
                         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                      android:layout_width="fill_parent"
                                      android:layout_height="wrap_content"
@@ -164,24 +117,24 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Телефон"
+                                          android:text="Фильтр истории звонков"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
                                           android:layout_marginLeft="5dp"
                                           android:layout_marginTop="1dp"
-                                          android:id="@+id/itemPhoneName"/>
+                                          android:id="@+id/itemFilterName"/>
                                 <LinearLayout android:layout_height="wrap_content"
                                               android:layout_width="match_parent"
                                               android:orientation="horizontal">
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="+7 952 002 12 32"
+                                              android:text="Показывать только неизвестные номера"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
-                                              android:id="@+id/itemPhoneSelection"
+                                              android:id="@+id/itemFilterSelection"
                                               android:paddingRight="8dp"/>
                                     <ImageView android:layout_width="10dp"
                                                android:layout_height="wrap_content"
@@ -197,103 +150,7 @@
                               android:layout_height="2px"
                               android:background="@drawable/call_list_divider"/>
 
-                        <!-- ================= EMAIL ===================== -->
-                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                     android:layout_width="fill_parent"
-                                     android:layout_height="wrap_content"
-                                     android:background="@drawable/item_cropped_state"
-                                     android:clickable="true"
-                                     android:paddingLeft="16dp"
-                                     android:paddingRight="10dp"
-                                     android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
-                            <LinearLayout android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:orientation="vertical">
-                                <TextView android:layout_height="wrap_content"
-                                          android:layout_width="match_parent"
-                                          android:text="E-Mail"
-                                          android:textColor="#333"
-                                          android:textSize="16sp"
-                                          android:layout_gravity="center_vertical"
-                                          android:layout_marginLeft="5dp"
-                                          android:layout_marginTop="1dp"
-                                          android:id="@+id/itemEMailName"/>
-                                <LinearLayout android:layout_height="wrap_content"
-                                              android:layout_width="match_parent"
-                                              android:orientation="horizontal">
-                                    <TextView android:layout_height="wrap_content"
-                                              android:layout_width="0dp"
-                                              android:layout_weight="1"
-                                              android:text="ivan@ushel_spat.ru"
-                                              android:textColor="#b7babf"
-                                              android:textSize="14sp"
-                                              android:layout_gravity="center_vertical"
-                                              android:id="@+id/itemEMailSelection"
-                                              android:paddingRight="8dp"/>
-                                    <ImageView android:layout_width="10dp"
-                                               android:layout_height="wrap_content"
-                                               android:adjustViewBounds="true"
-                                               android:scaleType="fitCenter"
-                                               android:src="@drawable/arrow_choise"
-                                               android:layout_gravity="right|bottom"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </FrameLayout>
-
-                        <View android:layout_width="match_parent"
-                              android:layout_height="2px"
-                              android:background="@drawable/call_list_divider"/>
-
-                        <!-- ================= TIME ===================== -->
-                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                     android:layout_width="fill_parent"
-                                     android:layout_height="wrap_content"
-                                     android:background="@drawable/item_cropped_state"
-                                     android:clickable="true"
-                                     android:paddingLeft="16dp"
-                                     android:paddingRight="10dp"
-                                     android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
-                            <LinearLayout android:layout_width="match_parent"
-                                          android:layout_height="wrap_content"
-                                          android:orientation="vertical">
-                                <TextView android:layout_height="wrap_content"
-                                          android:layout_width="match_parent"
-                                          android:text="Часы работы"
-                                          android:textColor="#333"
-                                          android:textSize="16sp"
-                                          android:layout_gravity="center_vertical"
-                                          android:layout_marginLeft="5dp"
-                                          android:layout_marginTop="1dp"
-                                          android:id="@+id/itemTimeName"/>
-                                <LinearLayout android:layout_height="wrap_content"
-                                              android:layout_width="match_parent"
-                                              android:orientation="horizontal">
-                                    <TextView android:layout_height="wrap_content"
-                                              android:layout_width="0dp"
-                                              android:layout_weight="1"
-                                              android:text="19:00 - 21:00"
-                                              android:textColor="#b7babf"
-                                              android:textSize="14sp"
-                                              android:layout_gravity="center_vertical"
-                                              android:id="@+id/itemTimeSelection"
-                                              android:paddingRight="8dp"/>
-                                    <ImageView android:layout_width="10dp"
-                                               android:layout_height="wrap_content"
-                                               android:adjustViewBounds="true"
-                                               android:scaleType="fitCenter"
-                                               android:src="@drawable/arrow_choise"
-                                               android:layout_gravity="right|bottom"/>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </FrameLayout>
-
-                        <View android:layout_width="match_parent"
-                              android:layout_height="2px"
-                              android:background="@drawable/call_list_divider"/>
-
-                        <!-- ================= COMMENTS ===================== -->
+                        <!-- ================= NOTIFICATIONS ===================== -->
                         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                      android:layout_width="fill_parent"
                                      android:layout_height="wrap_content"
@@ -308,20 +165,20 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Комментарии"
+                                          android:text="Настройка оповещений"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
                                           android:layout_marginLeft="5dp"
                                           android:layout_marginTop="1dp"
-                                          android:id="@+id/itemCommentsName"/>
+                                          android:id="@+id/itemNotificationName"/>
                                 <LinearLayout android:layout_height="wrap_content"
                                               android:layout_width="match_parent"
                                               android:orientation="horizontal">
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Я такой офигенный, лучше не звоните мне вообще"
+                                              android:text="Ежедневно на smmail@gmail.com"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -335,6 +192,102 @@
                                                android:layout_gravity="right|bottom"/>
                                 </LinearLayout>
                             </LinearLayout>
+                        </FrameLayout>
+
+                        <View android:layout_width="match_parent"
+                              android:layout_height="20dp"/>
+
+                        <!-- ====================== CONTACTS ================== -->
+                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="fill_parent"
+                                     android:layout_height="wrap_content"
+                                     android:background="@drawable/item_top_state"
+                                     android:clickable="true"
+                                     android:paddingLeft="16dp"
+                                     android:paddingRight="10dp"
+                                     android:paddingTop="8dp"
+                                     android:paddingBottom="8dp"
+                                     android:id="@+id/contacts">
+                            <LinearLayout android:layout_width="match_parent"
+                                          android:layout_height="wrap_content"
+                                          android:orientation="vertical">
+                                <TextView android:layout_height="wrap_content"
+                                          android:layout_width="match_parent"
+                                          android:text="Ваши контактные данные"
+                                          android:textColor="#333"
+                                          android:textSize="16sp"
+                                          android:layout_gravity="center_vertical"
+                                          android:layout_marginLeft="5dp"
+                                          android:layout_marginTop="1dp"
+                                          android:id="@+id/itemContactsName"/>
+                                <TextView android:layout_height="wrap_content"
+                                          android:layout_width="match_parent"
+                                          android:text="Заполните информацию о себе и определите кто может находить Вас через это приложение"
+                                          android:textColor="#b7babf"
+                                          android:textSize="14sp"
+                                          android:layout_gravity="center_vertical"
+                                          android:id="@+id/itemContactsSelection"/>
+                            </LinearLayout>
+                        </FrameLayout>
+
+                        <View android:layout_width="match_parent"
+                              android:layout_height="2px"
+                              android:background="@drawable/call_list_divider"/>
+
+                        <!-- ====================== COPY ================== -->
+                        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                     android:layout_width="fill_parent"
+                                     android:layout_height="wrap_content"
+                                     android:background="@drawable/item_bottom_state"
+                                     android:clickable="true"
+                                     android:paddingLeft="16dp"
+                                     android:paddingRight="10dp"
+                                     android:paddingTop="8dp"
+                                     android:paddingBottom="8dp">
+                            <LinearLayout android:layout_width="match_parent"
+                                          android:layout_height="wrap_content"
+                                          android:orientation="vertical">
+                                <TextView android:layout_height="wrap_content"
+                                          android:layout_width="match_parent"
+                                          android:text="Сохранить резервную копию контактов"
+                                          android:textColor="#333"
+                                          android:textSize="16sp"
+                                          android:layout_gravity="center_vertical"
+                                          android:layout_marginLeft="5dp"
+                                          android:layout_marginTop="1dp"
+                                          android:id="@+id/itemContactsName"/>
+                                <TextView android:layout_height="wrap_content"
+                                          android:layout_width="match_parent"
+                                          android:text="Сохранить Ваши контакты в безопасном хранилище на сервере."
+                                          android:textColor="#b7babf"
+                                          android:textSize="14sp"
+                                          android:layout_gravity="center_vertical"
+                                          android:id="@+id/itemContactsSelection"/>
+                            </LinearLayout>
+                        </FrameLayout>
+
+                        <View android:layout_width="match_parent"
+                              android:layout_height="8dp"/>
+
+                        <!-- ================= RESPONSE ================ -->
+                        <FrameLayout android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginTop="5dp"
+                                     android:padding="10dp"
+                                     android:background="@drawable/background_white">
+                            <Button android:id="@+id/btnSendResponse"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:background="@drawable/find_number_button_state"
+                                    android:text="Оставить отзыв о приложении"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#fff"
+                                    android:shadowColor="#8000"
+                                    android:shadowRadius="1"
+                                    android:shadowDy="1"
+                                    android:shadowDx="1"/>
                         </FrameLayout>
                     </LinearLayout>
                 </FrameLayout>
