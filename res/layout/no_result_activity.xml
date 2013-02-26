@@ -143,6 +143,9 @@
                             </LinearLayout>
                         </FrameLayout>
                         <FrameLayout android:layout_width="match_parent"
+                                     android:layout_height="2px"
+                                     android:background="@drawable/call_list_divider"/>
+                        <FrameLayout android:layout_width="match_parent"
                                      android:layout_height="wrap_content"
                                      android:background="@drawable/background_white_bottom"
                                      android:padding="12dp">

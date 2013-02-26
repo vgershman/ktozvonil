@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:padding="8dp">
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="5dp"
+                 android:background="@drawable/background_white">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="10dp"
+                      android:orientation="vertical">
+            <EditText android:id="@+id/phoneInput"
+                      android:inputType="phone"
+                      android:layout_height="48dp"
+                      android:layout_width="match_parent"
+                      android:paddingTop="8dp"
+                      android:paddingBottom="8dp"
+                      android:paddingLeft="8dp"
+                      android:textColorHint="#d4dae4"
+                      android:singleLine="true"
+                      android:textColor="#133CAC"
+                      android:textSize="16sp"
+                      android:hint="@string/phone_hint"
+                      android:background="@drawable/number_input_background"/>
+            <Button android:id="@+id/btnSend"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/find_number_button_state"
+                    android:text="Получить информацию"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:shadowColor="#8000"
+                    android:shadowRadius="1"
+                    android:shadowDy="1"
+                    android:shadowDx="1"/>
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

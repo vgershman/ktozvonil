@@ -1,89 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#FFFFFF">
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="fill_parent"
-                  android:layout_height="fill_parent"
-                  android:paddingLeft="20dp"
-                  android:paddingRight="20dp">
-
-        <ImageView android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:src="@drawable/logo"
-                   android:layout_marginTop="20dp"
-                  />
-
-        <TextView android:id="@+id/resultText"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="50dp"
-                  android:gravity="left"
-                  android:textColor="#133CAC"
-                  android:textStyle="italic"
-                  android:textSize="20sp"
-                />
-
-        <LinearLayout android:id="@+id/resultLayout"
-                      android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:visibility="gone"
-                      android:orientation="vertical"
-                      android:layout_marginTop="20dp"
-                      android:gravity="left">
-            <TextView android:id="@+id/resultPhone"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textColor="#133CAC"
-                      android:textStyle="bold"
-                      android:textSize="25sp"
-                    />
-        </LinearLayout>
-
-        <LinearLayout android:id="@+id/addResultLayout"
-                      android:layout_width="fill_parent"
-                      android:layout_height="wrap_content"
-                      android:visibility="gone"
-                      android:orientation="vertical"
-                      android:layout_marginTop="10dp"
-                      android:gravity="left"
-                     />
-        <LinearLayout android:layout_height="wrap_content"
-                      android:layout_width="fill_parent"
-                      android:orientation="vertical"
-                      android:layout_gravity="left"
-                      android:layout_marginTop="20dp">
-            <Button android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:id="@+id/showMore"
-                    android:text="@string/btn_more"
-                    android:textColor="#133CAC"
-                    android:textStyle="italic"
-                    android:visibility="gone"
-                    />
-            <Button android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:id="@+id/addContact"
-                    android:text="@string/btn_add2contacts"
-                    android:textColor="#133CAC"
-                    android:textStyle="italic"
-                    android:visibility="gone"
-                    />
-            <Button android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:id="@+id/another"
-                    android:text="@string/back_to_search"
-                    android:textColor="#133CAC"
-                    android:textStyle="italic"/>
-
-            <Button android:layout_height="wrap_content"
-                    android:layout_width="fill_parent"
-                    android:id="@+id/aboutMyself"
-                    android:text="@string/btn_about_myself"
-                    android:textColor="#133CAC"
-                    android:textStyle="italic"/>
-        </LinearLayout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="48dp"
+                     android:background="#fafafa">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="horizontal">
+                <ImageButton android:scaleType="fitCenter"
+                             android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:background="@drawable/actionbar_button_state"
+                             android:adjustViewBounds="true"
+                             android:src="@drawable/back_button"
+                             android:layout_gravity="center_vertical|left"
+                             android:padding="8dp"/>
+                <FrameLayout android:layout_width="0dp"
+                             android:layout_height="match_parent"
+                             android:layout_weight="1">
+                    <TextView android:text="Информация о номере"
+                              android:textColor="#333"
+                              android:textSize="18sp"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_gravity="left|center_vertical"/>
+                </FrameLayout>
+                <ImageButton android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:background="@drawable/actionbar_button_state"
+                             android:scaleType="fitCenter"
+                             android:adjustViewBounds="true"
+                             android:src="@drawable/ic_search"
+                             android:padding="8dp"
+                             android:layout_gravity="center_vertical|right"
+                             android:id="@+id/searchButton"/>
+                <ImageButton android:layout_width="wrap_content"
+                             android:layout_height="match_parent"
+                             android:background="@drawable/actionbar_button_state"
+                             android:scaleType="fitCenter"
+                             android:adjustViewBounds="true"
+                             android:src="@drawable/actionbar_button_settings"
+                             android:padding="8dp"
+                             android:layout_gravity="center_vertical|right"
+                             android:id="@+id/settingsButton"/>
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="0dp"
+                     android:layout_weight="1"
+                     android:background="#e3e5e8">
+            <ListView android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:id="@+id/resultList"
+                      android:fadingEdge="none"
+                      android:scrollingCache="false"
+                    android:divider="#0000"
+                    android:dividerHeight="0dp"
+                    android:cacheColorHint="#0000"/>
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="4px"
+                         android:background="@drawable/shadow"
+                         android:layout_gravity="top"/>
+        </FrameLayout>
     </LinearLayout>
-</ScrollView>
+</FrameLayout>
