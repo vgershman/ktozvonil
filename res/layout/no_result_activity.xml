@@ -19,7 +19,8 @@
                              android:adjustViewBounds="true"
                              android:src="@drawable/back_button"
                              android:layout_gravity="center_vertical|left"
-                             android:padding="8dp"/>
+                             android:padding="8dp"
+                             android:id="@+id/nav_back"/>
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
@@ -38,7 +39,8 @@
                              android:src="@drawable/ic_search"
                              android:padding="8dp"
                              android:layout_gravity="center_vertical|right"
-                             android:id="@+id/searchButton"/>
+                             android:id="@+id/searchButton"
+                             android:visibility="invisible"/>
                 <ImageButton android:layout_width="wrap_content"
                              android:layout_height="match_parent"
                              android:background="@drawable/actionbar_button_state"
@@ -88,7 +90,6 @@
                                            android:layout_marginTop="16dp"/>
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
-                                          android:id="@+id/searchNumber"
                                           android:textColor="#697384"
                                           android:textSize="14sp"
                                           android:textStyle="normal"
@@ -97,7 +98,6 @@
                                           android:layout_marginTop="8dp"/>
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
-                                          android:id="@+id/searchNumber"
                                           android:textColor="#697384"
                                           android:textSize="22sp"
                                           android:textStyle="normal"
@@ -122,7 +122,6 @@
                                                    android:layout_gravity="center"/>
                                         <TextView android:layout_width="wrap_content"
                                                   android:layout_height="wrap_content"
-                                                  android:id="@+id/searchNumber"
                                                   android:textColor="#697384"
                                                   android:textSize="16sp"
                                                   android:textStyle="normal"
@@ -133,7 +132,7 @@
                                 </FrameLayout>
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
-                                          android:id="@+id/searchNumber"
+                                          android:id="@+id/searchCounter"
                                           android:textColor="#b8bbc0"
                                           android:textSize="12sp"
                                           android:textStyle="normal"
@@ -193,11 +192,12 @@
                                                   android:textStyle="normal"
                                                   android:text="Мобильные ТелеСистемы"
                                                   android:layout_marginTop="0dp"
-                                                  android:id="@+id/regionInfo"/>
+                                                  android:id="@+id/operatorInfo"/>
                                         <ImageView android:layout_width="wrap_content"
                                                    android:layout_height="wrap_content"
                                                    android:scaleType="fitCenter"
                                                    android:adjustViewBounds="true"
+                                                   android:visibility="invisible"
                                                    android:src="@drawable/mts_logo_sample"/>
                                     </LinearLayout>
                                 </LinearLayout>

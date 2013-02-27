@@ -19,7 +19,8 @@
                              android:adjustViewBounds="true"
                              android:src="@drawable/back_button"
                              android:layout_gravity="center_vertical|left"
-                             android:padding="8dp"/>
+                             android:padding="8dp"
+                             android:id="@+id/nav_back"/>
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
@@ -38,7 +39,8 @@
                              android:src="@drawable/ic_search"
                              android:padding="8dp"
                              android:layout_gravity="center_vertical|right"
-                             android:id="@+id/searchButton"/>
+                             android:id="@+id/searchButton"
+                             android:visibility="invisible"/>
                 <ImageButton android:layout_width="wrap_content"
                              android:layout_height="match_parent"
                              android:background="@drawable/actionbar_button_state"

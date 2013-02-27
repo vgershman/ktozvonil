@@ -19,7 +19,8 @@
                              android:adjustViewBounds="true"
                              android:src="@drawable/back_button"
                              android:layout_gravity="center_vertical|left"
-                             android:padding="8dp"/>
+                             android:padding="8dp"
+                             android:id="@+id/nav_back"/>
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
@@ -65,13 +66,13 @@
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
                                      android:paddingBottom="8dp"
-                                     android:id="@+id/languageSetting">
+                                     android:id="@+id/callInfoSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Язык приложения"
+                                          android:text="Информация во время звонка"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -112,7 +113,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
+                                     android:paddingBottom="8dp"
+                                     android:id="@+id/itemFilterSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -160,7 +162,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="12dp">
+                                     android:paddingBottom="12dp"
+                                     android:id="@+id/itemPushSettings">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
