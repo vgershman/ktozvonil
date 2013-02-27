@@ -3,9 +3,7 @@ package com.vgershman.whocall.activity;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -14,15 +12,16 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.*;
 import com.vgershman.whocall.R;
+import com.vgershman.whocall.app.AppInfo;
+import com.vgershman.whocall.connection.Request;
+import com.vgershman.whocall.connection.RequestPostCallback;
 import com.vgershman.whocall.util.DialogsUtil;
 import com.vgershman.whocall.util.OnInputChangedListener;
 import com.vgershman.whocall.util.ReverseGeoCoding;
 import com.vgershman.whocall.util.ReverseGeoCodingListener;
 
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,81 +32,100 @@ import java.util.Map;
  */
 public class TellAboutActivity extends Activity {
 
-    EditText phoneEdit;
-    EditText emailEdit;
-    EditText nameEdit;
-    EditText optEdit;
-    EditText wtEdit;
-    EditText urlEdit;
     String locationText;
     String point;
-    Button send;
-    boolean self;
-    String type = "";
-    LinearLayout addit;
-    Button showMore;
-    boolean showMoreVar;
+
+    String type = "Физическое лицо";
+    String fio="";
+    String phone="";
+    String email="";
+    String time="";
+    String comments="";
+
+
     FrameLayout fioSetting;
+    FrameLayout accountType;
+    FrameLayout phoneSetting;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tell_avout_myself_activity);
-//        self = getIntent().getBooleanExtra("self",true);
-//        type = getIntent().getStringExtra("type");
-//
-//        initView();
-//        getCurrentLocation();
-//        String number = getIntent().getStringExtra("phone");
-//        if(number!=null){
-//            phoneEdit.setText(number);
-//        }
-//
-//        String myEmail = getMyEmail();
-//        if(myEmail!=null){
-//            emailEdit.setText(myEmail);
-//        }
-//
-//        send.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(checkFields()){
-//                    Map<String,String> data = new HashMap<String, String>();
-//                    Map<String,String> adds = new HashMap<String, String>();
-//
-//                    data.put("phone",phoneEdit.getText().toString());
-//                    data.put("name",nameEdit.getText().toString());
-//                    data.put("description", optEdit.getText().toString());
-//                    data.put("image","");
-//                    data.put("email",emailEdit.getText().toString());
-//
-//                    adds.put("type",type);
-//                    adds.put("location",locationText);
-//                    adds.put("point",point);
-//                    adds.put("url", urlEdit.getText().toString());
-//                    adds.put("worktime",wtEdit.getText().toString());
-//
-//                    Request.postInfo(data, adds, new RequestPostCallback() {
-//                        @Override
-//                        public void onSuccess() {
-//                            if(self){
-//                                getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).edit().putBoolean("addedInfo", true).commit();
-//                            }
-//                            Intent intent = new Intent(TellAboutActivity.this, ResultActivity.class);
-//                            intent.putExtra("actionType", 2);
-//                            intent.putExtra("phone", phoneEdit.getText());
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//
-//                        @Override
-//                        public void onFailure() {
-//                            Toast.makeText(TellAboutActivity.this, "Ошибка сервера", 2000).show();
-//                        }
-//                    });}
-//            }
-//        });
-//
+        ImageButton navBack = (ImageButton)findViewById(R.id.nav_back);
+        getCurrentLocation();
+        navBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        try{
+            String myEmail = getMyEmail();
+            if (myEmail!=null){
+                ((TextView)findViewById(R.id.itemEMailSelection)).setText(myEmail);
+            }
+
+        }catch (Exception ex){}
+
+        try{
+            String myPhone = getMyPhoneNumber();
+            if (myPhone!=null){
+                ((TextView)findViewById(R.id.itemPhoneSelection)).setText(myPhone);
+            }
+
+        }catch (Exception ex){}
+
+        findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkFields()){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put("name",fio);
+                    params.put("phone",phone);
+                    params.put("email",email);
+                    params.put("worktime",time);
+                    params.put("description",comments);
+                    params.put("point",point);
+                    params.put("location",locationText);
+                    params.put("imei", AppInfo.getIMEI());
+                    Request.postInfo(params,new RequestPostCallback() {
+                        @Override
+                        public void onSuccess() {
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(TellAboutActivity.this,getText(R.string.server_error),2000).show();
+                        }
+                    });
+
+                }
+            }
+        });
+
+
+        accountType = (FrameLayout)findViewById(R.id.accountType);
+        accountType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final List<String> options = new ArrayList<String>();
+                options.add("Физическое лицо");
+                options.add("Юридическое лицо");
+                options.add("Мошенник");
+                DialogsUtil.showDropdownDialog(TellAboutActivity.this,"Тип аккаунта", options,new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        TextView textView = (TextView)findViewById(R.id.itemAccountSelection);
+                        textView.setText(options.get(i));
+                        type = options.get(i);
+                    }
+                });
+            }
+        });
+
         fioSetting = (FrameLayout) findViewById(R.id.fioSetting);
         fioSetting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +135,61 @@ public class TellAboutActivity extends Activity {
                     public void onInputChanged(String input) {
                         TextView fioSelection = (TextView) findViewById(R.id.itemFIOSelection);
                         fioSelection.setText(input);
+                        fio = input;
+                    }
+                });
+            }
+        });
+
+        phoneSetting = (FrameLayout) findViewById(R.id.phoneSetting);
+        phoneSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, "Телефон", InputType.TYPE_CLASS_PHONE, new OnInputChangedListener() {
+                    @Override
+                    public void onInputChanged(String input) {
+                        TextView fioSelection = (TextView) findViewById(R.id.itemPhoneSelection);
+                        fioSelection.setText(input);
+                        phone = input;
+                    }
+                });
+            }
+        });
+
+         findViewById(R.id.emailSetting).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 DialogsUtil.showInputDialog(TellAboutActivity.this, "Email", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new OnInputChangedListener() {
+                     @Override
+                     public void onInputChanged(String input) {
+                         ((TextView) findViewById(R.id.itemEMailSelection)).setText(input);
+                         email = input;
+                     }
+                 });
+             }
+         });
+
+        findViewById(R.id.timeSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, "Рабочее время", InputType.TYPE_DATETIME_VARIATION_TIME, new OnInputChangedListener() {
+                    @Override
+                    public void onInputChanged(String input) {
+                        ((TextView) findViewById(R.id.itemTimeSelection)).setText(input);
+                        time = input;
+                    }
+                });
+            }
+        });
+
+        findViewById(R.id.commentSetting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, "Комментарии", InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
+                    @Override
+                    public void onInputChanged(String input) {
+                        ((TextView) findViewById(R.id.itemNotificationSelection)).setText(input);
+                        comments = input;
                     }
                 });
             }
@@ -143,46 +216,22 @@ public class TellAboutActivity extends Activity {
                     locationText = "";
 
                 }
-            });
+            }).execute();
         } else {
             point = "";
             locationText = "";
         }
     }
 
-    private void initView() {
-        addit = (LinearLayout) findViewById(R.id.addFields);
-        showMore = (Button) findViewById(R.id.showMore);
-        showMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!showMoreVar) {
-                    addit.setVisibility(View.VISIBLE);
-                    showMoreVar = true;
-                    showMore.setText("Скрыть");
-                } else {
-                    addit.setVisibility(View.GONE);
-                    showMoreVar = false;
-                    showMore.setText("Подробнее");
-                }
-            }
-        });
-        send = (Button) findViewById(R.id.aboutMyself);
-        nameEdit = (EditText) findViewById(R.id.nameEdit);
-        optEdit = (EditText) findViewById(R.id.optEdit);
-        phoneEdit = (EditText) findViewById(R.id.phoneEdit);
-        emailEdit = (EditText) findViewById(R.id.emailEdit);
-        urlEdit = (EditText) findViewById(R.id.urlEdit);
-        wtEdit = (EditText) findViewById(R.id.wtEdit);
-    }
+
 
     private boolean checkFields() {
         Toast toast = Toast.makeText(this, "Неверно введен телефон и/или название", 2000);
-        if (phoneEdit.getText().toString().length() < 5) {
+        if (phone.length() < 5) {
             toast.show();
             return false;
         }
-        if (nameEdit.getText().toString().equals("")) {
+        if (fio.length()  < 3) {
             toast.show();
             return false;
         }
@@ -218,6 +267,6 @@ public class TellAboutActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();    //To change body of overridden methods use File | Settings | File Templates.
-        overridePendingTransition(0, android.R.anim.slide_out_right);
+        finish();
     }
 }

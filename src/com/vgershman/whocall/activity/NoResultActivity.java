@@ -67,7 +67,7 @@ public class NoResultActivity extends BaseActivity {
 
     private void bindInfo() {
         searchNumber.setText(getIntent().getStringExtra("phone"));
-        searchCounter.setText(getIntent().getStringExtra("count"));
+        searchCounter.setText("Этот номер искали "+getIntent().getStringExtra("count")+" раз(а)");
         regionInfo.setText(getIntent().getStringExtra("region"));
         operatorInfo.setText(getIntent().getStringExtra("operator"));
     }
