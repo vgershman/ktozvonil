@@ -3,20 +3,22 @@ package com.vgershman.whocalling.activity;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.*;
 import com.vgershman.whocalling.R;
 import com.vgershman.whocalling.app.AppInfo;
 import com.vgershman.whocalling.connection.Request;
 import com.vgershman.whocalling.connection.RequestPostCallback;
+import com.vgershman.whocalling.util.DialogsUtil;
+import com.vgershman.whocalling.util.OnInputChangedListener;
 import com.vgershman.whocalling.util.ReverseGeoCoding;
 import com.vgershman.whocalling.util.ReverseGeoCodingListener;
 
@@ -43,10 +45,11 @@ public class TellAboutActivity extends Activity {
     String point;
     Button send;
     boolean self;
-    String type="";
+    String type = "";
     LinearLayout addit;
     Button showMore;
     boolean showMoreVar;
+    FrameLayout fioSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,74 +110,94 @@ public class TellAboutActivity extends Activity {
 //            }
 //        });
 //
+        fioSetting = (FrameLayout) findViewById(R.id.fioSetting);
+        fioSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, "Введите ваши Ф.И.О.", InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
+                    @Override
+                    public void onInputChanged(String input) {
+                        TextView fioSelection = (TextView) findViewById(R.id.itemFIOSelection);
+                        fioSelection.setText(input);
+                    }
+                });
+            }
+        });
     }
 
     private void getCurrentLocation() {
-        LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        if(location==null){
+        if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        if(location!=null){
-            point = "Lat:" + location.getLatitude() + ", Lon:"+ location.getLongitude();
+        if (location != null) {
+            point = "Lat:" + location.getLatitude() + ", Lon:" + location.getLongitude();
             new ReverseGeoCoding(this, location, new ReverseGeoCodingListener() {
                 @Override
                 public void OnSuccess(String s) {
-                    locationText=s;
+                    locationText = s;
                 }
 
                 @Override
                 public void OnFailure() {
-                    locationText="";
+                    locationText = "";
 
                 }
             });
-        }else{
+        } else {
             point = "";
-            locationText="";
+            locationText = "";
         }
     }
 
     private void initView() {
-        addit = (LinearLayout)findViewById(R.id.addFields);
-        showMore = (Button)findViewById(R.id.showMore);
+        addit = (LinearLayout) findViewById(R.id.addFields);
+        showMore = (Button) findViewById(R.id.showMore);
         showMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!showMoreVar){
+                if (!showMoreVar) {
                     addit.setVisibility(View.VISIBLE);
-                    showMoreVar=true;
+                    showMoreVar = true;
                     showMore.setText("Скрыть");
-                }else{
+                } else {
                     addit.setVisibility(View.GONE);
-                    showMoreVar=false;
+                    showMoreVar = false;
                     showMore.setText("Подробнее");
                 }
             }
         });
-        send = (Button)findViewById(R.id.aboutMyself);
-        nameEdit = (EditText)findViewById(R.id.nameEdit);
-        optEdit = (EditText)findViewById(R.id.optEdit);
-        phoneEdit=(EditText)findViewById(R.id.phoneEdit);
-        emailEdit = (EditText)findViewById(R.id.emailEdit);
-        urlEdit = (EditText)findViewById(R.id.urlEdit);
-        wtEdit = (EditText)findViewById(R.id.wtEdit);
+        send = (Button) findViewById(R.id.aboutMyself);
+        nameEdit = (EditText) findViewById(R.id.nameEdit);
+        optEdit = (EditText) findViewById(R.id.optEdit);
+        phoneEdit = (EditText) findViewById(R.id.phoneEdit);
+        emailEdit = (EditText) findViewById(R.id.emailEdit);
+        urlEdit = (EditText) findViewById(R.id.urlEdit);
+        wtEdit = (EditText) findViewById(R.id.wtEdit);
     }
 
-    private boolean checkFields(){
-        Toast toast = Toast.makeText(this,"Неверно введен телефон и/или название",2000);
-        if(phoneEdit.getText().toString().length()<5){toast.show();return false;}
-        if(nameEdit.getText().toString().equals("")){toast.show();return false;}
+    private boolean checkFields() {
+        Toast toast = Toast.makeText(this, "Неверно введен телефон и/или название", 2000);
+        if (phoneEdit.getText().toString().length() < 5) {
+            toast.show();
+            return false;
+        }
+        if (nameEdit.getText().toString().equals("")) {
+            toast.show();
+            return false;
+        }
         return true;
     }
-    private String getMyPhoneNumber(){
-        TelephonyManager tm = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+
+    private String getMyPhoneNumber() {
+        TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         String number = tm.getLine1Number();
         return number;
     }
 
-    private String getMyEmail(){
+    private String getMyEmail() {
         AccountManager am = AccountManager.get(this);
         Account[] accounts = am.getAccounts();
         ArrayList<String> googleAccounts = new ArrayList<String>();
@@ -182,20 +205,21 @@ public class TellAboutActivity extends Activity {
             String acname = ac.name;
             String actype = ac.type;
 
-            if(ac.type.equals("com.google")) {
+            if (ac.type.equals("com.google")) {
                 googleAccounts.add(ac.name);
             }
 
         }
-        if(googleAccounts.size()==0){
+        if (googleAccounts.size() == 0) {
             return null;
         } else {
-            return googleAccounts.get(0);}
+            return googleAccounts.get(0);
+        }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();    //To change body of overridden methods use File | Settings | File Templates.
-        overridePendingTransition(0,android.R.anim.slide_out_right);
+        overridePendingTransition(0, android.R.anim.slide_out_right);
     }
 }
