@@ -53,8 +53,6 @@ public class RequestPhoneActivity extends BaseActivity {
         List<Call> calls = AppInfo.getCallHistory();
         callsAdapter.setCalls(calls);
         callsAdapter.notifyDataSetChanged();
-
-
     }
 
     @Override
@@ -116,7 +114,7 @@ public class RequestPhoneActivity extends BaseActivity {
                 if (checkPhoneInput()) {
                     sendRequest();
                 } else {
-                   showWrongPhone();
+                    showWrongPhone();
                 }
             }
         });
@@ -173,7 +171,6 @@ public class RequestPhoneActivity extends BaseActivity {
         });
 
 
-
         settingsButton = (ImageButton) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,7 +180,6 @@ public class RequestPhoneActivity extends BaseActivity {
             }
         });
     }
-
 
 
     private void showWrongPhone() {
@@ -221,7 +217,7 @@ public class RequestPhoneActivity extends BaseActivity {
             @Override
             public void onNotFound(NotFoundInfo response) {
                 Intent notFound = new Intent(RequestPhoneActivity.this, NoResultActivity.class);
-                notFound.putExtra("count",response.getCount()+"");
+                notFound.putExtra("count", response.getCount() + "");
                 notFound.putExtra("operator", response.getOperator());
                 notFound.putExtra("region", response.getRegion());
                 notFound.putExtra("phone", phone);

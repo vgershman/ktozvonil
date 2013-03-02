@@ -48,7 +48,7 @@ public class Call {
     }
 
     public String getTimeString() {
-        return "";//String.valueOf(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), 6000));
+        return String.valueOf(DateUtils.getRelativeTimeSpanString(time, System.currentTimeMillis(), 6000));
     }
 
     public boolean hasName() {

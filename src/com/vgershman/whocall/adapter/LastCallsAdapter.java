@@ -2,6 +2,7 @@ package com.vgershman.whocall.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -27,8 +28,14 @@ public class LastCallsAdapter extends BaseAdapter {
     private Context context;
     private List<Call> calls = new ArrayList<Call>();
 
+//    Drawable top, cropped, bottom, single;
+
     public void setCalls(List<Call> calls) {
         this.calls = calls;
+//        top = this.context.getResources().getDrawable(R.drawable.item_top_state);
+//        cropped = this.context.getResources().getDrawable(R.drawable.item_cropped_state);
+//        bottom = this.context.getResources().getDrawable(R.drawable.item_bottom_state);
+//        single = this.context.getResources().getDrawable(R.drawable.item_state);
     }
 
     public LastCallsAdapter(Context context) {
@@ -55,8 +62,10 @@ public class LastCallsAdapter extends BaseAdapter {
         ContentHolder holder;
         View view = reView;
 
+//        boolean needReinflate = true;
+
         if (view == null) {
-            view = setupLayout(viewGroup, position);
+            view = ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_item, viewGroup, false);//setupLayout(viewGroup, position);
             holder = new ContentHolder();
 
             holder.itemCallType = (ImageView) view.findViewById(R.id.itemIcCallState);
@@ -65,29 +74,35 @@ public class LastCallsAdapter extends BaseAdapter {
             holder.itemCallerName = (TextView) view.findViewById(R.id.itemName);
             holder.itemTextDivider = (ImageView) view.findViewById(R.id.itemIcDivider);
             holder.itemCallTime = (TextView) view.findViewById(R.id.itemTime);
-            holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
+//            holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
 
             view.setTag(holder);
         } else {
             holder = (ContentHolder) view.getTag();
-            if (needReinflate(holder.oldPosition, position)) {
-                view = setupLayout(viewGroup, position);
-                holder = new ContentHolder();
-
-                holder.itemCallType = (ImageView) view.findViewById(R.id.itemIcCallState);
-                holder.itemPhoneNumber = (TextView) view.findViewById(R.id.itemNumber);
-                holder.itemCallerIcon = (ImageView) view.findViewById(R.id.itemIcPerson);
-                holder.itemCallerName = (TextView) view.findViewById(R.id.itemName);
-                holder.itemTextDivider = (ImageView) view.findViewById(R.id.itemIcDivider);
-                holder.itemCallTime = (TextView) view.findViewById(R.id.itemTime);
-                holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
-
-                view.setTag(holder);
-            }
+//            needReinflate = needReinflate(holder.oldPosition, position);
+//            if (needReinflate(holder.oldPosition, position)) {
+//                view = setupLayout(viewGroup, position);
+//                holder = new ContentHolder();
+//
+//                holder.itemCallType = (ImageView) view.findViewById(R.id.itemIcCallState);
+//                holder.itemPhoneNumber = (TextView) view.findViewById(R.id.itemNumber);
+//                holder.itemCallerIcon = (ImageView) view.findViewById(R.id.itemIcPerson);
+//                holder.itemCallerName = (TextView) view.findViewById(R.id.itemName);
+//                holder.itemTextDivider = (ImageView) view.findViewById(R.id.itemIcDivider);
+//                holder.itemCallTime = (TextView) view.findViewById(R.id.itemTime);
+//                holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
+//
+//                view.setTag(holder);
+//            }
         }
 
-        holder.oldPosition = position;
-       // holder.itemBackground.postInvalidate();
+//        if (needReinflate) {
+//            holder.itemBackground.setBackgroundDrawable(getBackground(position));
+//            holder.itemBackground.setPadding(20, 8, 8, 12);
+//        }
+
+//        holder.oldPosition = position;
+        // holder.itemBackground.postInvalidate();
 
         if (calls.get(position).isOut()) {
             holder.itemCallType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_call_out));
@@ -112,54 +127,75 @@ public class LastCallsAdapter extends BaseAdapter {
         return view;
     }
 
-    private View setupLayout(ViewGroup viewGroup, int position) {
-        if (calls.size() == 1) {
-            return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-        } else if (calls.size() == 2) {
-            if (position == 0) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-            } else if (position == 1) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
-            }
-        } else if (calls.size() > 2) {
-            if (position == 0) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-            } else if (position == calls.size() - 1) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
-            } else {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_item, viewGroup, false);
-            }
-        }
-        return null;
-    }
-
-    private boolean needReinflate(int oldPosition, int position) {
-        if (position == 0) {
-            if (oldPosition == 0) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        if (position == calls.size() - 1) {
-            if (oldPosition == calls.size() - 1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        if (position > 0 && position < calls.size() - 1) {
-            if (oldPosition > 0 && oldPosition < calls.size() - 1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        return true;
-    }
+//    private Drawable getBackground(int position) {
+//        if (calls.size() == 1) {
+//            return single;
+//        } else if (calls.size() == 2) {
+//            if (position == 0) {
+//                return top;
+//            } else if (position == 1) {
+//                return bottom;
+//            }
+//        } else if (calls.size() > 2) {
+//            if (position == 0) {
+//                return top;
+//            } else if (position == calls.size() - 1) {
+//                return bottom;
+//            } else {
+//                return cropped;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    private View setupLayout(ViewGroup viewGroup, int position) {
+//        if (calls.size() == 1) {
+//            return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_single_item, viewGroup, false);
+//        } else if (calls.size() == 2) {
+//            if (position == 0) {
+//                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
+//            } else if (position == 1) {
+//                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
+//            }
+//        } else if (calls.size() > 2) {
+//            if (position == 0) {
+//                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
+//            } else if (position == calls.size() - 1) {
+//                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
+//            } else {
+//                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_item, viewGroup, false);
+//            }
+//        }
+//        return null;
+//    }
+//
+//    private boolean needReinflate(int oldPosition, int position) {
+//        if (position == 0) {
+//            if (oldPosition == 0) {
+//                return false;
+//            } else {
+//                return true;
+//            }
+//        }
+//
+//        if (position == calls.size() - 1) {
+//            if (oldPosition == calls.size() - 1) {
+//                return false;
+//            } else {
+//                return true;
+//            }
+//        }
+//
+//        if (position > 0 && position < calls.size() - 1) {
+//            if (oldPosition > 0 && oldPosition < calls.size() - 1) {
+//                return false;
+//            } else {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     static class ContentHolder {
         TextView itemPhoneNumber;
@@ -168,7 +204,7 @@ public class LastCallsAdapter extends BaseAdapter {
         ImageView itemCallType;
         ImageView itemCallerIcon;
         ImageView itemTextDivider;
-        FrameLayout itemBackground;
-        int oldPosition;
+//        FrameLayout itemBackground;
+//        int oldPosition;
     }
 }
