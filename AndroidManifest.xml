@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.vgershman.whocalling">
+          android:versionCode="1"
+          android:versionName="0.1"
+          package="com.vgershman.whocall">
     <uses-sdk android:minSdkVersion="8"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
@@ -9,9 +11,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <application android:icon="@drawable/logo_small"
-                 android:label="@string/app_name"
-                 android:theme="@style/Theme.NoBackground">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <application android:icon="@drawable/logo" android:label="@string/app_name">
         <activity android:name=".activity.RequestPhoneActivity"
                   android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
@@ -22,12 +23,17 @@
         <receiver android:name=".service.OnBootReceiver"
                   android:exported="true"/>
         <receiver android:name=".service.RequestService"
-                  android:exported="true"/>
-        <service android:name=".service.PushService"/>
-        <activity android:name=".activity.ResultActivity"/>
-        <activity android:name=".activity.NoResultActivity"/>
-        <activity android:name=".activity.TellAboutActivity"/>
-        <activity android:name=".activity.SettingsActivity"/>
-        <activity android:name=".activity.TypeActivity"/>
+                android:exported="true"/>
+        <service android:name=".service.PushService"
+               />
+        <activity android:name=".activity.ResultActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.TellAboutActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SettingsActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.NoResultActivity"
+                  android:screenOrientation="portrait"/>
+
     </application>
 </manifest>

@@ -11,4 +11,63 @@
     <string name="btn_add2contacts">Добавить в контакты</string>
     <string name="back_to_search">Вернуться к поиску</string>
 
+    <string name="tell_phone">Телефон</string>
+    <string name="tell_name">Имя</string>
+    <string name="name_hint">Петров Петр Петрович</string>
+    <string name="tell_email">Email</string>
+    <string name="email_hint">example@example.com</string>
+    <string name="tell_comments">Комментарии</string>
+    <string name="comments_hint">Например, профиль в соц.сетях или профессия</string>
+    <string name="tell_time">Часы работы</string>
+    <string name="time_hint">9:00 - 22:00</string>
+    <string name="tell_web">Адрес в интернете:</string>
+    <string name="web_hint">www.example.ru</string>
+    <string name="send">Отправить</string>
+    <string name="private1">Частное лицо</string>
+    <string name="company">Компания</string>
+    <string name="rascal">Мошенник</string>
+    <string name="dialog_add_info_message">Пожалуйста, добавьте информацию о себе</string>
+    <string name="never_btn">Никогда</string>
+    <string name="later_btn">Позже</string>
+    <string name="yes_btn">Да</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="settings">Настройки</string>
+    <string name="show_more_in">Скрыть</string>
+    <string name="show_more_out">Подробнее</string>
+    <string name="successfully_added">Спасибо! Вы успешно добавили информацию по телефону</string>
+    <string name="you_have_searched">Вы искали </string>
+    <string name="operator">Оператор:</string>
+    <string name="region">Регион:</string>
+    <string name="help">Помогите другим!\nТы первый кто добавит информацию о владельце </string>
+    <string name="addComments">Добавить комментарии</string>
+    <string name="wrongInput">Неверно введен телефон и/или название"</string>
+    <string name="wrongNumber">Неверно введен телефон</string>
+    <string name="wrongComment">Слишком короткий комментарий</string>
+    <string name="owner">Владелец</string>
+    <string name="aboutmetitle">Информация о себе</string>
+    <string name="sharetitle">Поделиться информацией</string>
+
+
+
+    <string name="field_name">Имя</string>
+    <string name="field_phone">Телефон</string>
+    <string name="field_description">Описание</string>
+    <string name="field_type">Тип</string>
+    <string name="field_location">Адрем</string>
+    <string name="field_image">Изображение</string>
+    <string name="field_point">Точка</string>
+    <string name="field_operator">Оператор</string>
+    <string name="field_oregion">Регион</string>
+    <string name="field_osite">Сайт оператора</string>
+    <string name="field_worktime">Расписание</string>
+    <string name="field_url">Веб</string>
+    <string name="field_count">Счетчик</string>
+
+
+
+
+
+
+
+
 </resources>

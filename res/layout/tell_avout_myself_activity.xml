@@ -19,7 +19,8 @@
                              android:adjustViewBounds="true"
                              android:src="@drawable/back_button"
                              android:layout_gravity="center_vertical|left"
-                             android:padding="8dp"/>
+                             android:padding="8dp"
+                             android:id="@+id/nav_back"/>
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
@@ -64,7 +65,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="12dp">
+                                     android:paddingBottom="12dp"
+                                     android:id="@+id/accountType">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -83,7 +85,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Юридическое лицо"
+                                              android:text="Физическое лицо"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -117,7 +119,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Фамилия Имя Отчество"
+                                          android:text="ФИО/Наименование"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -159,7 +161,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
+                                     android:paddingBottom="8dp"
+                                     android:id="@+id/phoneSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -207,7 +210,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
+                                     android:paddingBottom="8dp"
+                                    android:id="@+id/emailSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -255,7 +259,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="8dp">
+                                     android:paddingBottom="8dp"
+                                     android:id="@+id/timeSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -303,7 +308,8 @@
                                      android:paddingLeft="16dp"
                                      android:paddingRight="10dp"
                                      android:paddingTop="8dp"
-                                     android:paddingBottom="12dp">
+                                     android:paddingBottom="12dp"
+                                     android:id="@+id/commentSetting">
                             <LinearLayout android:layout_width="match_parent"
                                           android:layout_height="wrap_content"
                                           android:orientation="vertical">
@@ -322,7 +328,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Я такой офигенный, лучше не звоните мне вообще"
+                                              android:text="Комментарии"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
