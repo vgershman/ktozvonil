@@ -117,9 +117,19 @@ public class RequestPhoneActivity extends Activity {
         boolean addedInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME, MODE_PRIVATE).getBoolean("addedInfo", false);
 
         lastCalls = (ListView) findViewById(R.id.lastCalls);
-        lastCalls.setAdapter(callsAdapter);
         List<Call> calls = getCallHistory();
-        callsAdapter.setCalls(calls);
+        if (calls.size() == 1) {
+            lastCalls.addHeaderView(getSingleCallItem(calls.get(0)));
+        } else if (calls.size() == 2) {
+            lastCalls.addHeaderView(getHeaderCallItem(calls.get(0)));
+            lastCalls.addFooterView(getFooterCallItem(calls.get(1)));
+        } else if (calls.size() > 2) {
+            lastCalls.addHeaderView(getHeaderCallItem(calls.get(0)));
+            lastCalls.addFooterView(getFooterCallItem(calls.get(calls.size() - 1)));
+            callsAdapter.setCalls(calls.subList(1,calls.size()-1));
+        }
+
+        lastCalls.setAdapter(callsAdapter);
         callsAdapter.notifyDataSetChanged();
 
         settingsButton = (ImageButton) findViewById(R.id.settingsButton);
@@ -130,6 +140,59 @@ public class RequestPhoneActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    private View getSingleCallItem(Call call) {
+        View header = getLayoutInflater().inflate(R.layout.last_call_single_item, null, false);
+        header = initHeader(call, header);
+
+        return header;
+    }
+
+    private View getHeaderCallItem(Call call) {
+        View header = getLayoutInflater().inflate(R.layout.last_call_header, null, false);
+        header = initHeader(call, header);
+
+        return header;
+    }
+
+    private View getFooterCallItem(Call call) {
+        View footer = getLayoutInflater().inflate(R.layout.last_call_footer, null, false);
+        footer = initHeader(call, footer);
+
+        return footer;
+    }
+
+    private View initHeader(Call call, View header) {
+        ImageView itemCallType = (ImageView) header.findViewById(R.id.itemIcCallState);
+        TextView itemPhoneNumber = (TextView) header.findViewById(R.id.itemNumber);
+        ImageView itemCallerIcon = (ImageView) header.findViewById(R.id.itemIcPerson);
+        TextView itemCallerName = (TextView) header.findViewById(R.id.itemName);
+        ImageView itemTextDivider = (ImageView) header.findViewById(R.id.itemIcDivider);
+        TextView itemCallTime = (TextView) header.findViewById(R.id.itemTime);
+        FrameLayout itemBackground = (FrameLayout) header.findViewById(R.id.itemBackground);
+
+        if (call.isOut()) {
+            itemCallType.setImageDrawable(getResources().getDrawable(R.drawable.ic_call_out));
+        } else {
+            itemCallType.setImageDrawable(getResources().getDrawable(R.drawable.ic_call_in));
+        }
+
+        itemPhoneNumber.setText(call.getNumber());
+        if (call.hasName()) {
+            itemCallerIcon.setVisibility(View.VISIBLE);
+            itemCallerName.setVisibility(View.VISIBLE);
+            itemTextDivider.setVisibility(View.VISIBLE);
+            itemCallerName.setText(call.getName());
+        } else {
+            itemCallerIcon.setVisibility(View.GONE);
+            itemCallerName.setVisibility(View.GONE);
+            itemTextDivider.setVisibility(View.GONE);
+        }
+
+        itemCallTime.setText(call.getTimeString());
+
+        return header;
     }
 
     private List<Call> getCallHistory() {

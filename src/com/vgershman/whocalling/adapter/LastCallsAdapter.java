@@ -55,7 +55,7 @@ public class LastCallsAdapter extends BaseAdapter {
         View view = reView;
 
         if (view == null) {
-            view = setupLayout(viewGroup, position);
+            view = ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_item, viewGroup, false);
             holder = new ContentHolder();
 
             holder.itemCallType = (ImageView) view.findViewById(R.id.itemIcCallState);
@@ -64,29 +64,11 @@ public class LastCallsAdapter extends BaseAdapter {
             holder.itemCallerName = (TextView) view.findViewById(R.id.itemName);
             holder.itemTextDivider = (ImageView) view.findViewById(R.id.itemIcDivider);
             holder.itemCallTime = (TextView) view.findViewById(R.id.itemTime);
-            holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
 
             view.setTag(holder);
         } else {
             holder = (ContentHolder) view.getTag();
-            if (needReinflate(holder.oldPosition, position)) {
-                view = setupLayout(viewGroup, position);
-                holder = new ContentHolder();
-
-                holder.itemCallType = (ImageView) view.findViewById(R.id.itemIcCallState);
-                holder.itemPhoneNumber = (TextView) view.findViewById(R.id.itemNumber);
-                holder.itemCallerIcon = (ImageView) view.findViewById(R.id.itemIcPerson);
-                holder.itemCallerName = (TextView) view.findViewById(R.id.itemName);
-                holder.itemTextDivider = (ImageView) view.findViewById(R.id.itemIcDivider);
-                holder.itemCallTime = (TextView) view.findViewById(R.id.itemTime);
-                holder.itemBackground = (FrameLayout) view.findViewById(R.id.itemBackground);
-
-                view.setTag(holder);
-            }
         }
-
-        holder.oldPosition = position;
-        holder.itemBackground.postInvalidate();
 
         if (calls.get(position).isOut()) {
             holder.itemCallType.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_call_out));
@@ -111,55 +93,6 @@ public class LastCallsAdapter extends BaseAdapter {
         return view;
     }
 
-    private View setupLayout(ViewGroup viewGroup, int position) {
-        if (calls.size() == 1) {
-            return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-        } else if (calls.size() == 2) {
-            if (position == 0) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-            } else if (position == 1) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
-            }
-        } else if (calls.size() > 2) {
-            if (position == 0) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_header, viewGroup, false);
-            } else if (position == calls.size() - 1) {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_footer, viewGroup, false);
-            } else {
-                return ((Activity) context).getLayoutInflater().inflate(R.layout.last_call_item, viewGroup, false);
-            }
-        }
-        return null;
-    }
-
-    private boolean needReinflate(int oldPosition, int position) {
-        if (position == 0) {
-            if (oldPosition == 0) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        if (position == calls.size() - 1) {
-            if (oldPosition == calls.size() - 1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        if (position > 0 && position < calls.size() - 1) {
-            if (oldPosition > 0 && oldPosition < calls.size() - 1) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        return true;
-    }
-
     static class ContentHolder {
         TextView itemPhoneNumber;
         TextView itemCallerName;
@@ -167,7 +100,5 @@ public class LastCallsAdapter extends BaseAdapter {
         ImageView itemCallType;
         ImageView itemCallerIcon;
         ImageView itemTextDivider;
-        FrameLayout itemBackground;
-        int oldPosition;
     }
 }
