@@ -49,7 +49,7 @@ public class PhonesManager {
 
     public void deletePhone(String phone){
         db = dbHelper.getWritableDatabase();
-        db.delete(TABLENAME,"phone = " + phone,null );
+        db.delete(TABLENAME,"phone like '%" + phone+"'",null );
         //db.rawQuery("delete * from " + TABLENAME + "where phone ==" + phone,null);
         db.close();
     }

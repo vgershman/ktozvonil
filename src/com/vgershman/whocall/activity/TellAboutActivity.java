@@ -52,6 +52,13 @@ public class TellAboutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tell_avout_myself_activity);
+        if(getIntent().getBooleanExtra("myself",false)){
+            ((TextView)findViewById(R.id.textTitle)).setText(getText(R.string.sharetitle));
+        }else {
+            ((TextView)findViewById(R.id.textTitle)).setText(getText(R.string.aboutmetitle));
+        }
+
+
         ImageButton navBack = (ImageButton)findViewById(R.id.nav_back);
         getCurrentLocation();
         navBack.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +83,11 @@ public class TellAboutActivity extends Activity {
             }
 
         }catch (Exception ex){}
+
+        if(getIntent().getStringExtra("phone")!=null){
+            ((TextView)findViewById(R.id.itemPhoneSelection)).setText(getIntent().getStringExtra("phone"));
+            phone = getIntent().getStringExtra("phone");
+        }
 
         findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
             @Override

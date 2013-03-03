@@ -48,6 +48,7 @@ public class NoResultActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NoResultActivity.this,TellAboutActivity.class);
                 intent.putExtra("myself",false);
+                intent.putExtra("phone",getIntent().getStringExtra("phone"));
                 startActivity(intent);
             }
         });

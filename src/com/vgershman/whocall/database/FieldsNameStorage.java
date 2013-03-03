@@ -31,7 +31,7 @@ public class FieldsNameStorage {
         stringHashMap.put("o_site",context.getResources().getString(R.string.field_osite));
         stringHashMap.put("worktime",context.getResources().getString(R.string.field_worktime));
         stringHashMap.put("url",context.getResources().getString(R.string.field_url));
-
+        stringHashMap.put("count","count");
     }
 
 

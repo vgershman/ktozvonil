@@ -100,8 +100,7 @@
                           android:paddingLeft="8dp"
                           android:textColorHint="#d4dae4"
                           android:singleLine="true"
-                          android:textColor="#133CAC"
-                          android:textSize="16sp"
+                          android:textSize="20sp"
                           android:hint="@string/phone_hint"
                           android:background="@drawable/number_input_background"/>
                 <Button android:id="@+id/btnSend"
