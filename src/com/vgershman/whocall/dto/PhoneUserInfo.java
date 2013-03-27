@@ -36,6 +36,23 @@ public class PhoneUserInfo {
         this.info = info;
     }
 
+
+    public static PhoneUserInfo createFromJSONArray(JSONArray data) throws JSONException{
+        PhoneUserInfo result = new PhoneUserInfo();
+
+        for(int i=0;i<data.length();i++){
+            JSONObject field = data.getJSONObject(i);
+            String key = field.names().getString(0);
+            String value = field.getString(key);
+            result.info.put(key,value);
+            if(key.equals("phone")){
+                result.setPhone(value);
+            }
+
+        }
+        return result;
+    }
+
     public static PhoneUserInfo createFromJSONObject(JSONObject data) {
         PhoneUserInfo result = new PhoneUserInfo();
         try {

@@ -10,7 +10,7 @@
           android:textColor="#b8bbc0"
           android:textSize="12sp"
           android:textStyle="normal"
-          android:text="АДРЕС"
+          android:text="адрес"
           android:layout_marginTop="8dp"
           android:id="@+id/infoTitle"/>
 <TextView android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                   android:textColor="#697384"
                   android:textSize="16sp"
                   android:textStyle="normal"
-                  android:text="Показать на карте"
+                  android:text="@string/show_map"
                   android:layout_gravity="center"
                   android:layout_marginLeft="3dp"/>
     </LinearLayout>

@@ -73,7 +73,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Тип аккаунта"
+                                          android:text="@string/account_type"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -86,7 +86,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Физическое лицо"
+                                              android:text="@string/private1"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -120,7 +120,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="ФИО/Наименование"
+                                          android:text="@string/tell_name"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -133,7 +133,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Русский Иван Иванович"
+                                              android:text="@string/name_hint"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -169,7 +169,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Телефон"
+                                          android:text="@string/tell_phone"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -182,7 +182,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="+7 952 002 12 32"
+                                              android:text="@string/phone_hint"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -218,7 +218,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="E-Mail"
+                                          android:text="@string/tell_email"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -231,7 +231,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="ivan@ushel_spat.ru"
+                                              android:text="@string/email_hint"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -267,7 +267,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Часы работы"
+                                          android:text="@string/tell_time"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -280,7 +280,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="19:00 - 21:00"
+                                              android:text="@string/time_hint"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -316,7 +316,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Комментарии"
+                                          android:text="@string/tell_comments"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -329,7 +329,7 @@
                                     <TextView android:layout_height="wrap_content"
                                               android:layout_width="0dp"
                                               android:layout_weight="1"
-                                              android:text="Комментарии"
+                                              android:text="@string/comments_hint"
                                               android:textColor="#b7babf"
                                               android:textSize="14sp"
                                               android:layout_gravity="center_vertical"
@@ -342,7 +342,33 @@
                                                android:src="@drawable/arrow_choise"
                                                android:layout_gravity="right|bottom"/>
                                 </LinearLayout>
+
+
                             </LinearLayout>
+                        </FrameLayout>
+
+                        <View android:layout_width="match_parent"
+                              android:layout_height="8dp"/>
+
+                        <!-- ================= RESPONSE ================ -->
+                        <FrameLayout android:layout_width="match_parent"
+                                     android:layout_height="wrap_content"
+                                     android:layout_marginTop="5dp"
+                                     android:padding="10dp"
+                                     android:background="@drawable/background_white">
+                            <Button android:id="@+id/btnSendBottom"
+                                    android:layout_marginTop="12dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:background="@drawable/find_number_button_state"
+                                    android:text="@string/send"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#fff"
+                                    android:shadowColor="#8000"
+                                    android:shadowRadius="1"
+                                    android:shadowDy="1"
+                                    android:shadowDx="1"/>
                         </FrameLayout>
                     </LinearLayout>
                 </FrameLayout>

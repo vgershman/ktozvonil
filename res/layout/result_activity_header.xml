@@ -29,7 +29,7 @@
                           android:textColor="#b8bbc0"
                           android:textSize="12sp"
                           android:textStyle="normal"
-                          android:text="ПОСЛЕДНИЙ ВЫЗОВ"
+                          android:text="@string/results_last_call"
                           android:layout_marginTop="8dp"
                           android:id="@+id/lastCallText"/>
                 <LinearLayout android:layout_width="match_parent"
@@ -76,11 +76,21 @@
                                   android:textColor="#697384"
                                   android:textSize="16sp"
                                   android:textStyle="normal"
-                                  android:text="Добавить в контакты"
+                                  android:text="@string/btn_add2contacts"
                                   android:layout_gravity="center"
                                   android:layout_marginLeft="3dp"/>
                     </LinearLayout>
+
                 </FrameLayout>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:id="@+id/searchCounter"
+                          android:textColor="#b8bbc0"
+                          android:textSize="12sp"
+                          android:textStyle="normal"
+                          android:text="Этот номер пытались найти 52 раза."
+                          android:layout_gravity="center"
+                          android:layout_marginTop="8dp"/>
             </LinearLayout>
         </FrameLayout>
         <FrameLayout android:layout_width="match_parent"
@@ -121,7 +131,7 @@
                                    android:adjustViewBounds="true"
                                    android:src="@drawable/ic_thumb_down"
                                    android:layout_gravity="center_horizontal"/>
-                        <TextView android:text="Информация неверна"
+                        <TextView android:text="@string/results_wrong"
                                   android:textColor="#697384"
                                   android:textSize="12sp"
                                   android:layout_width="wrap_content"
@@ -151,7 +161,7 @@
                                    android:adjustViewBounds="true"
                                    android:src="@drawable/ic_thumb_up"
                                    android:layout_gravity="center_horizontal"/>
-                        <TextView android:text="Всё верно и полезно!"
+                        <TextView android:text="@string/results_good"
                                   android:textColor="#697384"
                                   android:textSize="12sp"
                                   android:layout_width="wrap_content"
@@ -164,7 +174,7 @@
         </FrameLayout>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Комментарии пользователей"
+                  android:text="@string/results_comments"
                   android:textColor="#697384"
                   android:textSize="20sp"
                   android:layout_gravity="center"
@@ -202,7 +212,7 @@
                               android:singleLine="true"
                               android:textColor="#133CAC"
                               android:textSize="16sp"
-                              android:hint="Представьтесь"
+                              android:hint="@string/comment_name"
                               android:background="@drawable/number_input_background"/>
                     <EditText android:id="@+id/commentInput"
                               android:inputType="textMultiLine"
@@ -215,7 +225,7 @@
                               android:singleLine="true"
                               android:textColor="#133CAC"
                               android:textSize="16sp"
-                              android:hint="Напишите комментарий"
+                              android:hint="@string/comment_body"
                               android:background="@drawable/number_input_background"/>
                     <FrameLayout android:id="@+id/sendComment"
                                  android:layout_width="match_parent"
@@ -239,7 +249,7 @@
                                       android:textColor="#697384"
                                       android:textSize="14sp"
                                       android:textStyle="normal"
-                                      android:text="Отправить комментарий"
+                                      android:text="@string/comment_send"
                                       android:layout_gravity="center"
                                       android:layout_marginLeft="3dp"/>
                         </LinearLayout>

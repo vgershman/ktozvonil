@@ -21,17 +21,18 @@ import java.util.Map;
 public class Request {
 
     private static final String HOST = "http://www.kodtelefona.ru/api/phone/";
+    private static final String HOST2 = "http://www.kodtelefona.ru/api/2/phone/";
 
     public static void getCommentsByNumber(String number, CommentCallback commentCallback){
         new CommentGetTask(HOST + "comment_"+number,commentCallback).execute();
     }
 
     public static void getInfoByNumber(String number, RequestGetCallback requestGetCallback) {
-        new RequestGetTask(HOST + number, requestGetCallback).execute();
+        new RequestGetTask(HOST2 + number, requestGetCallback).execute();
     }
 
     public static void getInfoByNumber(String number, String from, RequestGetCallback requestGetCallback) {
-        new RequestGetTask(HOST + number+"&from="+from, requestGetCallback).execute();
+        new RequestGetTask(HOST2 + number+"&from="+from, requestGetCallback).execute();
     }
 
     public static void postInfo(Map<String, String> data, RequestPostCallback requestPostCallback) {

@@ -41,6 +41,14 @@ public class NoResultActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+        ImageButton settingsButton = (ImageButton)findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(NoResultActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
         searchNumber = (TextView)findViewById(R.id.searchNumber);
         shareButton = (FrameLayout)findViewById(R.id.shareButton);
         shareButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +76,7 @@ public class NoResultActivity extends BaseActivity {
 
     private void bindInfo() {
         searchNumber.setText(getIntent().getStringExtra("phone"));
-        searchCounter.setText("Этот номер искали "+getIntent().getStringExtra("count")+" раз(а)");
+        searchCounter.setText(getString(R.string.requested_count).replace("count",getIntent().getStringExtra("count")));
         regionInfo.setText(getIntent().getStringExtra("region"));
         operatorInfo.setText(getIntent().getStringExtra("operator"));
     }

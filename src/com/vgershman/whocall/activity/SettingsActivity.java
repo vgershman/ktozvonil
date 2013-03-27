@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,6 +39,18 @@ public class SettingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
+
+        findViewById(R.id.btnSendResponse).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.vgershman.whocall")));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.vgershman.whocall")));
+                }
+            }
+        });
+
         ImageButton save = (ImageButton)findViewById(R.id.saveButton);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +81,9 @@ public class SettingsActivity extends Activity {
         int callInfo = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getInt("callInfo",0);
 
         final List<String> options = new ArrayList<String>();
-        options.add("Да");
-        options.add("Нет");
-        options.add("Для неизвестных");
+        options.add(getString(R.string.setting_call_yes));
+        options.add(getString(R.string.setting_call_no));
+        options.add(getString(R.string.setting_call_an));
 
         languageSelection = (TextView) findViewById(R.id.itemLanguageSelection);
         languageSelection.setText(options.get(callInfo));
@@ -88,21 +101,21 @@ public class SettingsActivity extends Activity {
                     }
                 };
 
-                DialogsUtil.showDropdownDialog(SettingsActivity.this, "Показывать во время звонка", options, selector);
+                DialogsUtil.showDropdownDialog(SettingsActivity.this, getString(R.string.setting_call_title), options, selector);
             }
         });
 
         final TextView filterSelection = (TextView)findViewById(R.id.itemFilterSelection);
         FrameLayout itemFilterSetting = (FrameLayout)findViewById(R.id.itemFilterSetting);
         final List<String>options1 = new ArrayList<String>();
-        options1.add("Все");
-        options1.add("Только неизвестные");
+        options1.add(getString(R.string.setting_call_log_filter_all));
+        options1.add(getString(R.string.setting_call_log_filter_an));
         int filter = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getInt("filter",0);
         filterSelection.setText(options1.get(filter));
         itemFilterSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogsUtil.showDropdownDialog(SettingsActivity.this,"Показывать",options1,new DialogInterface.OnClickListener() {
+                DialogsUtil.showDropdownDialog(SettingsActivity.this,getString(R.string.setting_call_log_filter_title),options1,new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         filterSelection.setText(options1.get(i));
@@ -115,15 +128,16 @@ public class SettingsActivity extends Activity {
         final TextView pushSelection = (TextView)findViewById(R.id.itemNotificationSelection);
         FrameLayout itemPushSetting = (FrameLayout)findViewById(R.id.itemPushSettings);
         final List<String>options2 = new ArrayList<String>();
-        options2.add("Экономия траффика");
-        options2.add("Актуальная информация");
+        options2.add(getString(R.string.settings_notifications_ec));
+        options2.add(getString(R.string.settings_notifications_ac));
+        options2.add(getString(R.string.settings_notifications_ni));
         int pushSetting = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getInt("pushSetting",0);
         pushSelection.setText(options2.get(pushSetting));
         itemPushSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                DialogsUtil.showDropdownDialog(SettingsActivity.this,"Что важнее?",options2,new DialogInterface.OnClickListener() {
+                DialogsUtil.showDropdownDialog(SettingsActivity.this,getString(R.string.settings_notifications_title),options2,new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         pushSelection.setText(options2.get(i));

@@ -31,10 +31,11 @@ public class CallStateListener extends PhoneStateListener {
             public void run() {
                 while (true){
                 try {
-                    if (showInfo&current!=null) {
+                    if (showInfo & current!=null) {
                         current.show();
-                        sleep(3000);
+
                     }
+                    sleep(3000);
                 } catch (Exception e) {
                 }
             }
@@ -60,11 +61,23 @@ public class CallStateListener extends PhoneStateListener {
                     @Override
                     public void onInfoFound(PhoneUserInfo response) {
                         StringBuilder builder = new StringBuilder();
-                        for (String key:response.getInfo().keySet()){
-                            if(response.getInfo().get(key)!=null){
-                                builder.append(FieldsNameStorage.getFieldName(key)+": "+response.getInfo().get(key)+"\n");
-                            }
+                        if(response.getInfo().containsKey("name")){
+                            builder.append(response.getInfo().get("name")+"\n");
                         }
+                        if(response.getInfo().containsKey("description")){
+                            builder.append(response.getInfo().get("description")+"\n");
+                        }
+                        if(response.getInfo().containsKey("location")){
+                            builder.append(response.getInfo().get("location")+"\n");
+                        }
+                        if(response.getInfo().containsKey("operator")){
+                            builder.append(FieldsNameStorage.getFieldName("operator")+": "+response.getInfo().get("operator")+"\n");
+                        }
+                        if(response.getInfo().containsKey("o_region")){
+                            builder.append(FieldsNameStorage.getFieldName("o_region")+": "+response.getInfo().get("o_region")+"\n");
+                        }
+
+
                         showInfo = true;
                         current = Toast.makeText(context,builder.toString(),Toast.LENGTH_LONG);
                     }

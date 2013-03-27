@@ -30,7 +30,7 @@
                  android:background="#e3e5e8">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Последние звонки"
+                  android:text="@string/search_from_log"
                   android:textColor="#697384"
                   android:textSize="20sp"
                   android:layout_gravity="center"
@@ -78,7 +78,7 @@
                   android:padding="8dp">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Введите номер телефона"
+                  android:text="@string/input_phone_number"
                   android:textColor="#697384"
                   android:textSize="20sp"
                   android:layout_gravity="center"
@@ -108,7 +108,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/find_number_button_state"
-                        android:text="Получить информацию"
+                        android:text="@string/btn_send_request"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="#fff"

@@ -58,10 +58,14 @@ public class RequestGetTask extends AsyncTask{
             JSONObject jsonObject= new JSONObject(page);
 
             if(!jsonObject.has("msg")){
-                result = PhoneUserInfo.createFromJSONObject(jsonObject.getJSONObject("data"));
+                result = PhoneUserInfo.createFromJSONArray(jsonObject.getJSONArray("data"));
             } else {
-                notFoundInfo = NotFoundInfo.createFromJson(jsonObject.getJSONObject("data"));
+                notFoundInfo = NotFoundInfo.createFromJSONArray(jsonObject.getJSONArray("data"));
             }
+
+
+           // result = PhoneUserInfo.createFromJSONArray(jsonObject.getJSONArray("data"));
+
 
         } catch (IOException ex){
             Log.e(AppInfo.APP_NAME, ex.getMessage());

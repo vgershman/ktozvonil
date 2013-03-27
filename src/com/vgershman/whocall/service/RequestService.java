@@ -61,28 +61,17 @@ public class RequestService extends BroadcastReceiver {
         NotificationCompat.Builder mBuilder;
         mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle("Вы искали "+response.getPhone())
+                .setContentTitle(context.getString(R.string.notification) + response.getPhone())
                 .setContentText(String.valueOf(response.getInfo().get("name")));
         Intent found = new Intent(context, ResultActivity.class);
-        found.putExtra("actionType",1);
         found.putExtra("phone", response.getPhone());
-        Map<String,Object> info = response.getInfo();
-        for(String key:info.keySet()){
-            Object value = info.get(key);
-            if(value instanceof List<?>){
-                List<String> strings =(List<String>)value;
-                StringBuilder builder=new StringBuilder();
-                for(String s:strings){
-                    builder.append(s);
-                    builder.append(" ,");
-                }
-                builder.deleteCharAt(builder.length()-1);
-                found.putExtra(key, builder.toString());
-            }else{
-                found.putExtra(key,String.valueOf(value));
-            }
+        Map<String,Object>info = response.getInfo();
+        int i = 0;
+        for(String keyName : info.keySet()){
+            found.putExtra("key"+i,keyName);
+            found.putExtra(keyName,(String)info.get(keyName));
+            i++;
         }
-
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(ResultActivity.class);
@@ -92,6 +81,7 @@ public class RequestService extends BroadcastReceiver {
                         0,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
+        mBuilder.setAutoCancel(true);
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

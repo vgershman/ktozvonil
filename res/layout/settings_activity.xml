@@ -24,7 +24,7 @@
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
-                    <TextView android:text="Настройки"
+                    <TextView android:text="@string/title_settings"
                               android:textColor="#333"
                               android:textSize="18sp"
                               android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Информация во время звонка"
+                                          android:text="@string/setting_call"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -120,7 +120,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Фильтр истории звонков"
+                                          android:text="@string/setting_call_log_filter"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -169,7 +169,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Настройка оповещений"
+                                          android:text="@string/settings_notifications"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -217,7 +217,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Ваши контактные данные"
+                                          android:text="@string/setting_me"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -226,7 +226,7 @@
                                           android:id="@+id/itemContactsName"/>
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Заполните информацию о себе и определите кто может находить Вас через это приложение"
+                                          android:text="@string/setting_me_under"
                                           android:textColor="#b7babf"
                                           android:textSize="14sp"
                                           android:layout_gravity="center_vertical"
@@ -253,7 +253,7 @@
                                           android:orientation="vertical">
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Сохранить резервную копию контактов"
+                                          android:text="@string/setting_add"
                                           android:textColor="#333"
                                           android:textSize="16sp"
                                           android:layout_gravity="center_vertical"
@@ -262,7 +262,7 @@
                                           android:id="@+id/itemContactsName"/>
                                 <TextView android:layout_height="wrap_content"
                                           android:layout_width="match_parent"
-                                          android:text="Сохранить Ваши контакты в безопасном хранилище на сервере."
+                                          android:text="@string/setting_add_under"
                                           android:textColor="#b7babf"
                                           android:textSize="14sp"
                                           android:layout_gravity="center_vertical"
@@ -284,7 +284,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="48dp"
                                     android:background="@drawable/find_number_button_state"
-                                    android:text="Оставить отзыв о приложении"
+                                    android:text="@string/send_feed"
                                     android:textSize="16sp"
                                     android:textStyle="bold"
                                     android:textColor="#fff"

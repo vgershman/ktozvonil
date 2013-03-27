@@ -24,7 +24,7 @@
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
-                    <TextView android:text="Информация о номере"
+                    <TextView android:text="@string/results"
                               android:textColor="#333"
                               android:textSize="18sp"
                               android:layout_width="wrap_content"

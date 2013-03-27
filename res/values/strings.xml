@@ -1,73 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Кто звонит?</string>
-    <string name="input_phone_number">Введите номер телефона:</string>
-    <string name="phone_hint">7(***)*******"</string>
-    <string name="btn_send_request">Найти</string>
-    <string name="phone_request_example">Примеры: 74952313219, 79213441134</string>
-    <string name="search_from_log">Поиск из журнала вызова</string>
-    <string name="btn_about_myself">Добавить информацию о себе</string>
-    <string name="btn_more">Подробнее</string>
-    <string name="btn_add2contacts">Добавить в контакты</string>
-    <string name="back_to_search">Вернуться к поиску</string>
-
-    <string name="tell_phone">Телефон</string>
-    <string name="tell_name">Имя</string>
-    <string name="name_hint">Петров Петр Петрович</string>
+    <string name="app_name">Who call?</string>
+    <string name="input_phone_number">Enter a phone number:</string>
+    <string name="phone_hint">1(###)###-####"</string>
+    <string name="btn_send_request">Find</string>
+    <string name="phone_request_example">For example: 12129417994,74952313219</string>
+    <string name="search_from_log">Call History</string>
+    <string name="btn_about_myself">Add informaiton about you</string>
+    <string name="btn_more">Details</string>
+    <string name="btn_add2contacts">Add to phonebook</string>
+    <string name="back_to_search">Back to search</string>
+    <string name="tell_phone">Phone</string>
+    <string name="tell_name">Name</string>
+    <string name="name_hint">Bart Simpson</string>
     <string name="tell_email">Email</string>
     <string name="email_hint">example@example.com</string>
-    <string name="tell_comments">Комментарии</string>
-    <string name="comments_hint">Например, профиль в соц.сетях или профессия</string>
-    <string name="tell_time">Часы работы</string>
+    <string name="tell_comments">Comment</string>
+    <string name="comments_hint">Anything what you want</string>
+    <string name="tell_time">Working hours</string>
     <string name="time_hint">9:00 - 22:00</string>
-    <string name="tell_web">Адрес в интернете:</string>
-    <string name="web_hint">www.example.ru</string>
-    <string name="send">Отправить</string>
-    <string name="private1">Частное лицо</string>
-    <string name="company">Компания</string>
-    <string name="rascal">Мошенник</string>
-    <string name="dialog_add_info_message">Пожалуйста, добавьте информацию о себе</string>
-    <string name="never_btn">Никогда</string>
-    <string name="later_btn">Позже</string>
-    <string name="yes_btn">Да</string>
-    <string name="server_error">Ошибка сервера</string>
-    <string name="settings">Настройки</string>
-    <string name="show_more_in">Скрыть</string>
-    <string name="show_more_out">Подробнее</string>
-    <string name="successfully_added">Спасибо! Вы успешно добавили информацию по телефону</string>
-    <string name="you_have_searched">Вы искали </string>
-    <string name="operator">Оператор:</string>
-    <string name="region">Регион:</string>
-    <string name="help">Помогите другим!\nТы первый кто добавит информацию о владельце </string>
-    <string name="addComments">Добавить комментарии</string>
-    <string name="wrongInput">Неверно введен телефон и/или название"</string>
-    <string name="wrongNumber">Неверно введен телефон</string>
-    <string name="wrongComment">Слишком короткий комментарий</string>
-    <string name="owner">Владелец</string>
-    <string name="aboutmetitle">Информация о себе</string>
-    <string name="sharetitle">Поделиться информацией</string>
+    <string name="tell_web">Website:</string>
+    <string name="web_hint">www.example.com</string>
+    <string name="send">Send</string>
+    <string name="private1">Private person</string>
+    <string name="company">Company</string>
+    <string name="rascal">Faker</string>
+    <string name="dialog_add_info_message">Please, add info about you</string>
+    <string name="never_btn">Never</string>
+    <string name="later_btn">Later</string>
+    <string name="yes_btn">Yes</string>
+    <string name="server_error">server error: check internet access</string>
+    <string name="show_more_in">Hide</string>
+    <string name="show_more_out">Details</string>
+    <string name="successfully_added">Thanks! You have successfully added information</string>
+    <string name="you_have_searched">We found </string>
+    <string name="operator">Operator:</string>
+    <string name="region">State/Region:</string>
+    <string name="help">Help others!\nYou will be first who added information </string>
+    <string name="addComments">Add comment</string>
+    <string name="wrongInput">Incorrect entered information</string>
+    <string name="wrongNumber">Incorrect phone number</string>
+    <string name="wrongComment">Very short comment</string>
+    <string name="owner">Owner</string>
+    <string name="aboutmetitle">Information about you</string>
+    <string name="sharetitle">Share information</string>
+    <string name="field_name">Name</string>
+    <string name="field_phone">Phone number</string>
+    <string name="field_description">Description</string>
+    <string name="field_type">Type</string>
+    <string name="field_location">Address</string>
+    <string name="field_image">Image</string>
+    <string name="field_point">Point</string>
+    <string name="field_operator">Operator</string>
+    <string name="field_oregion">State/Region</string>
+    <string name="field_operator_u">OPERATOR</string>
+    <string name="field_oregion_u">STATE/REGION</string>
+    <string name="field_osite">Operator website</string>
+    <string name="field_worktime">Working hours</string>
+    <string name="field_url">Website</string>
+    <string name="field_count">Counter</string>
+    <string name="title_settings">Settings</string>
+    <string name="setting_call">Call time</string>
+    <string name="setting_call_title">Show</string>
+    <string name="setting_call_log_filter_title">Show</string>
+    <string name="setting_call_yes">Yes</string>
+    <string name="setting_call_no">No</string>
+    <string name="setting_call_an">Anonymous only</string>
+    <string name="setting_call_log_filter">Call log filter</string>
+    <string name="setting_call_log_filter_all">All</string>
+    <string name="setting_call_log_filter_an">Anonymous only</string>
+    <string name="settings_notifications">Notification settings</string>
+    <string name="settings_notifications_ec">Per day</string>
+    <string name="settings_notifications_ac">Per hour</string>
+    <string name="settings_notifications_ni">Never</string>
+    <string name="settings_notifications_title">How often?</string>
+    <string name="setting_me">Your contact info</string>
+    <string name="setting_me_under">Add information about yourself</string>
+    <string name="setting_add">We have cookies!</string>
+    <string name="send_feed">Rate us!</string>
+    <string name="setting_add_under">Send your feedback!</string>
+    <string name="no_results_title">Not Found</string>
+    <string name="no_results_under">Sorry, nothing was found</string>
+    <string name="dont_you_know">Do you know something about?</string>
+    <string name="requested_count">This number was requested count times</string>
+    <string name="results">Information found</string>
+    <string name="results_last_call">LAST CALL</string>
 
-
-
-    <string name="field_name">Имя</string>
-    <string name="field_phone">Телефон</string>
-    <string name="field_description">Описание</string>
-    <string name="field_type">Тип</string>
-    <string name="field_location">Адрем</string>
-    <string name="field_image">Изображение</string>
-    <string name="field_point">Точка</string>
-    <string name="field_operator">Оператор</string>
-    <string name="field_oregion">Регион</string>
-    <string name="field_osite">Сайт оператора</string>
-    <string name="field_worktime">Расписание</string>
-    <string name="field_url">Веб</string>
-    <string name="field_count">Счетчик</string>
-
-
-
-
-
-
-
+    <string name="results_wrong">Wrong Information</string>
+    <string name="results_good">All right!</string>
+    <string name="results_comments">Users comments</string>
+    <string name="comment_good">Like!</string>
+    <string name="comment_name">Your name</string>
+    <string name="comment_body">Write a comment</string>
+    <string name="comment_send">Send</string>
+    <string name="account_type">Account Type</string>
+    <string name="field_location_u">ADDRESS</string>
+    <string name="show_map">Show in the map</string>
+    <string name="notification">Got info about </string>
 
 </resources>

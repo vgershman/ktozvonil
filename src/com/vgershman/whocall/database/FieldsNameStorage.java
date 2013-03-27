@@ -16,27 +16,33 @@ import java.util.HashMap;
  */
 public class FieldsNameStorage {
 
-    private static HashMap<String,String>stringHashMap = new HashMap<String, String>();
+    private static HashMap<String, String> stringHashMap = new HashMap<String, String>();
 
 
     static {
         Context context = AppInfo.getContext();
-        stringHashMap.put("name",context.getResources().getString(R.string.field_name));
-        stringHashMap.put("phone",context.getResources().getString(R.string.field_phone));
-        stringHashMap.put("description",context.getResources().getString(R.string.field_description));
-        stringHashMap.put("type",context.getResources().getString(R.string.field_type));
-        stringHashMap.put("email","email");
-        stringHashMap.put("operator",context.getResources().getString(R.string.field_operator));
-        stringHashMap.put("o_region",context.getResources().getString(R.string.field_oregion));
-        stringHashMap.put("o_site",context.getResources().getString(R.string.field_osite));
-        stringHashMap.put("worktime",context.getResources().getString(R.string.field_worktime));
-        stringHashMap.put("url",context.getResources().getString(R.string.field_url));
-        stringHashMap.put("count","count");
+        stringHashMap.put("name", context.getResources().getString(R.string.field_name));
+        stringHashMap.put("phone", context.getResources().getString(R.string.field_phone));
+        stringHashMap.put("description", context.getResources().getString(R.string.field_description));
+        stringHashMap.put("type", context.getResources().getString(R.string.field_type));
+        stringHashMap.put("email", "email");
+        stringHashMap.put("operator", context.getResources().getString(R.string.field_operator));
+        stringHashMap.put("o_region", context.getResources().getString(R.string.field_oregion));
+        stringHashMap.put("o_site", context.getResources().getString(R.string.field_osite));
+        stringHashMap.put("worktime", context.getResources().getString(R.string.field_worktime));
+        stringHashMap.put("url", context.getResources().getString(R.string.field_url));
+        stringHashMap.put("point", "point");
+        stringHashMap.put("location", "location");
+        stringHashMap.put("count", "count");
     }
 
 
-    public static String getFieldName(String key){
-        return stringHashMap.get(key);
+    public static String getFieldName(String key) {
+        if (stringHashMap.containsKey(key)) {
+            return stringHashMap.get(key);
+        } else {
+            return key;
+        }
     }
 
 }

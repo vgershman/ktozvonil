@@ -2,6 +2,8 @@ package com.vgershman.whocall.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CallLog;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.*;
@@ -130,24 +134,31 @@ public class RequestPhoneActivity extends BaseActivity {
                     @Override
                     public void onInfoFound(PhoneUserInfo response) {
                         Intent found = new Intent(RequestPhoneActivity.this, ResultActivity.class);
-                        found.putExtra("phone", callsAdapter.getItem(i).getNumber());
+                        found.putExtra("phone", response.getPhone());
                         Map<String, Object> info = response.getInfo();
-                        for (String key : info.keySet()) {
-                            Object value = info.get(key);
-                            if (value instanceof List<?>) {
-                                List<String> strings = (List<String>) value;
-                                StringBuilder builder = new StringBuilder();
-                                for (String s : strings) {
-                                    builder.append(s);
-                                    builder.append(" ,");
-                                }
-                                builder.deleteCharAt(builder.length() - 1);
-                                found.putExtra(key, builder.toString());
-                            } else {
-                                found.putExtra(key, String.valueOf(value));
-                            }
-                        }
 
+                /*for (String key : info.keySet()) {
+                    Object value = info.get(key);
+                    if (value instanceof List<?>) {
+                        List<String> strings = (List<String>) value;
+                        StringBuilder builder = new StringBuilder();
+                        for (String s : strings) {
+                            builder.append(s);
+                            builder.append(" ,");
+                        }
+                        builder.deleteCharAt(builder.length() - 1);
+                        found.putExtra(key, builder.toString());
+                    } else {
+                        found.putExtra(key, String.valueOf(value));
+                    }
+                }
+              */
+                        int i = 0;
+                        for(String keyName : info.keySet()){
+                            found.putExtra("key"+i,keyName);
+                            found.putExtra(keyName,(String)info.get(keyName));
+                            i++;
+                        }
                         startActivity(found);
                     }
 
@@ -195,7 +206,8 @@ public class RequestPhoneActivity extends BaseActivity {
                 Intent found = new Intent(RequestPhoneActivity.this, ResultActivity.class);
                 found.putExtra("phone", phone);
                 Map<String, Object> info = response.getInfo();
-                for (String key : info.keySet()) {
+
+                /*for (String key : info.keySet()) {
                     Object value = info.get(key);
                     if (value instanceof List<?>) {
                         List<String> strings = (List<String>) value;
@@ -210,8 +222,15 @@ public class RequestPhoneActivity extends BaseActivity {
                         found.putExtra(key, String.valueOf(value));
                     }
                 }
-
+              */
+                int i = 0;
+                for(String keyName : info.keySet()){
+                    found.putExtra("key"+i,keyName);
+                    found.putExtra(keyName,(String)info.get(keyName));
+                    i++;
+                }
                 startActivity(found);
+
             }
 
             @Override
@@ -243,7 +262,7 @@ public class RequestPhoneActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuItem mi = menu.add(0, 1, 0, getText(R.string.settings));
+        MenuItem mi = menu.add(0, 1, 0, getText(R.string.title_settings));
         mi.setIntent(new Intent(this, SettingsActivity.class));
         return super.onCreateOptionsMenu(menu);
     }

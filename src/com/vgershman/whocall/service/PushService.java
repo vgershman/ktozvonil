@@ -26,6 +26,7 @@ public class PushService extends Service {
 
 
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getInt("pushSetting",1) == 2){return super.onStartCommand(intent, flags, startId);}
         unlimited = getSharedPreferences(AppInfo.PREFERENCES_NAME,MODE_PRIVATE).getInt("pushSetting",1)==1;
         start();
 
@@ -38,9 +39,9 @@ public class PushService extends Service {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, 0);
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
-        int interval=60*1000;
+        int interval=60*60*1000;
         if(!unlimited){
-            interval = 60*60*1000;
+            interval = 24*60*60*1000;
         }
 
 

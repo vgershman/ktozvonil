@@ -24,7 +24,7 @@
                 <FrameLayout android:layout_width="0dp"
                              android:layout_height="match_parent"
                              android:layout_weight="1">
-                    <TextView android:text="Информация о номере"
+                    <TextView android:text="@string/no_results_title"
                               android:textColor="#333"
                               android:textSize="18sp"
                               android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                                           android:textColor="#697384"
                                           android:textSize="14sp"
                                           android:textStyle="normal"
-                                          android:text="Мы сожалеем, но номер не найден"
+                                          android:text="@string/no_results_under"
                                           android:layout_gravity="center"
                                           android:layout_marginTop="8dp"/>
                                 <TextView android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                                           android:textColor="#697384"
                                           android:textSize="22sp"
                                           android:textStyle="normal"
-                                          android:text="Вы знаете чей это номер?"
+                                          android:text="@string/dont_you_know"
                                           android:layout_gravity="center"
                                           android:layout_marginTop="20dp"/>
                                 <FrameLayout android:id="@+id/shareButton"
@@ -125,7 +125,7 @@
                                                   android:textColor="#697384"
                                                   android:textSize="16sp"
                                                   android:textStyle="normal"
-                                                  android:text="Поделитесь информацией"
+                                                  android:text="@string/sharetitle"
                                                   android:layout_gravity="center"
                                                   android:layout_marginLeft="3dp"/>
                                     </LinearLayout>
@@ -159,7 +159,7 @@
                                               android:textColor="#b8bbc0"
                                               android:textSize="12sp"
                                               android:textStyle="normal"
-                                              android:text="СТРАНА И РЕГИОН"
+                                              android:text="@string/field_oregion_u"
                                               android:layout_marginTop="8dp"/>
                                     <TextView android:layout_width="wrap_content"
                                               android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                                               android:textColor="#b8bbc0"
                                               android:textSize="12sp"
                                               android:textStyle="normal"
-                                              android:text="ОПЕРАТОР"
+                                              android:text="@string/field_operator_u"
                                               android:layout_marginTop="8dp"/>
                                     <LinearLayout android:layout_width="match_parent"
                                                   android:layout_height="wrap_content"

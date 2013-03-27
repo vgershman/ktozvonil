@@ -35,7 +35,7 @@ public class TellAboutActivity extends Activity {
     String locationText;
     String point;
 
-    String type = "Физическое лицо";
+    String type = "";
     String fio="";
     String phone="";
     String email="";
@@ -52,6 +52,9 @@ public class TellAboutActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tell_avout_myself_activity);
+
+        type = getString(R.string.private1);
+
         if(getIntent().getBooleanExtra("myself",false)){
             ((TextView)findViewById(R.id.textTitle)).setText(getText(R.string.sharetitle));
         }else {
@@ -89,6 +92,35 @@ public class TellAboutActivity extends Activity {
             phone = getIntent().getStringExtra("phone");
         }
 
+
+        findViewById(R.id.btnSendBottom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkFields()){
+                    Map<String,String> params = new HashMap<String, String>();
+                    params.put("name",fio);
+                    params.put("phone",phone);
+                    params.put("email",email);
+                    params.put("worktime",time);
+                    params.put("description",comments);
+                    params.put("point",point);
+                    params.put("location",locationText);
+                    params.put("imei", AppInfo.getIMEI());
+                    Request.postInfo(params,new RequestPostCallback() {
+                        @Override
+                        public void onSuccess() {
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(TellAboutActivity.this,getText(R.string.server_error),2000).show();
+                        }
+                    });
+
+                }
+            }
+        });
         findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,10 +156,10 @@ public class TellAboutActivity extends Activity {
             @Override
             public void onClick(View view) {
                 final List<String> options = new ArrayList<String>();
-                options.add("Физическое лицо");
-                options.add("Юридическое лицо");
-                options.add("Мошенник");
-                DialogsUtil.showDropdownDialog(TellAboutActivity.this,"Тип аккаунта", options,new DialogInterface.OnClickListener() {
+                options.add(getString(R.string.private1));
+                options.add(getString(R.string.company));
+                options.add(getString(R.string.rascal));
+                DialogsUtil.showDropdownDialog(TellAboutActivity.this,getString(R.string.account_type), options,new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         TextView textView = (TextView)findViewById(R.id.itemAccountSelection);
@@ -142,7 +174,7 @@ public class TellAboutActivity extends Activity {
         fioSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogsUtil.showInputDialog(TellAboutActivity.this, "Введите ваши Ф.И.О.", InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, getString(R.string.tell_name), InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
                     @Override
                     public void onInputChanged(String input) {
                         TextView fioSelection = (TextView) findViewById(R.id.itemFIOSelection);
@@ -157,7 +189,7 @@ public class TellAboutActivity extends Activity {
         phoneSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogsUtil.showInputDialog(TellAboutActivity.this, "Телефон", InputType.TYPE_CLASS_PHONE, new OnInputChangedListener() {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, getString(R.string.tell_phone), InputType.TYPE_CLASS_PHONE, new OnInputChangedListener() {
                     @Override
                     public void onInputChanged(String input) {
                         TextView fioSelection = (TextView) findViewById(R.id.itemPhoneSelection);
@@ -171,7 +203,7 @@ public class TellAboutActivity extends Activity {
          findViewById(R.id.emailSetting).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 DialogsUtil.showInputDialog(TellAboutActivity.this, "Email", InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new OnInputChangedListener() {
+                 DialogsUtil.showInputDialog(TellAboutActivity.this, getString(R.string.tell_email), InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS, new OnInputChangedListener() {
                      @Override
                      public void onInputChanged(String input) {
                          ((TextView) findViewById(R.id.itemEMailSelection)).setText(input);
@@ -184,7 +216,7 @@ public class TellAboutActivity extends Activity {
         findViewById(R.id.timeSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogsUtil.showInputDialog(TellAboutActivity.this, "Рабочее время", InputType.TYPE_DATETIME_VARIATION_TIME, new OnInputChangedListener() {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, getString(R.string.tell_time), InputType.TYPE_DATETIME_VARIATION_TIME, new OnInputChangedListener() {
                     @Override
                     public void onInputChanged(String input) {
                         ((TextView) findViewById(R.id.itemTimeSelection)).setText(input);
@@ -197,7 +229,7 @@ public class TellAboutActivity extends Activity {
         findViewById(R.id.commentSetting).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogsUtil.showInputDialog(TellAboutActivity.this, "Комментарии", InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
+                DialogsUtil.showInputDialog(TellAboutActivity.this, getString(R.string.tell_comments), InputType.TYPE_CLASS_TEXT, new OnInputChangedListener() {
                     @Override
                     public void onInputChanged(String input) {
                         ((TextView) findViewById(R.id.itemNotificationSelection)).setText(input);
@@ -238,7 +270,7 @@ public class TellAboutActivity extends Activity {
 
 
     private boolean checkFields() {
-        Toast toast = Toast.makeText(this, "Неверно введен телефон и/или название", 2000);
+        Toast toast = Toast.makeText(this, getString(R.string.wrongInput), 2000);
         if (phone.length() < 5) {
             toast.show();
             return false;

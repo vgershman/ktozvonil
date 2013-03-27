@@ -24,10 +24,7 @@ import com.vgershman.whocall.dto.NotFoundInfo;
 import com.vgershman.whocall.dto.PhoneUserInfo;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -156,7 +153,7 @@ public class ResultActivity extends BaseActivity {
 
 
         list.addHeaderView(header);
-        list.addFooterView(footer);
+        //list.addFooterView(footer);
         adapter = new CommentsAdapter(this);
         list.setAdapter(adapter);
 
@@ -265,24 +262,47 @@ public class ResultActivity extends BaseActivity {
         searchNumber.setText(getIntent().getStringExtra("phone"));
 
         Bundle data = getIntent().getExtras();
-        final String typeText = data.getString("type");
-        data.keySet().remove("type");
+        Set<String>keys = new LinkedHashSet<String>();
+        int i = 0;
 
-        for (String key : data.keySet()) {
+        while (data.containsKey("key"+i)){
+            keys.add(data.getString("key"+i));
+            i++;
+        }
+
+        final String typeText = data.getString("type");
+        keys.remove("type");
+        keys.remove("point");
+        keys.remove("count");
+
+
+        ((TextView)findViewById(R.id.searchCounter)).setText(getString(R.string.requested_count).replace("count",getIntent().getStringExtra("count")));
+
+
+        for (String key : keys) {
 
             if(key.equals("location")){
                 LinearLayout itemLayout =  (LinearLayout) getLayoutInflater().inflate(R.layout.result_location_item, null, false);
                 TextView title = (TextView)itemLayout.findViewById(R.id.infoTitle);
-                title.setText("Aдрес".toUpperCase());
+                title.setText(getString(R.string.field_location).toUpperCase());
                 TextView entry = (TextView)itemLayout.findViewById(R.id.infoEntry);
                 entry.setText(data.getString(key));
-                final String loc = data.getString(key);
+                String loc = data.getString(key);
+                String point = data.getString("point");
+
+                String query = "";
+                if(point!=null && !point.equals("")){
+                    query = point;
+                }else{
+                    query = loc;
+                }
+                final String query_ = query;
                 FrameLayout mapButton = (FrameLayout)itemLayout.findViewById(R.id.showMapButton);
                 mapButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                                Uri.parse("http://maps.google.com/maps?q="+loc));
+                                Uri.parse("http://maps.google.com/maps?q="+query_));
                         startActivity(intent);
                     }
                 });
